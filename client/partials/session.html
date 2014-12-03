@@ -1,0 +1,32 @@
+
+<div>
+	<a ui-sref="sessions">&lt; Back</a>
+</div>
+
+<div class="panel" ng-class="getPanelClass(session.track)">
+
+	<div class="panel-heading">
+		{{session.title}}	
+		<div><small>{{session.startTime | date : 'EEE H:mm'}} in {{session.room}}</small></div>
+	</div>
+
+	<div class="panel-body">
+		{{session.description}}
+
+		<div><span class="badge">{{session.track}}</span></div>
+
+		<h5>Speakers</h5>
+
+		<div class="row" ng-repeat="speaker in session.speakers">
+			<div class="col-xs-3">
+				<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/80b0217f17f01b662fe26275fd625584.png">
+			</div>
+
+			<div class="col-xs-9">
+				{{speaker}}
+			</div>
+		</div>
+
+	</div>
+
+</div>

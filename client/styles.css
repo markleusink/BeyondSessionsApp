@@ -1,0 +1,106 @@
+body {
+  padding-top:50px;
+}
+
+.navbar-toggle {
+  float:left;
+}
+
+/*track colors */
+.greenBorder {
+  border-left:10px solid #259b24;
+}
+.panel-green {
+  border-color: #259b24;
+}
+.panel-green>.panel-heading {
+  color: #fff;
+  background-color: #259b24;
+  border-color: #259b24;
+}
+
+.blueBorder {
+  border-left:10px solid #536dfe;
+}
+.panel-blue {
+  border-color: #536dfe;
+}
+.panel-blue>.panel-heading {
+  color: #fff;
+  background-color: #536dfe;
+  border-color: #536dfe;
+}
+
+.orangeBorder {
+  border-left:10px solid #ff5722;
+}
+.panel-orange {
+  border-color: #ff5722;
+}
+.panel-orange>.panel-heading {
+  color: #fff;
+  background-color: #ff5722;
+  border-color: #ff5722;
+}
+
+/*off canvas*/
+.offcanvas {
+  background: #fff;
+  position: fixed;
+  top: 45px;
+  bottom: 0;
+  width: 200px;
+  overflow-y: auto;
+  z-index:1050;
+  height: 100%;
+  left: -200px;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -moz-transform: translate3d(0px, 0px, 0px);
+  -o-transform: translate3d(0px, 0px, 0px);
+  -ms-transform: translate3d(0px, 0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+  -webkit-transition: 0.25s ease;
+  -moz-transition: 0.25s ease;
+  -o-transition: 0.25s ease;
+  transition: 0.25s ease;
+}
+ .offcanvas.active {
+  -webkit-transform: translate3d(200px, 0px, 0px);
+  -moz-transform: translate3d(200px, 0px, 0px);
+  -o-transform: translate3d(200px, 0px, 0px);
+  -ms-transform: translate3d(200px, 0px, 0px);
+  transform: translate3d(200px, 0px, 0px);
+}
+
+
+/*view animation*/
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+   -webkit-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
+    -moz-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
+    -ms-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
+    -o-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
+    transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
+}
+
+[ui-view].ng-enter {
+  position:absolute;
+    -webkit-transition: 0.3s ease-out all;
+    -webkit-transform:translate3d(100%,0,0) ;
+}
+
+[ui-view].ng-enter-active {
+  position:absolute;
+    -webkit-transform:translate3d(0,0,0) ;
+}
+
+[ui-view].ng-leave {
+   position:absolute;
+    -webkit-transition: 0.3s ease-out all;
+    -webkit-transform:translate3d(0,0,0);
+}
+
+[ui-view].ng-leave-active {
+   position:absolute;
+    -webkit-transform:translate3d(-100%,0,0);
+}

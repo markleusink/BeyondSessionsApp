@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html ng-app="sessionsApp">
+
+<head>
+
+	<title>Connect 2015</title>
+
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/yeti/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body ng-controller="MainCtrl">
+
+<!--header-->
+<header class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+
+			<!--menu toggle button-->
+			<button type="button" class="navbar-toggle collapsed" ng-click="toggleOffcanvas()">
+	            <span class="sr-only">Show menu</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+          	</button>
+
+			<div class="navbar-brand">All sessions</div>
+		</div>
+	</div>
+</header>
+
+<!--offcanvas-->
+<nav class="offcanvas">
+	<ul class="nav">
+		<li><a>All sessions</a></li>
+		<li><a>Sessions by day</li>
+		<li><a>Favorites</a></li>
+	</ul>
+</nav>
+
+<div class="container" id="main">
+
+	<div ui-view></div>
+
+</div>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="sessions.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-animate.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-resource.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>
+
+</body>
+
+</html>

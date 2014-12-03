@@ -1,0 +1,16 @@
+<div class="list-group">
+
+	<div>
+		<input class="form-control" ng-model="search" placeholder="Search..." />
+	</div>
+
+	<a ng-repeat="session in sessions | filter : search" class="list-group-item" 
+		ng-class="getClass(session.track)"
+		ui-sref="sessionDetails({ sessionId : session.unid })">
+
+		{{session.title}}<br />
+		{{session.startTime | date : 'EEE HH:mm'}} | {{session.room}}
+
+	</a>
+
+</div>
