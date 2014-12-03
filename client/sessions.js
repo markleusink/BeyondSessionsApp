@@ -58,7 +58,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		all : function() {
 
-			return $http.get(restBaseUrl + 'collections/unid/' + allSessionsUNID)
+			return $http.get(restBaseUrl + 'collections/unid/' + allSessionsUNID + '?count=100')
 			.then( function(res) {
 				return res.data;
 			});
