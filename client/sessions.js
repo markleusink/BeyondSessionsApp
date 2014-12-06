@@ -1,7 +1,7 @@
 
 var sessionsAppCtrl = angular.module("sessionsApp.controllers", []);
 
-sessionsAppCtrl.controller( "SessionsCtrl", function($scope, SessionsFactory) {
+sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory) {
 
 	$scope.getClass = function(track) {
 		switch(track) {
@@ -16,7 +16,55 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($scope, SessionsFactory) {
 
 	};
 
+	$rootScope.$emit( "setPageTitle", {title:"All sessions"});
+
 	SessionsFactory.all().then( function(sessions) {
+		$scope.sessions = sessions;
+	});
+
+
+});
+
+sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory) {
+
+	$scope.getClass = function(track) {
+		switch(track) {
+			case 'Best Practices':
+				return 'greenBorder';
+			case 'Application Development':
+				return 'orangeBorder';
+			default:
+				return 'blueBorder';
+
+		}
+
+	};
+
+	var dayName;
+
+	switch ($stateParams.dayId) {
+
+		case "mon":
+			dayName = "Monday"; break;
+		case "tue":
+			dayName = "Tuesday"; break;
+		case "wed":
+			dayName = "Wednesday"; break;
+		case "thu":
+			dayName = "Thursday"; break;
+		case "fri":
+			dayName = "Friday"; break;
+		case "sat":
+			dayName = "Saturday"; break;
+		case "sun":
+			dayName = "Sunday"; break;
+
+
+	}
+
+	$rootScope.$emit( "setPageTitle", {title:"By day: " + dayName });
+
+	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
 		$scope.sessions = sessions;
 	});
 
@@ -52,13 +100,21 @@ var sessionsAppFactory = angular.module("sessionsApp.services", []);
 sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 	var restBaseUrl = "http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/";
-	var allSessionsUNID = "BB9CB6153C3A508EC1257DA2003C7E4F";
 	
 	return {
 
 		all : function() {
 
-			return $http.get(restBaseUrl + 'collections/unid/' + allSessionsUNID + '?count=100')
+			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=100')
+			.then( function(res) {
+				return res.data;
+			});
+
+		},
+
+		getByDay : function(dayId) {
+
+			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=100&category=' + dayId)
 			.then( function(res) {
 				return res.data;
 			});

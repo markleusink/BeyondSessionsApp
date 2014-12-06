@@ -10,13 +10,22 @@ app.config( function($stateProvider) {
 
   $stateProvider
 
-	  .state('sessions', { 	//all sessions
+	  .state('sessionsAll', { 	//all sessions
 
-		    url: '/sessions',
+		    url: '/sessionsAll',
 		    templateUrl: 'partials/sessions.html',
 		    controller: 'SessionsCtrl'
 
 	  })
+
+	   .state('sessionsByDay', { 	
+
+		    url: '/sessionsByDay/:dayId',
+		    templateUrl: 'partials/sessions.html',
+		    controller: 'SessionsByDayCtrl'
+
+	  })
+
 	  .state('sessionDetails', { 	//show session details
 
 		    url: '/sessions/:sessionId',
@@ -26,19 +35,24 @@ app.config( function($stateProvider) {
 
 });
 
-app.controller("MainCtrl", function($scope) {
+app.controller("MainCtrl", function($rootScope, $scope) {
 
 	$scope.toggleOffcanvas = function() {
 
+		
 		var offcanvas = angular.element(document.body.querySelector('.offcanvas'));
 		offcanvas.toggleClass('active');
 	};
+
+	$scope.pageTitle="";
+
+	$rootScope.$on('setPageTitle', function(ev, args) { $scope.pageTitle = args.title; });
 
 });
 
 app.run(function($state) {
 
-  $state.go('sessions'); // go to default view
+  $state.go('sessionsAll'); // go to default view
 
 });
 

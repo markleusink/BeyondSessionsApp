@@ -30,7 +30,20 @@
 	            <span class="icon-bar"></span>
           	</button>
 
-			<div class="navbar-brand">All sessions</div>
+			<div class="navbar-brand">{{pageTitle}}</div>
+		</div>
+
+		<div class="navbar navbar-collapse hidden-xs">
+
+			<ul class="nav navbar-nav">
+				<li><a ui-sref="sessionsAll">All sessions</a></li>
+				<li><a ui-sref="sessionsByDay({dayId: 'sun'})">Sunday</a>
+				<li><a ui-sref="sessionsByDay({dayId: 'mon'})">Monday</a>
+				<li><a ui-sref="sessionsByDay({dayId: 'tue'})">Tuesday</a>
+				<li><a ui-sref="sessionsByDay({dayId: 'wed'})">Wednesday</a>
+				<li><a>Favorites</a></li>
+			</ul>
+
 		</div>
 	</div>
 </header>
@@ -38,8 +51,12 @@
 <!--offcanvas-->
 <nav class="offcanvas">
 	<ul class="nav">
-		<li><a>All sessions</a></li>
-		<li><a>Sessions by day</li>
+		<li><a ui-sref="sessionsAll" ng-click="toggleOffCanvas()">All sessions</a></li>
+		<li>Sessions by day</li>
+		<li><a ui-sref="sessionsByDay({dayId: 'sun'})" ng-click="toggleOffcanvas()">Sunday</a>
+		<li><a ui-sref="sessionsByDay({dayId: 'mon'})" ng-click="toggleOffcanvas()">Monday</a>
+		<li><a ui-sref="sessionsByDay({dayId: 'tue'})" ng-click="toggleOffcanvas()">Tuesday</a>
+		<li><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="toggleOffcanvas()">Wednesday</a>
 		<li><a>Favorites</a></li>
 	</ul>
 </nav>
