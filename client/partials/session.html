@@ -1,37 +1,43 @@
-<div class="row">
+
 <div class="col-sm-12 bootcards-cards">
 
-<div class="panel" ng-class="getPanelClass(session.track)">
+	<div class="panel panel-default" ng-class="getPanelClass(session.track)">
 
-	<div class="panel-heading">
-		{{session.title}}	
-		<div><small>{{session.startTime | date : 'EEE H:mm'}} in {{session.room}}</small></div>
-	</div>
+		<div class="panel-heading">
+	  	  <h3>{{session.title}}</h3>
+			<div><small>{{session.startTime | date : 'EEE H:mm'}} in {{session.room}}</small></div>
+		</div>
 
-	<div class="panel-body">
-		{{session.description}}
+		<div class="panel-body">
 
-		<div style="margin:10px 0"><span class="badge">{{session.track}}</span></div>
+			<div style="margin-bottom:5px">
+				<button class="pull-right btn btn-default" ng-click="addToFavorites()">
+					<i class="fa fa-star-o"></i>Favorite
+				</button>
 
-		<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
-
-		<div class="row" ng-repeat="speaker in session.speakers">
-			<div class="col-xs-3 col-sm-2">
-				<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/80b0217f17f01b662fe26275fd625584.png">
+				<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i>Back</a>
 			</div>
 
-			<div class="col-xs-9 col-sm-10">
-				{{speaker}}
+			<div>
+				{{session.description}}
 			</div>
+
+			<div style="margin:10px 0"><span class="badge">{{session.track}}</span></div>
+
+			<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
+
+			<div class="row" ng-repeat="speaker in session.speakers">
+				<!-- <div class="col-xs-3 col-sm-2">
+					<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/80b0217f17f01b662fe26275fd625584.png">
+				</div> -->
+
+				<div class="col-xs-12 col-sm-12">
+					{{speaker}}
+				</div>
+			</div>
+
 		</div>
 
 	</div>
 
-</div>
-
-<div>
-	<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i>Back</a>
-</div>
-
-</div>
 </div>
