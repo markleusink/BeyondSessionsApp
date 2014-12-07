@@ -3,7 +3,8 @@ var app = angular.module("sessionsApp", [
 		'ngAnimate',
 		'ui.router',
 		'sessionsApp.controllers',
-		'sessionsApp.services'
+		'sessionsApp.services',
+		'sessionsApp.globals'
 	]);
 
 app.config( function($stateProvider) {
@@ -11,7 +12,6 @@ app.config( function($stateProvider) {
   $stateProvider
 
 	  .state('sessionsAll', { 	//all sessions
-
 		    url: '/sessionsAll',
 		    templateUrl: 'partials/sessions.html',
 		    controller: 'SessionsCtrl'
@@ -19,7 +19,6 @@ app.config( function($stateProvider) {
 	  })
 
 	   .state('sessionsByDay', { 	
-
 		    url: '/sessionsByDay/:dayId',
 		    templateUrl: 'partials/sessions.html',
 		    controller: 'SessionsByDayCtrl'
@@ -27,7 +26,6 @@ app.config( function($stateProvider) {
 	  })
 
 	   .state('favorites', { 	
-
 		    url: '/favorites',
 		    templateUrl: 'partials/sessions.html',
 		    controller: 'FavoritesCtrl'
@@ -35,7 +33,6 @@ app.config( function($stateProvider) {
 	  })
 
 	  .state('sessionDetails', { 	//show session details
-
 		    url: '/sessions/:sessionId',
 		    templateUrl: 'partials/session.html',
 		    controller: 'SessionCtrl'
@@ -44,6 +41,32 @@ app.config( function($stateProvider) {
 });
 
 app.controller("MainCtrl", function($rootScope, $scope) {
+
+	//load the OS specific CSS
+	var userAgent = navigator.userAgent;
+	var iOS = (/(iPhone|iPad|iPod)/gi).test(userAgent);
+	var css = 'http://cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/';
+
+	if (iOS) {
+		css += 'bootcards-ios-lite.min.css';
+		$scope.iOS = true;
+		$scope.Android = false;
+	} else {
+		css += 'bootcards-android-lite.min.css';
+		$scope.iOS = false;
+		$scope.Android = true;
+	}
+	
+	var head = angular.element(document.getElementsByTagName('head')[0]);
+	head.append("<link rel='stylesheet' href='" + css + "' />");
+
+	 bootcards.init( {
+        offCanvasHideOnMainClick : true,
+        offCanvasBackdrop : false,
+        enableTabletPortraitMode : true,
+        disableRubberBanding : true,
+        disableBreakoutSelector : 'a.no-break-out'
+      });
 
 	$scope.toggleOffcanvas = function() {
 

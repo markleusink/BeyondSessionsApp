@@ -7,31 +7,40 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 	<title>Connect 2015</title>
 
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/yeti/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 </head>
 
-<body ng-controller="MainCtrl">
+<body ng-controller="MainCtrl" class="bootcards-nofooter">
 
 <!--header-->
 <header class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
+	
 		<div class="navbar-header">
-
-			<!--menu toggle button-->
-			<button type="button" class="navbar-toggle collapsed" ng-click="toggleOffcanvas()">
-	            <span class="sr-only">Show menu</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-          	</button>
-
-			<div class="navbar-brand">{{pageTitle}}</div>
-		</div>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand no-break-out" title="Customers" href="/">{{pageTitle}}</a>  
+      </div>
+      <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
+        <i class="fa fa-lg fa-chevron-left"></i><span>Back</span>
+      </button>
+      <!-- menu button to show/ hide the off canvas slider -->
+      <button type="button" class="btn btn-default btn-menu pull-left offCanvasToggle" data-toggle="offcanvas">
+        <i class="fa fa-lg fa-bars"></i><span>Menu</span>
+      </button>   
 
 		<div class="navbar navbar-collapse hidden-xs">
 
@@ -45,28 +54,38 @@
 			</ul>
 
 		</div>
+
 	</div>
 </header>
 
 <!--offcanvas-->
-<nav class="offcanvas">
-	<ul class="nav nav-pills nav-stacked">
+<nav class="offcanvas navmenu">
+	<ul class="nav">
 
-		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="toggleOffCanvas()">All sessions</a></li>
-		<li><a href="" style="font-weight:bold">Sessions by day</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionssun'}"><a ui-sref="sessionsByDay({dayId: 'sun'})" ng-click="toggleOffcanvas()">Sunday</a>
-		<li ng-class="{'active' : activeMenu == 'sessionsmon'}"><a ui-sref="sessionsByDay({dayId: 'mon'})" ng-click="toggleOffcanvas()">Monday</a>
-		<li ng-class="{'active' : activeMenu == 'sessionstue'}"><a ui-sref="sessionsByDay({dayId: 'tue'})" ng-click="toggleOffcanvas()">Tuesday</a>
-		<li ng-class="{'active' : activeMenu == 'sessionswed'}"><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="toggleOffcanvas()">Wednesday</a>
-		<li ng-class="{'active' : activeMenu == 'favorites'}"><a>Favorites</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="toggleOffCanvas()"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
+		
+		<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites" ng-click="toggleOffCanvas()"><i class="fa fa-fw fa-star-o"></i>Favorites</a></li>
+
+		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-calendar"></i>Sessions by day</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionssun'}"><a ui-sref="sessionsByDay({dayId: 'sun'})" ng-click="toggleOffcanvas()"><i class="fa fa-fw fa-angle-right"></i>Sunday</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsmon'}"><a ui-sref="sessionsByDay({dayId: 'mon'})" ng-click="toggleOffcanvas()"><i class="fa fa-fw fa-angle-right"></i>Monday</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionstue'}"><a ui-sref="sessionsByDay({dayId: 'tue'})" ng-click="toggleOffcanvas()"><i class="fa fa-fw fa-angle-right"></i>Tuesday</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionswed'}"><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="toggleOffcanvas()"><i class="fa fa-fw fa-angle-right"></i>Wednesday</a></li>
+
+		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsAD'}"><a ><i class="fa fa-fw fa-angle-right"></i>App dev</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsBTE'}"><a ><i class="fa fa-fw fa-angle-right"></i>Beyond the Everyday</a></li>
 	</ul>
 </nav>
 
-<div class="container" id="main">
+<div class="container bootcards-container" id="main">
 
 	<div ui-view></div>
 
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
 

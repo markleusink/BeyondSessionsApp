@@ -1,19 +1,10 @@
 
-var sessionsAppCtrl = angular.module("sessionsApp.controllers", []);
+var sessionsAppCtrl = angular.module("sessionsApp.controllers", [])
 
-sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory) {
+sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, SessionsGlobals) {
 
 	$scope.getClass = function(track) {
-		switch(track) {
-			case 'Best Practices':
-				return 'greenBorder';
-			case 'Application Development':
-				return 'orangeBorder';
-			default:
-				return 'blueBorder';
-
-		}
-
+		return SessionsGlobals.getColorForTrack(track) + "Border";
 	};
 
 	$rootScope.$emit( "setPageTitle", {title:"All sessions", menu : "sessionsAll"});
@@ -25,19 +16,10 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, Session
 
 });
 
-sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory) {
+sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, SessionsGlobals) {
 
 	$scope.getClass = function(track) {
-		switch(track) {
-			case 'Best Practices':
-				return 'greenBorder';
-			case 'Application Development':
-				return 'orangeBorder';
-			default:
-				return 'blueBorder';
-
-		}
-
+		return SessionsGlobals.getColorForTrack(track) + "Border";
 	};
 
 	var dayName;
@@ -71,19 +53,28 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 });
 
-sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, SessionsFactory) {
+sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, SessionsGlobals) {
+
+	$scope.sessions = [];
+	$scope.noDocsFound = "You don't have any favorites yet...";
+
+	$scope.getClass = function(track) {
+		return SessionsGlobals.getColorForTrack(track) + "Border";
+	};
+
+	$rootScope.$emit( "setPageTitle", {title:"Favorites", menu : "favorites"});
+
+	SessionsFactory.all().then( function(sessions) {
+		//$scope.sessions = sessions;
+	});
+
+
+});
+
+sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, SessionsFactory, SessionsGlobals) {
 
 	$scope.getPanelClass = function(track) {
-
-		switch(track) {
-			case 'Best Practices':
-				return 'panel-green';
-			case 'Application Development':
-				return 'panel-orange';
-			default:
-				return 'panel-blue';
-		}
-
+		return "panel-" + SessionsGlobals.getColorForTrack(track);
 	};
 
 	SessionsFactory.getByID($stateParams.sessionId)
@@ -91,8 +82,6 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 		$scope.session = session;
 	});
 
-
-	
 });
 
 var sessionsAppFactory = angular.module("sessionsApp.services", []);
@@ -136,5 +125,32 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 
 	};
+
+});
+
+var sessionsAppGlobals = angular.module("sessionsApp.globals", []);
+
+sessionsAppGlobals.factory('SessionsGlobals', function() {
+
+	return {
+
+		getColorForTrack : function(track) {
+
+			if (!track) {
+				return 'blue';
+			}
+
+			if (track.indexOf('Best Practices')>-1) {
+				return 'green';
+			} else if (track.indexOf('Application Development')>-1) {
+				return 'orange';
+			} else if (track.indexOf('Innovators and Thought Leaders')>-1) {
+				return 'red';
+			} else {
+				return 'blue';
+			}
+		}
+		
+	}
 
 });

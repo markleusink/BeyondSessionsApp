@@ -1,14 +1,13 @@
-body {
-  padding-top:50px;
+
+.list-group-item {
+  margin-left: 0 !important;
+  padding-left: 15px !important;
 }
 
-.navbar-toggle {
-  float:left;
-}
 
 /*track colors */
 .greenBorder {
-  border-left:10px solid #259b24;
+  border-left:10px solid #259b24 !important;
 }
 .panel-green {
   border-color: #259b24;
@@ -20,19 +19,32 @@ body {
 }
 
 .blueBorder {
-  border-left:10px solid #536dfe;
+  border-left:10px solid #536dfe !important;
 }
 .panel-blue {
-  border-color: #536dfe;
+  border-color: #536dfe  !important;
 }
 .panel-blue>.panel-heading {
-  color: #fff;
-  background-color: #536dfe;
-  border-color: #536dfe;
+  color: #fff  !important;
+  background-color: #536dfe  !important;
+  border-color: #536dfe  !important;
+}
+.redBorder {
+  border-left:10px solid #e51c23 !important;
+}
+.panel-red {
+  border-color: #e51c23  !important;
+}
+.panel-red>.panel-heading {
+  color: #fff  !important;
+  background-color: #e51c23 !important;
+  border-color: #e51c23 !important;
 }
 
+
+
 .orangeBorder {
-  border-left:10px solid #ff5722;
+  border-left:10px solid #ff5722 !important;
 }
 .panel-orange {
   border-color: #ff5722;
