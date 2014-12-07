@@ -94,7 +94,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		all : function() {
 
-			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=100')
+			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=100', {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -103,7 +103,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		getByDay : function(dayId) {
 
-			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=100&category=' + dayId)
+			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=100&category=' + dayId, {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -112,7 +112,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		getByID : function(sessionId) {
 
-			return $http.get(restBaseUrl + 'documents/unid/' + sessionId)
+			return $http.get(restBaseUrl + 'documents/unid/' + sessionId, {cache: true})
 			.then( function(res) {
 				//if 'speakers' is a string: make it an array
 				if (typeof res.data.speakers == 'string') {
