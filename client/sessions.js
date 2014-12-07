@@ -16,7 +16,7 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, Session
 
 	};
 
-	$rootScope.$emit( "setPageTitle", {title:"All sessions"});
+	$rootScope.$emit( "setPageTitle", {title:"All sessions", menu : "sessionsAll"});
 
 	SessionsFactory.all().then( function(sessions) {
 		$scope.sessions = sessions;
@@ -62,7 +62,7 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 	}
 
-	$rootScope.$emit( "setPageTitle", {title:"By day: " + dayName });
+	$rootScope.$emit( "setPageTitle", {title:"By day: " + dayName, menu : "sessions" + $stateParams.dayId });
 
 	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
 		$scope.sessions = sessions;

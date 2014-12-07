@@ -50,14 +50,15 @@
 
 <!--offcanvas-->
 <nav class="offcanvas">
-	<ul class="nav">
-		<li><a ui-sref="sessionsAll" ng-click="toggleOffCanvas()">All sessions</a></li>
-		<li>Sessions by day</li>
-		<li><a ui-sref="sessionsByDay({dayId: 'sun'})" ng-click="toggleOffcanvas()">Sunday</a>
-		<li><a ui-sref="sessionsByDay({dayId: 'mon'})" ng-click="toggleOffcanvas()">Monday</a>
-		<li><a ui-sref="sessionsByDay({dayId: 'tue'})" ng-click="toggleOffcanvas()">Tuesday</a>
-		<li><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="toggleOffcanvas()">Wednesday</a>
-		<li><a>Favorites</a></li>
+	<ul class="nav nav-pills nav-stacked">
+
+		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="toggleOffCanvas()">All sessions</a></li>
+		<li><a href="" style="font-weight:bold">Sessions by day</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionssun'}"><a ui-sref="sessionsByDay({dayId: 'sun'})" ng-click="toggleOffcanvas()">Sunday</a>
+		<li ng-class="{'active' : activeMenu == 'sessionsmon'}"><a ui-sref="sessionsByDay({dayId: 'mon'})" ng-click="toggleOffcanvas()">Monday</a>
+		<li ng-class="{'active' : activeMenu == 'sessionstue'}"><a ui-sref="sessionsByDay({dayId: 'tue'})" ng-click="toggleOffcanvas()">Tuesday</a>
+		<li ng-class="{'active' : activeMenu == 'sessionswed'}"><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="toggleOffcanvas()">Wednesday</a>
+		<li ng-class="{'active' : activeMenu == 'favorites'}"><a>Favorites</a></li>
 	</ul>
 </nav>
 

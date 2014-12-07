@@ -26,6 +26,14 @@ app.config( function($stateProvider) {
 
 	  })
 
+	   .state('favorites', { 	
+
+		    url: '/favorites',
+		    templateUrl: 'partials/sessions.html',
+		    controller: 'FavoritesCtrl'
+
+	  })
+
 	  .state('sessionDetails', { 	//show session details
 
 		    url: '/sessions/:sessionId',
@@ -39,14 +47,17 @@ app.controller("MainCtrl", function($rootScope, $scope) {
 
 	$scope.toggleOffcanvas = function() {
 
-		
 		var offcanvas = angular.element(document.body.querySelector('.offcanvas'));
 		offcanvas.toggleClass('active');
 	};
 
-	$scope.pageTitle="";
+	$scope.pageTitle = "Connect 2015 Sessions";
+	$scope.activeMenu = "sessionsAll";
 
-	$rootScope.$on('setPageTitle', function(ev, args) { $scope.pageTitle = args.title; });
+	$rootScope.$on('setPageTitle', function(ev, args) { 
+		$scope.pageTitle = args.title; 
+		$scope.activeMenu = args.menu;
+	});
 
 });
 
