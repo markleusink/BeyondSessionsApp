@@ -14,37 +14,43 @@ app.config( function($stateProvider) {
 
   	.state('about', { 	//all sessions
 	    url: '/about',
-	    templateUrl: 'partials/about.html'
+	    templateUrl: 'partials/about.html',
+	    title : 'About'
 	})
 
 	.state('map', { 	//map of the venue
 	    url: '/map',
-	    templateUrl: 'partials/map.html'
+	    templateUrl: 'partials/map.html',
+	    title : 'Swan Map'
 	})
 
 	  .state('sessionsAll', { 	//all sessions
 		    url: '/sessionsAll',
 		    templateUrl: 'partials/sessions.html',
-		    controller: 'SessionsCtrl'
+		    controller: 'SessionsCtrl',
+		    title : 'All sessions'
 
 	  })
 
 	   .state('sessionsByDay', { 	
 		    url: '/sessionsByDay/:dayId',
 		    templateUrl: 'partials/sessions.html',
-		    controller: 'SessionsByDayCtrl'
+		    controller: 'SessionsByDayCtrl',
+		    title : 'Sessions by day'
 	  })
 
 	   .state('favorites', { 	
 		    url: '/favorites',
 		    templateUrl: 'partials/sessions.html',
-		    controller: 'FavoritesCtrl'
+		    controller: 'FavoritesCtrl',
+		    title : 'Favorites'
 	  })
 
 	  .state('sessionDetails', { 	//show session details
 		    url: '/sessions/:sessionId',
 		    templateUrl: 'partials/session.html',
-		    controller: 'SessionCtrl'
+		    controller: 'SessionCtrl',
+		    title : 'Session'
 		});
 
 });
@@ -72,6 +78,16 @@ app.controller("MainCtrl", function($rootScope, $scope, $cookies) {
 	//add custom CSS here after bootcards, so we don't have to !important everything
 	head.append("<link rel='stylesheet' href='styles.css' />");
 
+	//function to toggle the offcanvas (todo)
+	$scope.hideOffcanvas = function() {
+		Bootcards.OffCanvas.hide();
+	};
+
+	//set default active menu option
+
+	$scope.pageTitle = "Connect 2015 Sessions";
+	$scope.activeMenu = "about";
+
 	//bootcards init
 	 bootcards.init( {
         offCanvasHideOnMainClick : true,
@@ -81,31 +97,24 @@ app.controller("MainCtrl", function($rootScope, $scope, $cookies) {
         disableBreakoutSelector : 'a.no-break-out'
       });
 
-	//function to toggle the offcanvas (todo)
-	$scope.toggleOffcanvas = function() {
-
-		Bootcards.OffCanvas.toggle();
-
-	};
-
-	//set default active menu option
-
-	$scope.pageTitle = "Connect 2015 Sessions";
-	$scope.activeMenu = "about";
-
-	//if the page title is changed, set it in the scope
-	$rootScope.$on('setPageTitle', function(ev, args) { 
-		$scope.pageTitle = args.title; 
-		$scope.activeMenu = args.menu;
+	//fastclick
+	$(function() {
+	    FastClick.attach(document.body);
 	});
-
-	/*TODO: idea here is to store the user's last visited page in a cookie, so that if he returns, that page gets opened again
-
+	
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
+/*TODO: idea here is to store the user's last visited page in a cookie, so that if he returns, that page gets opened again*/
 
-		console.log('to ' , toState);
+		$scope.activeMenu = toState.name;
 
-	} );*/
+		if (toState.name == 'sessionsByDay' ) {
+
+			$scope.pageTitle = toState.title + ': ' + toParams.dayId;
+		} else {
+			$scope.pageTitle = toState.title;
+		}
+
+	} );
 
 });
 

@@ -22,6 +22,9 @@ h3 {
 small {
   font-size: 80%;
 }
+.panel-heading {
+  border-radius:0;
+}
 .panel-heading h3 {
   margin-top:10px;
   margin-bottom:5px;
@@ -29,6 +32,14 @@ small {
 }
 .navbar .btn {
   color: #000000;
+}
+
+.list-group-item .list-group-item-heading {
+  font-size: 16px;
+}
+
+.nav > li > a {
+  padding: 7px 15px;
 }
 
 .bootcards-card.col-xs-12 {
@@ -98,7 +109,7 @@ small {
 }
 
 /*view animation*/
-
+/*
 [ui-view].ng-enter, [ui-view].ng-leave {
    -webkit-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
     -moz-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
@@ -127,4 +138,4 @@ small {
 [ui-view].ng-leave-active {
    position:absolute;
     -webkit-transform:translate3d(-100%,0,0);
-}
+}*/

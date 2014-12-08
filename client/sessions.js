@@ -8,14 +8,11 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, Session
 	$scope.getClass = function(track) {
 		return SessionsGlobals.getColorForTrack(track) + "Border";
 	};
-
-	$rootScope.$emit( "setPageTitle", {title:"All sessions", menu : "sessionsAll"});
-
+	
 	SessionsFactory.all().then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
 	});
-
 
 });
 
@@ -49,8 +46,6 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 	}
 
-	$rootScope.$emit( "setPageTitle", {title:"By day: " + dayName, menu : "sessions" + $stateParams.dayId });
-
 	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
@@ -68,8 +63,6 @@ sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, Sessio
 	$scope.getClass = function(track) {
 		return SessionsGlobals.getColorForTrack(track) + "Border";
 	};
-
-	$rootScope.$emit( "setPageTitle", {title:"Favorites", menu : "favorites"});
 
 	SessionsFactory.all().then( function(sessions) {
 		//$scope.sessions = sessions;
@@ -89,8 +82,7 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 
 	$scope.addToFavorites = function() {
 		alert("todo");
-
-	}
+	};
 
 	SessionsFactory.getByID($stateParams.sessionId)
 	.then( function(session) {
@@ -110,7 +102,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		all : function() {
 
-			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=100', {cache: true})
+			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -119,7 +111,7 @@ sessionsAppFactory.factory('SessionsFactory', function($http) {
 
 		getByDay : function(dayId) {
 
-			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=100&category=' + dayId, {cache: true})
+			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=1000&category=' + dayId, {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -169,6 +161,6 @@ sessionsAppGlobals.factory('SessionsGlobals', function() {
 			}
 		}
 		
-	}
+	};
 
 });
