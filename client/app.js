@@ -5,9 +5,9 @@ TODO:
 - template cache?
 - search is behaving strange
 - implement feedback option
-- track badges: link to track view
 - off canvas: allow scroll (zindex issue)
-- desktop menu options
+- desktop menu options: organise
+- offcanvas: collapse suboptions
 */
 
 var app = angular.module("sessionsApp", [

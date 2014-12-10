@@ -137,6 +137,9 @@ small {
   background: #259b24;
   color: #fff;
 }
+.bg-green {
+  background-color: #259b24;
+}
 .greenBorder {
   border-left:10px solid #259b24;
 }
@@ -149,6 +152,9 @@ small {
   background: #536dfe;
   color: #fff;
 }
+.bg-blue {
+  background-color: #536dfe;
+}
 .blueBorder {
   border-left:10px solid #536dfe;
 }
@@ -160,6 +166,9 @@ small {
 .orange i.fa {
   background: #FF9800;
   color: #fff;
+}
+.bg-orange {
+  background-color: #FF9800;
 }
 .orangeBorder {
   border-left:10px solid #FF9800;
@@ -174,6 +183,9 @@ small {
   background: #607d8b;
   color: #fff;
 }
+.bg-gray {
+  background-color: #607d8b;
+}
 .grayBorder {
   border-left:10px solid #607d8b;
 }
@@ -186,6 +198,9 @@ small {
 .purple i.fa {
   background: #673ab7;
   color: #fff;
+}
+.bg-purple {
+  background-color: #673ab7;
 }
 .purpleBorder {
   border-left:10px solid #673ab7;
@@ -200,6 +215,9 @@ small {
   background: #ffc107;
   color: #fff;
 }
+.bg-amber {
+  background-color: #ffc107;
+}
 .amberBorder {
   border-left:10px solid #ffc107;
 }
@@ -212,6 +230,9 @@ small {
 .lime i.fa {
   background: #cddc39;
   color: #fff;
+}
+.bg-lime {
+  background-color: #cddc39;
 }
 .limeBorder {
   border-left:10px solid #cddc39;
@@ -230,16 +251,16 @@ small {
 
 /*view animation*/
 [ui-view].ng-enter {
-  -webkit-animation: fadeInRight 0.5s;
-    -moz-animation: fadeInRight 0.5s;
-    -ms-animation: fadeInRight 0.5s;
-    animation: fadeInRight 0.5s;
+  -webkit-animation: fadeIn 0.4s;
+    -moz-animation: fadeIn 0.4s;
+    -ms-animation: fadeIn 0.4s;
+    animation: fadeIn 0.4s;
 }
 [ui-view].ng-leave {
-  -webkit-animation: fadeOut 0.2s;
-    -moz-animation: fadeOut 0.2s;
-    -ms-animation: fadeOut 0.2s;
-    animation: fadeOut 0.2s;
+  -webkit-animation: fadeOut 0.3s;
+    -moz-animation: fadeOut 0.3s;
+    -ms-animation: fadeOut 0.3s;
+    animation: fadeOut 0.3s;
 }
 
 /*

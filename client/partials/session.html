@@ -24,7 +24,7 @@
 				{{::session.description}}
 			</div>
 
-			<div style="margin:10px 0"><span class="badge">{{::session.track}}</span></div>
+			<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>
 
 			<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
 

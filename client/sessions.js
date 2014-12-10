@@ -132,6 +132,9 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 	$scope.getPanelClass = function(track) {
 		return "panel-" + utils.getColorForTrack(track);
 	};
+	$scope.getBackgroundClass = function(track) {
+		return "bg-" + utils.getColorForTrack(track);
+	};
 
 	$scope.toggleFavorite = function() {
 
