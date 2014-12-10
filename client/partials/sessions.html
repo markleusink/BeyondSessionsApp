@@ -13,7 +13,7 @@
 				<input class="form-control" ng-model="search" placeholder="Search..." />
 			</div>
 
-			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : search track by $index" class="list-group-item" 
+			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter track by $index" class="list-group-item" 
 				ng-class="getClass(session.track)"
 				ui-sref="sessionDetails({ sessionId : session.unid })">
 

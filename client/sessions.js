@@ -1,27 +1,35 @@
 
 var sessionsAppCtrl = angular.module("sessionsApp.controllers", []);
 
-sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, utils) {
+//set up a base controller containing properties/ methods that will be shared
+sessionsAppCtrl.controller( "SessionsBaseCtrl", function($scope, utils) {
 
-	$scope.isLoading = true;
 	$scope.favorites = [];
+	$scope.isLoading = true;
+	$scope.noDocsFound = "No sessions found...";
+
+	$scope.isFavorite = function(session) {
+	 	return $scope.favorites.indexOf(session.sessionId) > -1;
+	};
 
 	$scope.getClass = function(track) {
 		return utils.getColorForTrack(track) + "Border";
 	};
 
-	$scope.isFavorite = function(session) {
-		return $scope.favorites.indexOf(session.sessionId) > -1;
-	}
-	
+});
+
+sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, utils, $controller) {
+
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
+
 	SessionsFactory.all().then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
 
 		//get favorites
 		if ( utils.hasFavorites() ) {
-			SessionsFactory.getFavorites(true).then( function(favorites) {
-				console.log('got the favs...', favorites);
+			SessionsFactory.getFavorites().then( function(favorites) {
 				$scope.favorites = favorites;
 			});
 		}
@@ -30,14 +38,10 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, Session
 
 });
 
-sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils) {
+sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils, $controller) {
 
-	$scope.isLoading = true;
-	$scope.favorites = [];
-
-	$scope.getClass = function(track) {
-		return utils.getColorForTrack(track) + "Border";
-	};
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
 
 	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
 		$scope.sessions = sessions;
@@ -45,7 +49,7 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 		//get favorites
 		if ( utils.hasFavorites() ) {
-			SessionsFactory.getFavorites(true).then( function(favorites) {
+			SessionsFactory.getFavorites().then( function(favorites) {
 				$scope.favorites = favorites;
 			});
 		}
@@ -53,16 +57,41 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 });
 
-sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, utils) {
+sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils, $controller) {
 
-	$scope.isLoading = true;
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
+
+	$scope.trackFilter = function(item) {
+    	return item.track.indexOf($stateParams.trackId)>-1;
+	};
+
+	SessionsFactory.all().then( function(sessions) {
+		$scope.sessions = sessions;
+		$scope.isLoading = false;
+
+		//get favorites
+		if ( utils.hasFavorites() ) {
+			SessionsFactory.getFavorites().then( function(favorites) {
+				$scope.favorites = favorites;
+			});
+		}
+	});
+
+});
+
+
+sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, utils, $controller) {
+
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
+
 	$scope.sessions = [];
-	$scope.favorites = [];
 	$scope.noDocsFound = "You don't have any favorites yet...";
 
 	if ( utils.hasFavorites() ) {
 
-		SessionsFactory.getFavorites(false).then( function(fav) {
+		SessionsFactory.getFavorites().then( function(fav) {
 
 			$scope.favorites = fav;
 
@@ -86,10 +115,6 @@ sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, Sessio
 
 		});
 	}
-
-	$scope.getClass = function(track) {
-		return utils.getColorForTrack(track) + "Border";
-	};
 
 	SessionsFactory.all().then( function(sessions) {
 		//$scope.sessions = sessions;

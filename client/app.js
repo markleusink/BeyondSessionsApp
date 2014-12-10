@@ -1,3 +1,7 @@
+//TODO:
+//grunt task to concat JS files
+//template cache?
+
 var app = angular.module("sessionsApp", [
 		'ngResource',
 		'ngAnimate',
@@ -25,10 +29,10 @@ app.config( function($stateProvider) {
 		    title : 'Swan Map'
 		})
 		.state('sessionsAll', { 	//all sessions
-			    url: '/sessionsAll',
-			    templateUrl: 'partials/sessions.html',
-			    controller: 'SessionsCtrl',
-			    title : 'All sessions'
+		    url: '/sessionsAll',
+		    templateUrl: 'partials/sessions.html',
+		    controller: 'SessionsCtrl',
+		    title : 'All sessions',
 
 		  })
 		   .state('sessionsByDay', { 	
@@ -37,13 +41,18 @@ app.config( function($stateProvider) {
 			    controller: 'SessionsByDayCtrl',
 			    title : 'Sessions'
 		  })
+		   .state('sessionsByTrack', { 	
+			    url: '/sessionsByTrack/:trackId',
+			    templateUrl: 'partials/sessions.html',
+			    controller: 'SessionsByTrackCtrl',
+			    title : 'Sessions'
+		  })
 		   .state('favorites', { 	
 			    url: '/favorites',
 			    templateUrl: 'partials/sessions.html',
 			    controller: 'FavoritesCtrl',
 			    title : 'Favorites'
 		  })
-
 		  .state('sessionDetails', { 	//show session details
 			    url: '/sessions/:sessionId',
 			    templateUrl: 'partials/session.html',
@@ -65,18 +74,29 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
 		angular.element( document.getElementById('container')).removeClass('active');
 	};
 
+	$scope.getMenuOptionClass = function(track) {
+
+		var color = utils.getColorForTrack(track);
+		return color + ( $scope.activeMenu == track ? ' active' : '');
+	}
+
 	//set default active menu option
 	$scope.pageTitle = "Connect 2015 Sessions";
 	$scope.activeMenu = "about";
 
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
 		
-		//store last state
-		ipCookie('lastState', toState.name, {path : '/', expires: 365} );
+		//store last state, but not for session details
+		if (toState.name != 'sessionDetails') {
+			ipCookie('lastState', toState.name, {path : '/', expires: 365} );
+		}
 
 		if (toState.name == 'sessionsByDay' ) {
-			$scope.pageTitle = toState.title + ' : ' + utils.getFullDayName(toParams.dayId);
+			$scope.pageTitle = toState.title + ': ' + utils.getFullDayName(toParams.dayId);
 			$scope.activeMenu = toState.name + toParams.dayId;
+		} else if (toState.name == 'sessionsByTrack' ) {
+			$scope.pageTitle = toParams.trackId;
+			$scope.activeMenu = toParams.trackId;
 		} else {
 			$scope.pageTitle = toState.title;
 			$scope.activeMenu = toState.name;
@@ -88,12 +108,13 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
 
 app.run( function($state, ipCookie) {
 
+	//enable fastclick
 	FastClick.attach(document.body);
 
-	//go to last state (or the default state)
+	//go to last saved state or the default state)
 	var lastState = ipCookie('lastState');
 
-	if (lastState === null || lastState.length===0) {
+	if (lastState == null || lastState.length == 0) {
 		lastState = 'about';
 	}
 

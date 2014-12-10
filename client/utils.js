@@ -40,6 +40,8 @@ app.factory('utils', function(ipCookie) {
 				return 'amber';
 			} else if ( track.indexOf('Kenexa') > -1) {
 				return 'lime';
+			} else if ( track.indexOf('Tell') > -1) {
+				return 'lime';
 			} else {
 				return 'blue';
 			}

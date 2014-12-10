@@ -1,7 +1,10 @@
 
 var app = angular.module("sessionsApp.services", []);
 
-app.factory('SessionsFactory', function($http, dasBaseUrl, utils) {
+app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
+
+	var favorites = [];
+	var favoritesLoaded = false;
 
 	return {
 
@@ -26,7 +29,7 @@ app.factory('SessionsFactory', function($http, dasBaseUrl, utils) {
 		getByID : function(sessionId) {
 
 			return $http.get(dasBaseUrl + 'documents/unid/' + sessionId, {cache: true})
-			.then( function(res) {
+			.then( function(res) { 
 				//if 'speakers' is a string: make it an array
 				if (typeof res.data.speakers == 'string') {
 					res.data.speakers = [res.data.speakers];
@@ -36,27 +39,41 @@ app.factory('SessionsFactory', function($http, dasBaseUrl, utils) {
 
 		}, 
 
-		getFavorites : function(doCache) {
+		getFavorites : function() {
 
 			var favoritesUnid = utils.getFavoritesUnid();
 
 			if (favoritesUnid == null) {
-				console.log('no favorites cookies');
-				return [];
+
+				console.log('no favorites cookie');
+				var deferred = $q.defer();
+				deferred.resolve( favorites );
+				return deferred.promise;
+
 			} else {
+
+				if (favoritesLoaded) {
+					var deferred = $q.defer();
+					deferred.resolve( favorites );
+					return deferred.promise;
+				}
 
 				console.log('load favorites');
 
-				return $http.get( dasBaseUrl + 'documents/unid/' + favoritesUnid)
+				return $http.get( dasBaseUrl + 'documents/unid/' + favoritesUnid, {cache : false})
 				.then( function(res) {
 
-					console.log('favorites loaded');
+					console.log('favorites loaded', res.data.favorites);
+					favoritesLoaded=true;
 
 					if (typeof res.data.favorites == 'string') {
-						return [res.data.favorites];
+						favorites = [res.data.favorites];
 					} else {
-						return res.data.favorites;
+						favorites = res.data.favorites;
 					}
+
+					return favorites;
+					
 				});
 
 
@@ -78,7 +95,7 @@ app.factory('SessionsFactory', function($http, dasBaseUrl, utils) {
 			});
 		},
 
-		saveFavorites : function(unid, favorites) {
+		saveFavorites : function(unid, _favorites) {
 
 			var config = {
 				headers:  {
@@ -86,9 +103,14 @@ app.factory('SessionsFactory', function($http, dasBaseUrl, utils) {
 			    }
 			};
 
-			return $http.post( dasBaseUrl + 'documents/unid/' + unid, { 'favorites' : favorites}, config)
+			var _this = this;
+
+			return $http.post( dasBaseUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
 			.then (function(response) {
-				console.log('done patching favorites document...');
+				console.log('done patching favorites document, new favorites:', _favorites);
+
+				favorites = _favorites;
+
 			});
 
 		}

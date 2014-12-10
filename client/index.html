@@ -41,7 +41,7 @@
       </button>
       
 
-		<div class="navbar navbar-collapse hidden-xs">
+		<div class="navbar-collapse collapse hidden-xs">
 
 			<ul class="nav navbar-nav">
 				<li><a ui-sref="sessionsAll">All sessions</a></li>
@@ -76,8 +76,9 @@
 		<li ng-class="{'active' : activeMenu == 'sessionsByDaywed'}"><a ui-sref="sessionsByDay({dayId: 'wed'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Wednesday</a></li>
 
 		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsAD'}"><a><i class="fa fa-fw fa-angle-right"></i>App dev</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsBTE'}"><a ><i class="fa fa-fw fa-angle-right"></i>Beyond the Everyday</a></li>
+		<li ng-class="getMenuOptionClass('Application Development')"><a ui-sref="sessionsByTrack({trackId: 'Application Development'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>App dev</a></li>
+		<li ng-class="getMenuOptionClass('Infrastructure')"><a ui-sref="sessionsByTrack({trackId: 'Infrastructure'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Infrastructure</a></li>
+		<li ng-class="getMenuOptionClass('Tell')"><a ui-sref="sessionsByTrack({trackId: 'Tell'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Show 'n Tell</a></li>
 		<li ng-class="{'active' : activeMenu == 'sessionsX'}"><a ><i class="fa fa-fw fa-angle-right"></i>...</a></li>
 
 	</ul>
