@@ -18,7 +18,7 @@ sessionsAppCtrl.controller( "SessionsBaseCtrl", function($scope, utils) {
 
 });
 
-sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, utils, $controller) {
+sessionsAppCtrl.controller( "SessionsCtrl", function($scope, SessionsFactory, utils, $controller) {
 
 	// instantiate base controller
 	$controller('SessionsBaseCtrl', { $scope: $scope });
@@ -38,12 +38,12 @@ sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, Session
 
 });
 
-sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils, $controller) {
+sessionsAppCtrl.controller( "SessionsByDayCtrl", function($scope, $stateParams, SessionsFactory, utils, $controller) {
 
 	// instantiate base controller
 	$controller('SessionsBaseCtrl', { $scope: $scope });
 
-	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
+	SessionsFactory.getByDay($stateParams.dayNo).then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
 
@@ -57,7 +57,7 @@ sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $s
 
 });
 
-sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils, $controller) {
+sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($scope, $stateParams, SessionsFactory, utils, $controller) {
 
 	// instantiate base controller
 	$controller('SessionsBaseCtrl', { $scope: $scope });
@@ -80,8 +80,58 @@ sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($rootScope, $scope, 
 
 });
 
+sessionsAppCtrl.controller( "NowNextCtrl", function($scope, SessionsFactory, utils, $controller) {
 
-sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, utils, $controller) {
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
+
+	$scope.sessionsNow = [];
+	$scope.sessionsNext =[];
+	
+	var now = new Date();
+
+	//debug
+	now.setYear(2014);
+	now.setMonth(0);
+	now.setDate(29);
+
+	//v/ar nowMs = now.getTime();
+	var todayDayNo = now.getDay();
+
+	SessionsFactory.getByDay(todayDayNo).then( function(sessions) {
+		
+		angular.forEach(sessions, function(session) {
+
+			var s = new Date(session.startTime);
+			var e = new Date(session.endTime);
+
+			//console.log('session', s, e, now);
+
+			//restrict list of sessions to sessions running now/ next
+			if (s > now) {
+				
+				//calculate time between now & session start
+				var diffMs = (s - now); // milliseconds between now & start
+				session.startsIn = Math.round( diffMs / 1000 / 60 );
+
+				$scope.sessionsNext.push(session);
+
+			} else if (s < now && e > now ) {
+				
+				var diffRuns = (e - now);
+				session.runsFor = Math.round(diffRuns / 1000 / 60);
+
+				$scope.sessionsNow.push(session);
+			}
+
+		});
+
+		$scope.isLoading = false;
+	});
+
+});
+
+sessionsAppCtrl.controller( "FavoritesCtrl", function($scope, SessionsFactory, utils, $controller) {
 
 	// instantiate base controller
 	$controller('SessionsBaseCtrl', { $scope: $scope });

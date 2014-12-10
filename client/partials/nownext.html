@@ -1,0 +1,38 @@
+<div class="row no-gutter">
+<div class="col-sm-12">
+
+	<div style="margin-left: 15px;"><h3>Now ({{sessionsNow.length}})</h3></div>
+
+	<div ng-show="sessionsNow.length == 0" class="alert alert-info">No sessions running at this time</div>
+
+	<div ng-show="sessionsNow.length > 0">
+		<a ng-repeat="session in sessionsNow | orderBy :'startTime' track by $index" class="list-group-item"
+			ng-class="getClass(session.track)"
+			ui-sref="sessionDetails({ sessionId : session.unid })">
+
+			<div class="label label-warning pull-right">{{session.runsFor}}</div>
+			
+			<h4 class="list-group-item-heading">{{::session.title}}</h4>
+			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
+		</a>
+
+	</div> 
+
+	<div style="margin-left: 15px;"><h3>Next ({{sessionsNext.length}})</h3></div>
+
+	<div ng-show="sessionsNext.length == 0" class="alert alert-info">No sessions scheduled</div>
+
+	<div ng-show="sessionsNext.length > 0">
+		<a ng-repeat="session in sessionsNext | orderBy :'startTime' track by $index" class="list-group-item"
+			ng-class="getClass(session.track)"
+			ui-sref="sessionDetails({ sessionId : session.unid })">
+			
+			<div class="label label-primary pull-right">{{session.startsIn}}</div>
+		
+			<h4 class="list-group-item-heading">{{::session.title}}</h4>
+			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
+		</a>
+	</div>
+
+</div>
+</div>

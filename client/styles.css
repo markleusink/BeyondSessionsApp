@@ -38,7 +38,7 @@ body {
 
 /*get rid of the rounded corners*/
 .btn, .panel, .panel-heading, .form-control, 
-.list-group-item:first-child, .list-group-item:last-child {
+.list-group-item:first-child, .list-group-item:last-child, .alert {
   border-radius: 0;
 }
 

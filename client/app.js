@@ -8,6 +8,7 @@ TODO:
 - off canvas: allow scroll (zindex issue)
 - desktop menu options: organise
 - offcanvas: collapse suboptions
+- show speaker images ?
 */
 
 var app = angular.module("sessionsApp", [
@@ -37,6 +38,12 @@ app.config( function($stateProvider) {
 		    title : 'Feedback',
 		    controller : 'FeedbackCtrl'
 		})
+		.state('nowNext', { 
+		    url: '/nowNext',
+		    templateUrl: 'partials/nowNext.html',
+		    title : 'Now & Next',
+		    controller : 'NowNextCtrl'
+		})
 		.state('map', { 	//map of the venue
 		    url: '/map',
 		    templateUrl: 'partials/map.html',
@@ -50,7 +57,7 @@ app.config( function($stateProvider) {
 
 		  })
 		   .state('sessionsByDay', { 	
-			    url: '/sessionsByDay/:dayId',
+			    url: '/sessionsByDay/:dayNo',
 			    templateUrl: 'partials/sessions.html',
 			    controller: 'SessionsByDayCtrl',
 			    title : 'Sessions'
@@ -106,7 +113,7 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
 		}
 
 		if (toState.name == 'sessionsByDay' ) {
-			$scope.pageTitle = toState.title + ': ' + utils.getFullDayName(toParams.dayId);
+			$scope.pageTitle = toState.title + ': ' + utils.getFullDayName(toParams.dayNo);
 			$scope.activeMenu = toState.name + toParams.dayId;
 		} else if (toState.name == 'sessionsByTrack' ) {
 			$scope.pageTitle = toParams.trackId;

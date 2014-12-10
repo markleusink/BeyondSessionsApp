@@ -47,25 +47,25 @@ app.factory('utils', function(ipCookie) {
 			}
 		},
 
-		getFullDayName : function(dayId) {
-			switch (dayId) {
-				case "mon":
-					return "Monday";
-				case "tue":
-					return "Tuesday";
-				case "wed":
-					return "Wednesday";
-				case "thu":
-					return "Thursday";
-				case "fri":
-					return "Friday";
-				case "sat":
-					return "Saturday";
-				case "sun":
+		getFullDayName : function(dayNo) {
+
+			switch (dayNo) {
+				case '0':
 					return "Sunday";
+				case '1':
+					return "Monday";
+				case '2':
+					return "Tuesday";
+				case '3':
+					return "Wednesday";
+				case '4':
+					return "Thursday";
+				case '5':
+					return "Friday";
+				case '6':
+					return "Saturday";
 				default:
 					return "?";
-
 			}
 
 		}

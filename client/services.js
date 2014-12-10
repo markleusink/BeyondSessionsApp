@@ -17,9 +17,9 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		},
 
-		getByDay : function(dayId) {
+		getByDay : function(dayNo) {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsByDay?count=1000&category=' + dayId, {cache: true})
+			return $http.get(dasBaseUrl + 'collections/name/sessionsByDay?count=1000&category=' + dayNo, {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
