@@ -12,11 +12,9 @@
 		<div class="panel-body">
 
 			<div style="margin-bottom:5px">
-				<button class="pull-right btn btn-primary" ng-click="toggleFavorite()" ng-show="session.isFavorite">
-					<i class="fa fa-star"></i>Favorite
-				</button>
-				<button class="pull-right btn btn-default" ng-click="toggleFavorite()" ng-show="!session.isFavorite">
-					<i class="fa fa-star-o"></i>Favorite
+				
+				<button class="pull-right btn" ng-class="{'btn-default' : !session.isFavorite, 'btn-primary btn-flip' : session.isFavorite, }" ng-click="toggleFavorite()">
+					<i class="fa" ng-class="session.isFavorite ? 'fa-star' : 'fa-star-o'"></i>Favorite
 				</button>
 
 				<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i>Back</a>

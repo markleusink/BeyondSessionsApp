@@ -42,18 +42,19 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 		getFavorites : function() {
 
 			var favoritesUnid = utils.getFavoritesUnid();
+			var deferred;
 
 			if (favoritesUnid == null) {
 
 				console.log('no favorites cookie');
-				var deferred = $q.defer();
+				deferred = $q.defer();
 				deferred.resolve( favorites );
 				return deferred.promise;
 
 			} else {
 
 				if (favoritesLoaded) {
-					var deferred = $q.defer();
+					deferred = $q.defer();
 					deferred.resolve( favorites );
 					return deferred.promise;
 				}
@@ -112,6 +113,12 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 				favorites = _favorites;
 
 			});
+
+		},
+
+		saveFeedback : function(form) {
+
+			return $http.post(dasBaseUrl + 'documents?form=frmFeedback', form );
 
 		}
 

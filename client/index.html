@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/united/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
 	
 </head>
 
@@ -40,16 +41,15 @@
         <i class="fa fa-lg fa-chevron-left"></i><span>Back</span>
       </button>
       
-
 		<div class="navbar-collapse collapse hidden-xs">
 
 			<ul class="nav navbar-nav">
-				<li><a ui-sref="sessionsAll">All sessions</a></li>
-				<li><a ui-sref="sessionsByDay({dayId: 'sun'})">Sunday</a>
-				<li><a ui-sref="sessionsByDay({dayId: 'mon'})">Monday</a>
-				<li><a ui-sref="sessionsByDay({dayId: 'tue'})">Tuesday</a>
-				<li><a ui-sref="sessionsByDay({dayId: 'wed'})">Wednesday</a>
-				<li><a>Favorites</a></li>
+				<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-question"></i>About</a></li>
+				<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
+				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-star-o"></i>Favorites</a></li>
+				<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
+				<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
+
 			</ul>
 
 		</div>
@@ -80,6 +80,8 @@
 		<li ng-class="getMenuOptionClass('Infrastructure')"><a ui-sref="sessionsByTrack({trackId: 'Infrastructure'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Infrastructure</a></li>
 		<li ng-class="getMenuOptionClass('Tell')"><a ui-sref="sessionsByTrack({trackId: 'Tell'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Show 'n Tell</a></li>
 		<li ng-class="{'active' : activeMenu == 'sessionsX'}"><a ><i class="fa fa-fw fa-angle-right"></i>...</a></li>
+
+		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
 
 	</ul>
 </nav>

@@ -192,8 +192,6 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 
 		}
 
-		
-
 	};
 
 	SessionsFactory.getByID($stateParams.sessionId)
@@ -216,4 +214,14 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 	});
 
 });
+
+sessionsAppCtrl.controller('FeedbackCtrl', function($scope, SessionsFactory) {
+
+	//TODO
+
+	//TODO: check if form is valid
+	SessionsFactory.saveFeedback( {feedback : $scope.feedback} );
+
+});
+
 

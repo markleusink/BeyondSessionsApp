@@ -1,6 +1,14 @@
-//TODO:
-//grunt task to concat JS files
-//template cache?
+/*
+TODO:
+- performance of animations
+- grunt task to concat JS files
+- template cache?
+- search is behaving strange
+- implement feedback option
+- track badges: link to track view
+- off canvas: allow scroll (zindex issue)
+- desktop menu options
+*/
 
 var app = angular.module("sessionsApp", [
 		'ngResource',
@@ -22,6 +30,12 @@ app.config( function($stateProvider) {
 		    url: '/about',
 		    templateUrl: 'partials/about.html',
 		    title : 'About'
+		})
+		.state('feedback', { 	
+		    url: '/feedback',
+		    templateUrl: 'partials/feedback.html',
+		    title : 'Feedback',
+		    controller : 'FeedbackCtrl'
 		})
 		.state('map', { 	//map of the venue
 		    url: '/map',

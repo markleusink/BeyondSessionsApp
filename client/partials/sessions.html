@@ -13,11 +13,11 @@
 				<input class="form-control" ng-model="search" placeholder="Search..." />
 			</div>
 
-			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter track by $index" class="list-group-item" 
+			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter | filter : search track by $index" class="list-group-item" 
 				ng-class="getClass(session.track)"
 				ui-sref="sessionDetails({ sessionId : session.unid })">
 
-				<i class="pull-right fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
+				<i class="pull-right no-text fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
 
 				<h4 class="list-group-item-heading">{{::session.title}}</h4>
 				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>

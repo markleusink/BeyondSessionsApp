@@ -7,14 +7,21 @@ body {
   padding-top: 57px;
 }
 
-/*no gutter on lists*/
-.no-gutter > [class*='col-'] {
-    padding-right:0;
-    padding-left:0;
+/*no gutter on lists on small devices*/
+@media (max-width: 767px) {
+  .no-gutter > [class*='col-'] {
+      padding-right:0;
+      padding-left:0;
+  }
+
+  /*no borders on panels (sessions)*/
+  .panel {
+    border: 0;
+  }
 }
 
 /*margin in buttons > icons*/
-.btn > i.fa, .offcanvas i.fa, i.fa-refresh {
+.btn > i.fa, a > i.fa, .offcanvas i.fa, i.fa-refresh {
   margin-right: 5px;
 }
 
@@ -33,11 +40,6 @@ body {
 .btn, .panel, .panel-heading, .form-control, 
 .list-group-item:first-child, .list-group-item:last-child {
   border-radius: 0;
-}
-
-/*no borders on panels (sessions)*/
-.panel {
-  border: 0;
 }
 
 /*highlight active menu option*/
@@ -219,8 +221,38 @@ small {
   background-color: #cddc39;
 }
 
+.btn-flip {
+    -webkit-animation: flip 0.4s;
+    -moz-animation: flip 0.4s;
+    -ms-animation: flip 0.4s;
+    animation: flip 0.4s;
+}
 
 /*view animation*/
+[ui-view].ng-enter {
+  -webkit-animation: fadeInRight 0.5s;
+    -moz-animation: fadeInRight 0.5s;
+    -ms-animation: fadeInRight 0.5s;
+    animation: fadeInRight 0.5s;
+}
+[ui-view].ng-leave {
+  -webkit-animation: fadeOut 0.2s;
+    -moz-animation: fadeOut 0.2s;
+    -ms-animation: fadeOut 0.2s;
+    animation: fadeOut 0.2s;
+}
+
+/*
+[ui-view].ng-leave {
+   -webkit-animation: fadeInOut 1s;
+    -moz-animation: fadeInOut 1s;
+    -ms-animation: fadeInOut 1s;
+    animation: fadeInOut 1s;
+}
+*/
+
+
+/*
 [ui-view].ng-enter, [ui-view].ng-leave {
    -webkit-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
     -moz-transition: 275ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
@@ -249,4 +281,4 @@ small {
 [ui-view].ng-leave-active {
    position:absolute;
     -webkit-transform:translate3d(-100%,0,0);
-}
+}*/
