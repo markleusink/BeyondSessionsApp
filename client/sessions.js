@@ -1,67 +1,94 @@
 
-var sessionsAppCtrl = angular.module("sessionsApp.controllers", [])
+var sessionsAppCtrl = angular.module("sessionsApp.controllers", []);
 
-sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, SessionsGlobals) {
+sessionsAppCtrl.controller( "SessionsCtrl", function($rootScope, $scope, SessionsFactory, utils) {
 
 	$scope.isLoading = true;
+	$scope.favorites = [];
 
 	$scope.getClass = function(track) {
-		return SessionsGlobals.getColorForTrack(track) + "Border";
+		return utils.getColorForTrack(track) + "Border";
 	};
+
+	$scope.isFavorite = function(session) {
+		return $scope.favorites.indexOf(session.sessionId) > -1;
+	}
 	
 	SessionsFactory.all().then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
+
+		//get favorites
+		if ( utils.hasFavorites() ) {
+			SessionsFactory.getFavorites(true).then( function(favorites) {
+				console.log('got the favs...', favorites);
+				$scope.favorites = favorites;
+			});
+		}
+
 	});
 
 });
 
-sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, SessionsGlobals) {
+sessionsAppCtrl.controller( "SessionsByDayCtrl", function($rootScope, $scope, $stateParams, SessionsFactory, utils) {
 
 	$scope.isLoading = true;
+	$scope.favorites = [];
 
 	$scope.getClass = function(track) {
-		return SessionsGlobals.getColorForTrack(track) + "Border";
+		return utils.getColorForTrack(track) + "Border";
 	};
-
-	var dayName;
-
-	switch ($stateParams.dayId) {
-
-		case "mon":
-			dayName = "Monday"; break;
-		case "tue":
-			dayName = "Tuesday"; break;
-		case "wed":
-			dayName = "Wednesday"; break;
-		case "thu":
-			dayName = "Thursday"; break;
-		case "fri":
-			dayName = "Friday"; break;
-		case "sat":
-			dayName = "Saturday"; break;
-		case "sun":
-			dayName = "Sunday"; break;
-
-
-	}
 
 	SessionsFactory.getByDay($stateParams.dayId).then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
-	});
 
+		//get favorites
+		if ( utils.hasFavorites() ) {
+			SessionsFactory.getFavorites(true).then( function(favorites) {
+				$scope.favorites = favorites;
+			});
+		}
+	});
 
 });
 
-sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, SessionsGlobals) {
+sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, SessionsFactory, utils) {
 
 	$scope.isLoading = true;
 	$scope.sessions = [];
+	$scope.favorites = [];
 	$scope.noDocsFound = "You don't have any favorites yet...";
 
+	if ( utils.hasFavorites() ) {
+
+		SessionsFactory.getFavorites(false).then( function(fav) {
+
+			$scope.favorites = fav;
+
+			//get all sessions, restrict to favorites
+			SessionsFactory.all().then( function(sessions) {
+
+				var favoriteSessions = [];
+
+				for (var i=0; i<sessions.length; i++) {
+					var sessionId = sessions[i].sessionId;
+
+					if (fav.indexOf(sessionId) >-1) {
+						favoriteSessions.push( sessions[i] );
+					}
+
+				}
+
+				$scope.sessions = favoriteSessions;
+				$scope.isLoading = false;
+			});
+
+		});
+	}
+
 	$scope.getClass = function(track) {
-		return SessionsGlobals.getColorForTrack(track) + "Border";
+		return utils.getColorForTrack(track) + "Border";
 	};
 
 	SessionsFactory.all().then( function(sessions) {
@@ -72,95 +99,96 @@ sessionsAppCtrl.controller( "FavoritesCtrl", function($rootScope, $scope, Sessio
 
 });
 
-sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, SessionsFactory, SessionsGlobals) {
+sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, SessionsFactory, utils) {
 
 	$scope.isLoading = true;
+	$scope.favorites = [];
 
 	$scope.getPanelClass = function(track) {
-		return "panel-" + SessionsGlobals.getColorForTrack(track);
+		return "panel-" + utils.getColorForTrack(track);
 	};
 
-	$scope.addToFavorites = function() {
-		alert("todo");
+	$scope.toggleFavorite = function() {
+
+		console.log('toggle favorite');
+
+		var sessionId = $scope.session.sessionId;
+
+		//check if we have a UNID we can store the favorites in (on the server)
+		var favoritesUnid = utils.getFavoritesUnid();
+
+		if ($scope.session.isFavorite) {
+
+			$scope.session.isFavorite = false;
+
+			var pos = $scope.favorites.indexOf( sessionId);
+
+			if (pos>-1){
+				$scope.favorites.splice(pos, 1);
+			}
+
+			SessionsFactory.saveFavorites(favoritesUnid, $scope.favorites);
+
+		} else {
+
+			//mark as favorite
+			$scope.session.isFavorite = true;
+			$scope.favorites.push( sessionId );
+
+			console.log('adding favorite',  $scope.session.sessionId, 'all favorites:', $scope.favorites  );
+
+			//TODO: make list unique
+
+			//get the unid of this users' favorites document from a cookie
+		//if no id exists, a new favorite document is created using DDS 
+		//and the unid of that document is stored locally in a cookie.
+
+			if ( favoritesUnid == null || favoritesUnid.length==0 ) {
+				//no favorites yet: get favorites unid
+						
+				SessionsFactory.getFavoritesUnid()
+				.then( function(favoritesUnid) {
+
+					utils.setFavoritesUnid(favoritesUnid);
+
+					//now store the favorites list
+					SessionsFactory.saveFavorites(favoritesUnid, $scope.favorites);
+
+				});
+
+			} else {
+
+				console.log('existing favorites unid ' + favoritesUnid);
+
+				//store the favorites
+				SessionsFactory.saveFavorites(favoritesUnid, $scope.favorites);
+			}
+
+
+		}
+
+		
+
 	};
 
 	SessionsFactory.getByID($stateParams.sessionId)
 	.then( function(session) {
 		$scope.session = session;
-		$scope.isLoading = false;
+		$scope.isLoading = true;
+
+		//check if the session is a favorite
+		if ( utils.hasFavorites() ) {
+			SessionsFactory.getFavorites(true).then( function(favorites) {
+				console.log('check favs', favorites, session.sessionId);
+
+				if (favorites.indexOf(session.sessionId)>-1) {
+					$scope.session.isFavorite = true;
+				}
+
+				$scope.favorites = favorites;
+			});
+		}
 	});
 
 });
 
-var sessionsAppFactory = angular.module("sessionsApp.services", []);
-
-sessionsAppFactory.factory('SessionsFactory', function($http) {
-
-	var restBaseUrl = "http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/";
-	
-	return {
-
-		all : function() {
-
-			return $http.get(restBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
-			.then( function(res) {
-				return res.data;
-			});
-
-		},
-
-		getByDay : function(dayId) {
-
-			return $http.get(restBaseUrl + 'collections/name/sessionsByDay?count=1000&category=' + dayId, {cache: true})
-			.then( function(res) {
-				return res.data;
-			});
-
-		},
-
-		getByID : function(sessionId) {
-
-			return $http.get(restBaseUrl + 'documents/unid/' + sessionId, {cache: true})
-			.then( function(res) {
-				//if 'speakers' is a string: make it an array
-				if (typeof res.data.speakers == 'string') {
-					res.data.speakers = [res.data.speakers];
-				}
-				return res.data;
-			});
-
-		}
-
-
-	};
-
-});
-
-var sessionsAppGlobals = angular.module("sessionsApp.globals", []);
-
-sessionsAppGlobals.factory('SessionsGlobals', function() {
-
-	return {
-
-		getColorForTrack : function(track) {
-
-			if (!track) {
-				return 'blue';
-			}
-
-			if (track.indexOf('Best Practices')>-1) {
-				return 'green';
-			} else if (track.indexOf('Application Development')>-1) {
-				return 'orange';
-			} else if (track.indexOf('Innovators and Thought Leaders')>-1) {
-				return 'red';
-			} else if (track.indexOf('Business Partner Development Day')>-1) {
-				return 'gray';
-			} else {
-				return 'blue';
-			}
-		}
-		
-	};
-
-});

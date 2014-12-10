@@ -1,24 +1,30 @@
-<div class="col-sm-12 bootcards-list">
+<div class="row no-gutter">
 
-	<div ng-show="isLoading" class="list-group-item">
-		<i class="fa fa-spin fa-refresh"></i>Loading...</div>
-	<div>
+	<div class="col-sm-12 no-gutter">
 
-	<div ng-show="!isLoading && sessions.length == 0" class="list-group-item">{{noDocsFound}}</div>
-
-	<div ng-show="!isLoading && sessions.length > 0">
+		<div ng-show="isLoading" class="list-group-item">
+			<i class="fa fa-spin fa-refresh"></i>Loading...</div>
 		<div>
-			<input class="form-control" ng-model="search" placeholder="Search..." />
+
+		<div ng-show="!isLoading && sessions.length == 0" class="list-group-item">{{noDocsFound}}</div>
+
+		<div ng-show="!isLoading && sessions.length > 0">
+			<div>
+				<input class="form-control" ng-model="search" placeholder="Search..." />
+			</div>
+
+			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : search track by $index" class="list-group-item" 
+				ng-class="getClass(session.track)"
+				ui-sref="sessionDetails({ sessionId : session.unid })">
+
+				<i class="pull-right fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
+
+				<h4 class="list-group-item-heading">{{::session.title}}</h4>
+				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
+
+			</a>
 		</div>
 
-		<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : search" class="list-group-item" 
-			ng-class="getClass(session.track)"
-			ui-sref="sessionDetails({ sessionId : session.unid })">
-
-			<h4 class="list-group-item-heading">{{session.title}}</h4>
-			<p class="list-group-item-text">{{session.startTime | date : 'EEE HH:mm'}} | {{session.room}}</p>
-
-		</a>
 	</div>
 
 </div>

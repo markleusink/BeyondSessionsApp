@@ -1,17 +1,21 @@
+<div class="row no-gutter">
 
-<div class="col-sm-12 bootcards-cards">
+<div class="col-sm-12">
 
 	<div class="panel panel-default" ng-class="getPanelClass(session.track)">
 
 		<div class="panel-heading">
-	  	  <h3>{{session.title}}</h3>
+	  	  <h4>{{session.title}}</h4>
 			<div><small>{{session.startTime | date : 'EEE H:mm'}} in {{session.room}}</small></div>
 		</div>
 
 		<div class="panel-body">
 
 			<div style="margin-bottom:5px">
-				<button class="pull-right btn btn-default" ng-click="addToFavorites()">
+				<button class="pull-right btn btn-primary" ng-click="toggleFavorite()" ng-show="session.isFavorite">
+					<i class="fa fa-star"></i>Favorite
+				</button>
+				<button class="pull-right btn btn-default" ng-click="toggleFavorite()" ng-show="!session.isFavorite">
 					<i class="fa fa-star-o"></i>Favorite
 				</button>
 
@@ -39,5 +43,7 @@
 		</div>
 
 	</div>
+
+</div>
 
 </div>
