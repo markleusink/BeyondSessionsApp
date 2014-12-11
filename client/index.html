@@ -72,16 +72,19 @@
 		<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
 
 		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-calendar"></i>Sessions by day</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsByDaysun'}"><a ui-sref="sessionsByDay({dayNo: '0'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Sunday</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsByDaymon'}"><a ui-sref="sessionsByDay({dayNo: '1'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Monday</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsByDaytue'}"><a ui-sref="sessionsByDay({dayNo: '2'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Tuesday</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsByDaywed'}"><a ui-sref="sessionsByDay({dayNo: '3'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Wednesday</a></li>
+
+		<!--repeat over days-->
+		<li ng-repeat="day in menuDays">
+			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
+		</li>
 
 		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
-		<li ng-class="getMenuOptionClass('Application Development')"><a ui-sref="sessionsByTrack({trackId: 'Application Development'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>App dev</a></li>
-		<li ng-class="getMenuOptionClass('Infrastructure')"><a ui-sref="sessionsByTrack({trackId: 'Infrastructure'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Infrastructure</a></li>
-		<li ng-class="getMenuOptionClass('Tell')"><a ui-sref="sessionsByTrack({trackId: 'Tell'})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>Show 'n Tell</a></li>
-		<li ng-class="{'active' : activeMenu == 'sessionsX'}"><a ><i class="fa fa-fw fa-angle-right"></i>...</a></li>
+
+		<!--repeat over tracks-->
+		<li ng-repeat="track in tracks" ng-class="track.clazz">
+			<a ui-sref="sessionsByTrack({trackId:track.label})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{track.label}}</a>
+		</li>
+
 
 		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
 

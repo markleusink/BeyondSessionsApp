@@ -12,8 +12,8 @@ sessionsAppCtrl.controller( "SessionsBaseCtrl", function($scope, utils) {
 	 	return $scope.favorites.indexOf(session.sessionId) > -1;
 	};
 
-	$scope.getClass = function(track) {
-		return utils.getColorForTrack(track) + "Border";
+	$scope.getBackgroundClass = function(track) {
+		return "bg-" + utils.getColorForTrack(track);
 	};
 
 });
@@ -270,10 +270,17 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 
 sessionsAppCtrl.controller('FeedbackCtrl', function($scope, SessionsFactory) {
 
-	//TODO
+	$scope.submitted = false;
 
-	//TODO: check if form is valid
-	SessionsFactory.saveFeedback( {feedback : $scope.feedback} );
+	$scope.submit = function() {
+
+		console.log('save it');
+		$scope.submitted = true;
+
+		//TODO
+		//SessionsFactory.saveFeedback( {feedback : $scope.feedback} );
+
+	}
 
 });
 

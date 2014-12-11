@@ -5,7 +5,7 @@ TODO:
 - template cache?
 - search is behaving strange
 - implement feedback option
-- off canvas: allow scroll (zindex issue)
+- active menu options
 - desktop menu options: organise
 - offcanvas: collapse suboptions
 - show speaker images ?
@@ -87,19 +87,38 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
+		//we add the noscroll class to the body so it can't be scrolled
+		//while the offcanvas is opened
+		angular.element( document.body).toggleClass('noscroll');
 		angular.element( document.getElementById('offcanvas')).toggleClass('active');
 		angular.element( document.getElementById('container')).toggleClass('active');
 	};
 	$scope.hideOffCanvas = function() {
+		angular.element( document.body).removeClass('noscroll');
 		angular.element( document.getElementById('offcanvas')).removeClass('active');
 		angular.element( document.getElementById('container')).removeClass('active');
 	};
 
-	$scope.getMenuOptionClass = function(track) {
+	var tracks = [
+		"Application Development",
+		"Beyond the Everday",
+		"Best Practices",
+		"..."
+	];
 
+	$scope.tracks = [];
+	angular.forEach(tracks, function(track) {
 		var color = utils.getColorForTrack(track);
-		return color + ( $scope.activeMenu == track ? ' active' : '');
-	}
+		var clazz = color + ( $scope.activeMenu == track ? ' active' : '');
+		$scope.tracks.push( {"label":track, "clazz":clazz} );
+	} );
+
+	$scope.menuDays = [
+		{id: '0', label:'Sunday'},
+		{id: '1', label:'Monday'},
+		{id: '2', label:'Tuesday'},
+		{id: '3', label:'Wednesday'}
+	];
 
 	//set default active menu option
 	$scope.pageTitle = "Connect 2015 Sessions";

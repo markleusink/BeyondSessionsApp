@@ -2,13 +2,27 @@
 
 <div class="col-sm-12">
 
-	<form name="feedbackForm">
+	<form name="feedbackForm" ng-submit="submit()">
 
-		We love to hear what you think about this app. Please let us know!
+		<p style="margin-top:10px">
+			We love to hear what you think about this app. Got remarks? Suggestions? Please let us know!
+		</p>
 
-		<textarea ng-model="feedback" class="form-control"></textarea>
+		<div ng-show="!submitted" class="msgBox">
+			<div class="form-group">
+				<textarea ng-model="feedback" class="form-control" style="height:100px"></textarea>
+			</div>
 
-		<button type="button" ng-click="saveFeedback()" class="btn btn-primary">Submit</button>
+			<div class="form-group">
+				<button class="btn btn-info" type="submit">
+				<i class="fa fa-rocket"></i>Send it!</button>
+			</div>
+
+		</div>
+
+		<div ng-show="submitted" class="alert alert-info msgBox">
+			Awesome. Thanks!
+		</div>
 
 	</form>
 

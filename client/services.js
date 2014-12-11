@@ -118,6 +118,9 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		saveFeedback : function(form) {
 
+			console.log('saving feedback...')
+			
+
 			return $http.post(dasBaseUrl + 'documents?form=frmFeedback', form );
 
 		}

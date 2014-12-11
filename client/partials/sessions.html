@@ -1,6 +1,6 @@
 <div class="row no-gutter">
 
-	<div class="col-sm-12 no-gutter">
+	<div class="col-sm-12 no-gutter sessions">
 
 		<div ng-show="isLoading" class="list-group-item">
 			<i class="fa fa-spin fa-refresh"></i>Loading...</div>
@@ -13,9 +13,11 @@
 				<input class="form-control" ng-model="search" placeholder="Search..." />
 			</div>
 
-			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter | filter : search track by $index" class="list-group-item" 
-				ng-class="getClass(session.track)"
+			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter | filter : search track by $index" 
+				class="list-group-item" 	
 				ui-sref="sessionDetails({ sessionId : session.unid })">
+
+				<div class="marker" ng-class="getBackgroundClass(session.track)"></div>
 
 				<i class="pull-right no-text fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
 
