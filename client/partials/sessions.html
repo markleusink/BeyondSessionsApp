@@ -10,10 +10,10 @@
 
 		<div ng-show="!isLoading && sessions.length > 0">
 			<div>
-				<input class="form-control" ng-model="search" placeholder="Search..." />
+				<input class="form-control" ng-model="searchField" placeholder="Search..." />
 			</div>
 
-			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter | filter : search track by $index" 
+			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : trackFilter | filter : searchField track by session['@unid']" 
 				class="list-group-item" 	
 				ui-sref="sessionDetails({ sessionId : session.unid })">
 
@@ -22,7 +22,7 @@
 				<i class="pull-right no-text fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
 
 				<h4 class="list-group-item-heading">{{::session.title}}</h4>
-				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
+				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}} >> {{session.$11 | date : 'dd MM yyyy' }}</p>
 
 			</a>
 		</div>
