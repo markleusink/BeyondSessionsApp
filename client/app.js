@@ -1,13 +1,6 @@
 /*
 TODO:
-- performance of animations
-- grunt task to concat JS files
-- template cache?
-- search is behaving strange
-- implement feedback option
-- active menu options
-- desktop menu options: organise
-- offcanvas: collapse suboptions
+- grunt task to concat JS files / template cache (performance optimization)
 - show speaker images ?
 */
 
@@ -15,6 +8,7 @@ var app = angular.module("sessionsApp", [
 		'ngResource',
 		'ngAnimate',
 		'ui.router',
+		'ui.bootstrap',
 		'ipCookie',
 		'sessionApp.utils',
 		'sessionsApp.controllers',

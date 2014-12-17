@@ -10,7 +10,9 @@
 			ng-class="getClass(session.track)"
 			ui-sref="sessionDetails({ sessionId : session.unid })">
 
-			<div class="label label-warning pull-right">{{session.runsFor}}</div>
+			<div class="marker" ng-class="getBackgroundClass(session.track)"></div>
+
+			<div class="label label-warning pull-right" title="{{session.runsFor + ' minutes left'}}">{{session.runsFor}}</div>
 			
 			<h4 class="list-group-item-heading">{{::session.title}}</h4>
 			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
@@ -26,8 +28,10 @@
 		<a ng-repeat="session in sessionsNext | orderBy :'startTime' track by $index" class="list-group-item"
 			ng-class="getClass(session.track)"
 			ui-sref="sessionDetails({ sessionId : session.unid })">
+
+			<div class="marker" ng-class="getBackgroundClass(session.track)"></div>
 			
-			<div class="label label-primary pull-right">{{session.startsIn}}</div>
+			<div class="label label-primary pull-right" title="{{'Starting in ' + session.startsIn + ' minutes'}}">{{session.startsIn}}</div>
 		
 			<h4 class="list-group-item-heading">{{::session.title}}</h4>
 			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>

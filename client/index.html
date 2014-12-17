@@ -23,32 +23,57 @@
 
 <body ng-controller="MainCtrl">
 
-<!--header-->
 <header class="navbar navbar-default navbar-fixed-top">
 
 	<div class="container">
 	
 		<div class="navbar-header">
 
-		 <!-- menu button to show/ hide the off canvas slider -->
-      <button type="button" class="btn btn-primary pull-left navbar-toggle" ng-click="toggleOffCanvas()">
-        <i class="fa fa-lg fa-bars no-text"></i>
-      </button>  
-       
-        <a class="navbar-brand no-break-out" title="Customers" href="/">{{pageTitle}}</a>  
-      </div>
-      <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
-        <i class="fa fa-lg fa-chevron-left"></i><span>Back</span>
-      </button>
-      
+			<!-- menu button to show/ hide the off canvas slider -->
+	      	<button type="button" class="btn btn-primary pull-left navbar-toggle" ng-click="toggleOffCanvas()">
+	        	<i class="fa fa-lg fa-bars no-text"></i>
+	      	</button>  
+	       
+	        <a class="navbar-brand no-break-out" title="Customers" href="/">{{pageTitle}}</a>  
+		</div>
+    
+	    <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
+	        <i class="fa fa-lg fa-chevron-left"></i><span>Back</span>
+	    </button>
+     
+	    <!--desktop menu-->
 		<div class="navbar-collapse collapse hidden-xs">
 
 			<ul class="nav navbar-nav">
-				<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-question"></i>About</a></li>
-				<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
-				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-star-o"></i>Favorites</a></li>
-				<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
-				<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
+				<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about"><i class="fa fa-question"></i>About</a></li>
+
+				<li class="dropdown" dropdown on-toggle="toggled(open)">
+	                <a href class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Sessions <span class="caret"></span></a>
+	                <ul class="dropdown-menu" role="menu">
+	                	<li><a ui-sref="sessionsAll"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
+
+				   		<li class="divider"></li>
+						<li class="dropdown-header"><i class="fa fa-fw fa-calendar"></i> By day</a></li>
+					    <!--repeat over days-->
+						<li ng-repeat="day in menuDays">
+							<a ui-sref="sessionsByDay({dayNo: day.id})"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
+						</li>
+
+						<li class="divider"></li>
+						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> By track</a></li>
+
+						<!--repeat over tracks-->
+						<li ng-repeat="track in tracks" class="track">
+							<a ui-sref="sessionsByTrack({trackId:track.name})">
+								<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.name}}</a>
+						</li>
+	                </ul>
+	    		</li>
+
+				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites"><i class="fa fa-star-o"></i>Favorites</a></li>
+				<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext"><i class="fa fa-clock-o"></i>Now & Next</a></li>
+				<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map"><i class="fa fa-map-marker"></i>Map</a></li>
+				<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback"><i class="fa fa-edit"></i>Feedback</a></li>
 
 			</ul>
 
@@ -109,6 +134,11 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-resource.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-cookie/angular-cookie.min.js"></script>
+
+<!--angular ui bootstrap-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
 
