@@ -9,7 +9,7 @@
 		<div ng-show="!isLoading && sessions.length == 0" class="list-group-item">{{noDocsFound}}</div>
 
 		<div ng-show="!isLoading && sessions.length > 0">
-			<div>
+			<div ng-show="allowSearch">
 				<input class="form-control" ng-model="searchField" placeholder="Search..." />
 			</div>
 
@@ -22,7 +22,8 @@
 				<i class="pull-right no-text fa " ng-class="isFavorite(session) ? 'fa-star' : 'fa-angle-right'"></i>
 
 				<h4 class="list-group-item-heading">{{::session.title}}</h4>
-				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}} >> {{session.$11 | date : 'dd MM yyyy' }}</p>
+				<!-- <p class="list-group-item-text">{{::session.sessionId}}</p> -->
+				<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
 
 			</a>
 		</div>

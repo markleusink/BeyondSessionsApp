@@ -2,10 +2,11 @@
 
 <div class="col-sm-12">
 
-	<div class="panel panel-default" ng-class="getPanelClass(session.track)">
+	<div class="panel panel-default">
 
-		<div class="panel-heading">
-	  	  <h4>{{session.title}}</h4>
+		<div class="panel-heading" ng-class="getBackgroundClass(session.track)">
+	  		<h4>{{session.title}}</h4>
+	  		<!-- <div class="small">{{::session.sessionId}}</div> -->
 			<div><small>{{::session.startTime | date : 'EEE H:mm'}} in {{::session.room}} | {{::session.sessionId}}</small></div>
 		</div>
 

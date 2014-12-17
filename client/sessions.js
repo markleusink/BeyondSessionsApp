@@ -4,6 +4,7 @@ var sessionsAppCtrl = angular.module("sessionsApp.controllers", []);
 //set up a base controller containing properties/ methods that will be shared
 sessionsAppCtrl.controller( "SessionsBaseCtrl", function($scope, utils) {
 
+	$scope.allowSearch = true;
 	$scope.favorites = [];
 	$scope.isLoading = true;
 	$scope.noDocsFound = "No sessions found...";
@@ -61,6 +62,8 @@ sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($scope, $stateParams
 
 	// instantiate base controller
 	$controller('SessionsBaseCtrl', { $scope: $scope });
+
+	$scope.allowSearch = false;
 
 	$scope.trackFilter = function(item) {
     	return item.track.indexOf($stateParams.trackId)>-1;
@@ -137,6 +140,7 @@ sessionsAppCtrl.controller( "FavoritesCtrl", function($scope, SessionsFactory, u
 	$controller('SessionsBaseCtrl', { $scope: $scope });
 
 	$scope.sessions = [];
+	$scope.allowSearch = false;
 	$scope.noDocsFound = "You don't have any favorites yet...";
 
 	if ( utils.hasFavorites() ) {
@@ -174,17 +178,10 @@ sessionsAppCtrl.controller( "FavoritesCtrl", function($scope, SessionsFactory, u
 
 });
 
-sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, SessionsFactory, utils) {
+sessionsAppCtrl.controller( "SessionCtrl", function($controller, $scope, $stateParams, SessionsFactory, utils) {
 
-	$scope.isLoading = true;
-	$scope.favorites = [];
-
-	$scope.getPanelClass = function(track) {
-		return "panel-" + utils.getColorForTrack(track);
-	};
-	$scope.getBackgroundClass = function(track) {
-		return "bg-" + utils.getColorForTrack(track);
-	};
+	// instantiate base controller
+	$controller('SessionsBaseCtrl', { $scope: $scope });
 
 	$scope.toggleFavorite = function() {
 
@@ -236,7 +233,7 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 
 			} else {
 
-				console.log('existing favorites unid ' + favoritesUnid);
+				//console.log('existing favorites unid ' + favoritesUnid);
 
 				//store the favorites
 				SessionsFactory.saveFavorites(favoritesUnid, $scope.favorites);
@@ -255,7 +252,7 @@ sessionsAppCtrl.controller( "SessionCtrl", function($scope, $stateParams, Sessio
 		//check if the session is a favorite
 		if ( utils.hasFavorites() ) {
 			SessionsFactory.getFavorites(true).then( function(favorites) {
-				console.log('check favs', favorites, session.sessionId);
+				//console.log('check favs', favorites, session.sessionId);
 
 				if (favorites.indexOf(session.sessionId)>-1) {
 					$scope.session.isFavorite = true;
@@ -273,14 +270,11 @@ sessionsAppCtrl.controller('FeedbackCtrl', function($scope, SessionsFactory) {
 	$scope.submitted = false;
 
 	$scope.submit = function() {
-
-		console.log('save it');
+		
+		SessionsFactory.saveFeedback( {feedback : $scope.feedback, name: $scope.name} );
 		$scope.submitted = true;
 
-		//TODO
-		//SessionsFactory.saveFeedback( {feedback : $scope.feedback} );
-
-	}
+	};
 
 });
 

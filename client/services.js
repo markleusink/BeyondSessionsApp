@@ -83,6 +83,15 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 			
 		},
 
+		getTracks : function() {
+
+			return $http.get(dasBaseUrl + 'collections/name/tracks', {cache: true})
+			.then( function(res) {
+				return res.data;
+			});
+
+		},
+
 		getFavoritesUnid : function() {
 
 			return $http.post(dasBaseUrl + 'documents?form=frmFavorites', { 'a' : 'b'} )
@@ -118,9 +127,8 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		saveFeedback : function(form) {
 
-			console.log('saving feedback...')
-			
-
+			console.log('saving feedback', form)
+		
 			return $http.post(dasBaseUrl + 'documents?form=frmFeedback', form );
 
 		}

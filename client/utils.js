@@ -22,27 +22,32 @@ app.factory('utils', function(ipCookie) {
 			ipCookie(favoritesCookieName, id, {path : '/', expires: 365} );
 		},
 
-		getColorForTrack : function(track) {
+		getColorForTrack : function(trackName) {
 
-			if (!track) {
+			if (!trackName) {
 				return 'blue';
 			}
 
-			if (track.indexOf('Best Practices')>-1) {
+			if (trackName.indexOf('Best Practices')>-1) {
 				return 'green';
-			} else if (track.indexOf('Application Development')>-1) {
+			} else if (trackName.indexOf('Application Development')>-1) {
 				return 'orange';
-			} else if (track.indexOf('Innovators and Thought Leaders')>-1 || track.indexOf('JumpStarts and Master Classes')>-1) {
+			} else if (trackName.indexOf('Innovators and Thought Leaders')>-1 || trackName.indexOf('JumpStarts and Master Classes')>-1) {
 				return 'purple';
-			} else if (track.indexOf('Business Partner Development Day')>-1) {
+			} else if (trackName.indexOf('Business Partner Development Day')>-1) {
 				return 'gray';
-			} else if ( track.indexOf('Spotlight on IBM Business Partners') > -1) {
+			} else if (trackName.indexOf('Featured')>-1) {
+				return 'pink';
+			} else if ( trackName.indexOf('Spotlight on IBM Business Partners') > -1) {
 				return 'amber';
-			} else if ( track.indexOf('Kenexa') > -1) {
+			} else if ( trackName.indexOf('Kenexa') > -1) {
 				return 'lime';
-			} else if ( track.indexOf('Tell') > -1) {
+			} else if ( trackName.indexOf('Tell') > -1) {
 				return 'lime';
+			} else if ( trackName.indexOf('Customer Case') > -1) {
+				return 'purple';
 			} else {
+				console.log('no track color found for track ' + trackName);
 				return 'blue';
 			}
 		},

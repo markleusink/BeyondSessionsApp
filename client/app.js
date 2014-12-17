@@ -83,7 +83,7 @@ app.config( function($stateProvider) {
 
 });
 
-app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
+app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie, SessionsFactory) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
@@ -99,19 +99,20 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie) {
 		angular.element( document.getElementById('container')).removeClass('active');
 	};
 
-	var tracks = [
-		"Application Development",
-		"Beyond the Everday",
-		"Best Practices",
-		"..."
-	];
-
 	$scope.tracks = [];
-	angular.forEach(tracks, function(track) {
-		var color = utils.getColorForTrack(track);
-		var clazz = color + ( $scope.activeMenu == track ? ' active' : '');
-		$scope.tracks.push( {"label":track, "clazz":clazz} );
-	} );
+
+	//load the tracks and get the color for every track
+	SessionsFactory.getTracks().then( function(tracks) {
+
+		angular.forEach( tracks, function(track) {
+
+			var color = utils.getColorForTrack(track.name);
+			track.clazz = 'bg-' + color + ( $scope.activeMenu == track.name ? ' active' : '');
+
+		});
+
+		$scope.tracks = tracks;
+	});
 
 	$scope.menuDays = [
 		{id: '0', label:'Sunday'},

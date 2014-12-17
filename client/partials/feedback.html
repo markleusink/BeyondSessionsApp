@@ -9,19 +9,26 @@
 		</p>
 
 		<div ng-show="!submitted" class="msgBox">
+
 			<div class="form-group">
-				<textarea ng-model="feedback" class="form-control" style="height:100px"></textarea>
+				<label for="name">Name</label>
+				<input id="name" ng-model="name" class="form-control" required></input>
 			</div>
 
 			<div class="form-group">
-				<button class="btn btn-info" type="submit">
+				<label for="feedback">Feedback</label>
+				<textarea ng-model="feedback" id="feedback" class="form-control" style="height:100px" required></textarea>
+			</div>
+
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit">
 				<i class="fa fa-rocket"></i>Send it!</button>
 			</div>
 
 		</div>
 
 		<div ng-show="submitted" class="alert alert-info msgBox">
-			Awesome. Thanks!
+			Great. Thanks for that!
 		</div>
 
 	</form>

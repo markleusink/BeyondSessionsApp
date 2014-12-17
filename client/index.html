@@ -81,10 +81,10 @@
 		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
 
 		<!--repeat over tracks-->
-		<li ng-repeat="track in tracks" ng-class="track.clazz">
-			<a ui-sref="sessionsByTrack({trackId:track.label})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{track.label}}</a>
+		<li ng-repeat="track in tracks" class="track">
+			<a ui-sref="sessionsByTrack({trackId:track.name})" ng-click="hideOffCanvas()">
+				<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.nameAbbr}}</a>
 		</li>
-
 
 		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
 

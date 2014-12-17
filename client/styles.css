@@ -19,11 +19,21 @@ body {
     border: 0;
   }
 
+  /*remove the border on smartphones*/
   .sessions .list-group-item {
     border-left: 0;
     border-right: 0;
-    padding-left: 19px;
   }
+}
+
+/*session title text size*/
+.sessions .list-group-item .list-group-item-heading {
+  font-size: 15px;
+}
+
+/*make room in the sessions list for the track color*/
+.sessions .list-group-item {
+  padding-left: 19px;
 }
 
 /*margin in buttons > icons*/
@@ -54,6 +64,7 @@ body {
   background-color: #EEE;
 }
 
+/*offcanvas*/
 .offcanvas, .offcanvas-list {
   background: #ffffff;
   position: fixed;
@@ -72,7 +83,7 @@ body {
   transform: translate3d(0px, 0px, 0px);
 }
 
-/*transitions*/
+/*offcanvas transitions*/
 .offcanvas, .container, .container:after {
   -webkit-transition: 0.25s ease;
   -moz-transition: 0.25s ease;
@@ -91,6 +102,12 @@ body {
   transform: translate3d(200px, 0px, 0px);
 }
 
+/*size of menu items in the offcanvas*/
+.offcanvas li > a {
+  padding: 7px 10px;
+}
+
+/*no scroll class gets added when the offcanvas is opened */
 body.noscroll {
   overflow: hidden;
 
@@ -98,9 +115,9 @@ body.noscroll {
 
 .container.active {
   overflow: hidden;
-
 }
 
+/*overlay for the container when the offcanvas is opened*/
 .container.active:after {
   content: " ";
   z-index: 10;
@@ -113,39 +130,19 @@ body.noscroll {
   background: rgba(0, 0, 0, 0.2);
 }
 
-/*not sure if the rest is needed...*/
-.list-group-item {
-  padding: 8px 15px 8px 12px;
-}
+/*session details in the list*/
 .list-group-item-text {
   line-height: 1.2;
   font-size: 12px;
-  color: #8b8b8b
+  color: #8b8b8b;
 }
 .list-group-item .fa {
   opacity: 0.4;
   margin-top:5px;
 }
 .fa-star {
-  color: gold !important;
+  color: #F4CD00 !important;
   opacity: 1 !important;
-}
-
-
-h3 {
-  font-size: 15px;
-}
-small {
-  font-size: 80%;
-}
-
-
-.list-group-item .list-group-item-heading {
-  font-size: 16px;
-}
-
-.offcanvas li > a {
-  padding: 7px 10px;
 }
 
 /*sessions list*/
@@ -157,12 +154,20 @@ small {
   width:10px;
 }
 
-
+/*animate the 'favorite' button*/
 .btn-flip {
     -webkit-animation: flip 0.4s;
     -moz-animation: flip 0.4s;
     -ms-animation: flip 0.4s;
     animation: flip 0.4s;
+}
+
+.msgBox.ng-hide-add {
+    -webkit-animation: fadeOut 0.5s;
+    display: block!important;
+}
+.msgBox.ng-hide-remove {
+    -webkit-animation: fadeIn 1.5s;
 }
 
 /*view animation*/
@@ -172,108 +177,40 @@ small {
     -ms-animation: fadeIn 0.4s;
     animation: fadeIn 0.4s;
 }
-[ui-view].ng-leave {
-  -webkit-animation: fadeOut 0.3s;
-    -moz-animation: fadeOut 0.3s;
-    -ms-animation: fadeOut 0.3s;
-    animation: fadeOut 0.3s;
-}
 
+/*text color on session*/
+.panel-default > .panel-heading {
+  color: #fff;
+}
+.track .fa {
+  color: #fff;
+}
 
 /*track colors */
-.green i.fa {
-  background: #259b24;
-  color: #fff;
-}
 .bg-green {
-  background-color: #259b24;
-}
-.panel-green>.panel-heading {
-  color: #fff;
-  background-color: #259b24;
-}
-
-.blue i.fa {
-  background: #536dfe;
-  color: #fff;
+  background-color: #259b24 !important;
 }
 .bg-blue {
-  background-color: #536dfe;
-}
-.panel-blue>.panel-heading {
-  color: #fff  !important;
-  background-color: #536dfe ;
-}
-
-.orange i.fa {
-  background: #FF9800;
-  color: #fff;
+  background-color: #536dfe !important;;
 }
 .bg-orange {
-  background-color: #FF9800;
-}
-.panel-orange>.panel-heading {
-  color: #fff;
-  background-color: #FF9800;
-}
-
-/*blue gray #607d8b */
-.gray i.fa {
-  background: #607d8b;
-  color: #fff;
+  background-color: #FF9800 !important;;
 }
 .bg-gray {
-  background-color: #607d8b;
-}
-.panel-gray>.panel-heading {
-  color: #fff;
-  background-color: #607d8b;
-}
-
-/* deep purple #673ab7 */
-.purple i.fa {
-  background: #673ab7;
-  color: #fff;
+  background-color: #607d8b !important;;
 }
 .bg-purple {
-  background-color: #673ab7;
-}
-.panel-purple>.panel-heading {
-  color: #fff;
-  background-color: #673ab7;
-}
-
-/* amber #ffc107 */
-.amber i.fa {
-  background: #ffc107;
-  color: #fff;
+  background-color: #673ab7 !important;;
 }
 .bg-amber {
-  background-color: #ffc107;
-}
-.panel-amber>.panel-heading {
-  color: #fff;
-  background-color: #ffc107;
-}
-
-/* lime #cddc39 */
-.lime i.fa {
-  background: #cddc39;
-  color: #fff;
+  background-color: #ffc107 !important;;
 }
 .bg-lime {
-  background-color: #cddc39;
+  background-color: #cddc39 !important;;
 }
-.panel-lime>.panel-heading {
-  color: #fff;
-  background-color: #cddc39;
+.bg-pink {
+  background-color: #e91e63 !important;;
 }
-
-.msgBox.ng-hide-add {
-    -webkit-animation: fadeOutRightBig 0.5s;
-    display: block!important;
+.bg-teal {
+  background-color: #009688 !important;;
 }
-.msgBox.ng-hide-remove {
-    -webkit-animation: fadeInLeftBig 1.5s;
-}
-
