@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="beyondApp">
+
+	<head>
+		<title>Beyond 2b</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- some basic styling -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	
+		<!-- load Angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+
+		<script src="js/2-controller.js"></script>
+
+	</head>
+
+	<body ng-controller="SessionsCtrl">
+
+		<div class="container">
+
+			<div class="jumbotron">
+
+				Find a session: <input ng-model="query" />
+
+			</div>
+
+			<table class="table table-striped"><tbody>
+
+				<tr ng-repeat="session in sessions | orderBy : 'title' : false | filter : query">
+			
+					<td>
+						{{session.title}}
+					</td>
+					<td>
+						<img ng-src="{{ session.image }}" width="100" class="img-rounded" />
+					</td>
+
+				</tr>
+			</tbody></table>
+
+			<div>
+				<a href="3-remote.html" class="btn btn-primary">Next (remote data)</a>
+			</div>
+			
+		</div>
+	</body>
+
+</html>

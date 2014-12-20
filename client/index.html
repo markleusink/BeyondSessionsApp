@@ -11,7 +11,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<title>Connect 2015</title>
+	<title>Connect 2015 Sessions</title>
 
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/united/bootstrap.min.css">
@@ -35,7 +35,7 @@
 	      	</button>  
 	       
 	        <a class="visible-xs navbar-brand no-break-out" title="{{pageTitle}}" href="/">{{pageTitle}}</a>  
-	        <a class="hidden-xs navbar-brand no-break-out" title="Connect '15 sessions" href="/">Connect '15 sessions</a>  
+	        <a class="hidden-xs navbar-brand no-break-out" title="Connect 2015 Sessions" href="/">Connect 2015 Sessions</a>  
 		</div>
     
 	    <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
@@ -45,11 +45,15 @@
 	    <!--desktop menu-->
 		<div class="navbar-collapse collapse hidden-xs">
 
-			<ul class="nav navbar-nav">
-				<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about"><i class="fa fa-question"></i>About</a></li>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-class="{'active' : activeMenu == 'about'}">
+				<a ui-sref="about" title="About">
+					<i class="fa fa-question"></i>
+					<span class="hidden-sm">About</span>
+				</a></li>
 
 				<li class="dropdown" dropdown on-toggle="toggled(open)">
-	                <a href class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Sessions <span class="caret"></span></a>
+	                <a href class="dropdown-toggle" title="Sessions" dropdown-toggle role="button" aria-expanded="false">Sessions <span class="caret"></span></a>
 	                <ul class="dropdown-menu" role="menu">
 	                	<li><a ui-sref="sessionsAll"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
 
@@ -73,8 +77,18 @@
 
 				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites"><i class="fa fa-star-o"></i>Favorites</a></li>
 				<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext"><i class="fa fa-clock-o"></i>Now & Next</a></li>
-				<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map"><i class="fa fa-map-marker"></i>Map</a></li>
-				<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback"><i class="fa fa-edit"></i>Feedback</a></li>
+				<li ng-class="{'active' : activeMenu == 'map'}">
+					<a ui-sref="map" title="map">
+						<i class="fa fa-map-marker"></i>
+						<span class="hidden-sm">Map</span>
+					</a>
+				</li>
+				<li ng-class="{'active' : activeMenu == 'feedback'}">
+					<a ui-sref="feedback" title="Feedback">
+						<i class="fa fa-edit"></i>
+						<span class="hidden-sm">Feedback</span>
+					</a>
+				</li>
 
 			</ul>
 

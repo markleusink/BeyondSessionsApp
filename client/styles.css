@@ -38,7 +38,7 @@ body {
 
 /*margin in buttons > icons*/
 .btn > i.fa, a > i.fa, .offcanvas i.fa, i.fa-refresh {
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 /*for icon only buttons */
