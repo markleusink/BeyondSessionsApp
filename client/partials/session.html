@@ -1,48 +1,45 @@
 <div class="row no-gutter">
 
-<div class="col-sm-12">
+	<div class="col-sm-12">
 
-	<div class="panel panel-default">
+		<div class="panel panel-default">
 
-		<div class="panel-heading" ng-class="getBackgroundClass(session.track)">
-	  		<h4>{{session.title}}</h4>
-	  		<!-- <div class="small">{{::session.sessionId}}</div> -->
-			<div><small>{{::session.startTime | date : 'EEE H:mm'}} in {{::session.room}} | {{::session.sessionId}}</small></div>
-		</div>
-
-		<div class="panel-body">
-
-			<div style="margin-bottom:10px">
-				
-				<button class="pull-right btn" ng-class="{'btn-default' : !session.isFavorite, 'btn-primary btn-flip' : session.isFavorite, }" ng-click="toggleFavorite()">
-					<i class="fa" ng-class="session.isFavorite ? 'fa-star' : 'fa-star-o'"></i>Favorite
-				</button>
-
-				<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i>Back</a>
+			<div class="panel-heading" ng-class="getBackgroundClass(session.track)">
+		  		<h4>{{session.title}}</h4>
+				<div><small>{{::session.startTime | date : 'EEE H:mm'}} in {{::session.room}} | {{::session.sessionId}}</small></div>
 			</div>
 
-			<div>
-				{{::session.description}}
-			</div>
+			<div class="panel-body">
 
-			<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>
+				<div style="margin-bottom:10px">
+					
+					<button class="pull-right btn" ng-class="{'btn-default' : !session.isFavorite, 'btn-primary btn-flip' : session.isFavorite, }" ng-click="toggleFavorite()">
+						<i class="fa" ng-class="session.isFavorite ? 'fa-star' : 'fa-star-o'"></i>Favorite
+					</button>
 
-			<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
-
-			<div class="row" ng-repeat="speaker in session.speakers">
-				<!-- <div class="col-xs-3 col-sm-2">
-					<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/80b0217f17f01b662fe26275fd625584.png">
-				</div> -->
-
-				<div class="col-xs-12 col-sm-12">
-					{{speaker}}
+					<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i>Back</a>
 				</div>
+
+				<div>
+					{{::session.description}}
+				</div>
+
+				<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>
+
+				<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
+
+				<div class="row" ng-repeat="speaker in session.speakers">
+			
+					<div class="col-xs-12 col-sm-12">
+						{{speaker}}
+					</div>
+			
+				</div>
+
 			</div>
 
 		</div>
 
 	</div>
-
-</div>
 
 </div>
