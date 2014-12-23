@@ -190,11 +190,23 @@ body.noscroll {
 .bg-green {
   background-color: #259b24 !important;
 }
+.bg-lightgreen {
+  background-color: #8bc34a !important;
+}
 .bg-blue {
   background-color: #536dfe !important;;
 }
+.bg-red {
+  background-color: #e51c23 !important;
+}
+.bg-yellow {
+  background-color: #ffff00 !important
+}
 .bg-orange {
   background-color: #FF9800 !important;;
+}
+.bg-deeporange {
+  background-color: #ff5722 !important;
 }
 .bg-gray {
   background-color: #607d8b !important;;
@@ -213,4 +225,7 @@ body.noscroll {
 }
 .bg-teal {
   background-color: #009688 !important;;
+}
+.bg-cyan {
+  background-color: #18ffff !important;
 }

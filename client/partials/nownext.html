@@ -12,7 +12,7 @@
 
 			<div class="marker" ng-class="getBackgroundClass(session.track)"></div>
 
-			<div class="label label-warning pull-right" title="{{session.runsFor + ' minutes left'}}">{{session.runsFor}}</div>
+			<div class="label label-warning pull-right" title="{{session.runsFor + ' minutes left'}}">{{session.runsFor}}"</div>
 			
 			<h4 class="list-group-item-heading">{{::session.title}}</h4>
 			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>
@@ -31,7 +31,7 @@
 
 			<div class="marker" ng-class="getBackgroundClass(session.track)"></div>
 			
-			<div class="label label-primary pull-right" title="{{'Starting in ' + session.startsIn + ' minutes'}}">{{session.startsIn}}</div>
+			<div class="label label-primary pull-right" title="{{'Starting in ' + session.startsIn + ' minutes'}}">{{session.startsIn}}"</div>
 		
 			<h4 class="list-group-item-heading">{{::session.title}}</h4>
 			<p class="list-group-item-text">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>

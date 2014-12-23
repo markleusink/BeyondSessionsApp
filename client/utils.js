@@ -31,21 +31,22 @@ app.factory('utils', function(ipCookie) {
 			if (trackName.indexOf('Best Practices')>-1) {
 				return 'green';
 			} else if (trackName.indexOf('Application Development')>-1) {
-				return 'orange';
-			} else if (trackName.indexOf('Innovators and Thought Leaders')>-1 || trackName.indexOf('JumpStarts and Master Classes')>-1) {
-				return 'purple';
-			} else if (trackName.indexOf('Business Partner Development Day')>-1) {
+				return 'amber';
+			} else if (trackName.indexOf('Beyond')>-1) {
+				return 'red';
+			} else if (trackName.indexOf('Spotlight')>-1) {
 				return 'gray';
 			} else if (trackName.indexOf('Featured')>-1) {
 				return 'pink';
-			} else if ( trackName.indexOf('Spotlight on IBM Business Partners') > -1) {
-				return 'amber';
-			} else if ( trackName.indexOf('Kenexa') > -1) {
-				return 'lime';
-			} else if ( trackName.indexOf('Tell') > -1) {
-				return 'lime';
-			} else if ( trackName.indexOf('Customer Case') > -1) {
+			} else if ( trackName.indexOf('Strategy') > -1) {
+				return 'deeporange';
+			} else if ( trackName.indexOf('Partner') > -1) {
+				return 'teal';
+			} else if ( trackName.indexOf('Partner') > -1) {
 				return 'purple';
+			} else if ( trackName.indexOf('Infrastructure') > -1) {
+				return 'lightgreen';
+
 			} else {
 				console.log('no track color found for track ' + trackName);
 				return 'blue';
