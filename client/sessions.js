@@ -65,11 +65,11 @@ sessionsAppCtrl.controller( "SessionsByTrackCtrl", function($scope, $stateParams
 
 	$scope.allowSearch = false;
 
-	$scope.trackFilter = function(item) {
+	/*$scope.trackFilter = function(item) {
     	return item.track.indexOf($stateParams.trackId)>-1;
-	};
+	};*/
 
-	SessionsFactory.all().then( function(sessions) {
+	SessionsFactory.getByTrack($stateParams.trackId).then( function(sessions) {
 		$scope.sessions = sessions;
 		$scope.isLoading = false;
 

@@ -19,15 +19,56 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		getByDay : function(dayNo) {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsByDay?count=1000&category=' + dayNo, {cache: true})
+			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
-				return res.data;
+
+				var filtered = [];
+				angular.forEach( res.data, function(session) {
+					if (session.dayNo == dayNo) {
+						filtered.push(session);
+					}
+				});
+				return filtered;
+			});
+
+		},
+
+		getByTrack : function(track) {
+
+			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			.then( function(res) {
+
+				var filtered = [];
+				angular.forEach( res.data, function(session) {
+					if (session.track == track) {
+						filtered.push(session);
+					}
+				});
+				return filtered;
 			});
 
 		},
 
 		getByID : function(sessionId) {
 
+			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			.then( function(res) {
+
+				for (var i=0; i<res.data.length; i++) {
+					if (res.data[i]['@unid'] == sessionId) {
+						var session = res.data[i];
+						//if 'speakers' is a string: make it an array
+						if (typeof session.speakers == 'string') {
+							session.speakers = [session.speakers];
+						}	
+						return session;
+					}
+
+				}
+				return null;
+			});
+
+			/*
 			return $http.get(dasBaseUrl + 'documents/unid/' + sessionId, {cache: true})
 			.then( function(res) { 
 				//if 'speakers' is a string: make it an array
@@ -35,7 +76,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 					res.data.speakers = [res.data.speakers];
 				}
 				return res.data;
-			});
+			});*/
 
 		}, 
 

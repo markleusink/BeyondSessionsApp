@@ -1,7 +1,7 @@
 /*
 TODO:
 - grunt task to concat JS files / template cache (performance optimization)
-- show speaker images ?
+- favs not saaved: security issue!!!
 */
 
 var app = angular.module("sessionsApp", [

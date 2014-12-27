@@ -46,7 +46,8 @@ app.factory('utils', function(ipCookie) {
 				return 'purple';
 			} else if ( trackName.indexOf('Infrastructure') > -1) {
 				return 'lightgreen';
-
+			} else if (trackName.indexOf('Master Classes')>-1) {
+				return 'lime';
 			} else {
 				console.log('no track color found for track ' + trackName);
 				return 'blue';
