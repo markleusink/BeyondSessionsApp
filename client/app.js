@@ -1,7 +1,7 @@
 /*
 TODO:
 - grunt task to concat JS files / template cache (performance optimization)
-- favs not saaved: security issue!!!
+- full screen: issue on iOS (needs top padding)
 */
 
 var app = angular.module("sessionsApp", [
@@ -15,7 +15,8 @@ var app = angular.module("sessionsApp", [
 		'sessionsApp.services'
 	]);
 
-app.constant('dasBaseUrl', 'http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/');
+app.constant('sessionsRestUrl', 'http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/');
+app.constant('favoritesRestUrl', 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/');
 
 app.config( function($stateProvider) {
 

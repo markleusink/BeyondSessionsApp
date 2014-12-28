@@ -1,16 +1,16 @@
 
 var app = angular.module("sessionsApp.services", []);
 
-app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
+app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRestUrl, utils) {
 
 	var favorites = [];
 	var favoritesLoaded = false;
-
+	
 	return {
 
 		all : function() {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -19,7 +19,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		getByDay : function(dayNo) {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
 
 				var filtered = [];
@@ -35,7 +35,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		getByTrack : function(track) {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
 
 				var filtered = [];
@@ -51,7 +51,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		getByID : function(sessionId) {
 
-			return $http.get(dasBaseUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
 			.then( function(res) {
 
 				for (var i=0; i<res.data.length; i++) {
@@ -69,7 +69,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 			});
 
 			/*
-			return $http.get(dasBaseUrl + 'documents/unid/' + sessionId, {cache: true})
+			return $http.get(sessionsRestUrl + 'documents/unid/' + sessionId, {cache: true})
 			.then( function(res) { 
 				//if 'speakers' is a string: make it an array
 				if (typeof res.data.speakers == 'string') {
@@ -84,6 +84,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 			var favoritesUnid = utils.getFavoritesUnid();
 			var deferred;
+			var _this = this;
 
 			if (favoritesUnid == null) {
 
@@ -102,13 +103,15 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 				console.log('load favorites');
 
-				return $http.get( dasBaseUrl + 'documents/unid/' + favoritesUnid, {cache : false})
+				return $http.get( favoritesRestUrl + 'documents/unid/' + favoritesUnid, {cache : false})
 				.then( function(res) {
 
-					console.log('favorites loaded', res.data.favorites);
+					//console.log('favorites loaded', res.data.favorites);
 					favoritesLoaded=true;
 
-					if (typeof res.data.favorites == 'string') {
+					if (!res.data.hasOwnProperty('favorites')) {
+						favorites = [];
+					} else if (typeof res.data.favorites == 'string') {
 						favorites = [res.data.favorites];
 					} else {
 						favorites = res.data.favorites;
@@ -116,6 +119,16 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 					return favorites;
 					
+				}, function(err) {
+					//could not find favorites document (anymore): create a new one
+
+					return _this.getFavoritesUnid()
+					.then( function( unid) {
+						utils.setFavoritesUnid(unid);
+						return _this.getFavorites();
+
+					});
+
 				});
 
 
@@ -126,7 +139,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 		getTracks : function() {
 
-			return $http.get(dasBaseUrl + 'collections/name/tracks', {cache: true})
+			return $http.get(sessionsRestUrl + 'collections/name/tracks', {cache: true})
 			.then( function(res) {
 				return res.data;
 			});
@@ -134,8 +147,9 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 		},
 
 		getFavoritesUnid : function() {
+			//create a new favorites document, return the unid
 
-			return $http.post(dasBaseUrl + 'documents?form=frmFavorites', { 'a' : 'b'} )
+			return $http.post(favoritesRestUrl + 'documents?form=frmFavorites', { 'favorites' : ['']} )
 			.then( function(response) {
 				//get the unid of the newly created document from the Location header
 				var location = response.headers('Location');
@@ -156,7 +170,7 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 
 			var _this = this;
 
-			return $http.post( dasBaseUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
+			return $http.post( favoritesRestUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
 			.then (function(response) {
 				console.log('done patching favorites document, new favorites:', _favorites);
 
@@ -167,10 +181,11 @@ app.factory('SessionsFactory', function($http, $q, dasBaseUrl, utils) {
 		},
 
 		saveFeedback : function(form) {
+			//we're saving the feedback in the same db as the favorites
 
 			console.log('saving feedback', form)
 		
-			return $http.post(dasBaseUrl + 'documents?form=frmFeedback', form );
+			return $http.post(favoritesRestUrl + 'documents?form=frmFeedback', form );
 
 		}
 

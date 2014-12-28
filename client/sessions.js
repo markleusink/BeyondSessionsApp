@@ -213,7 +213,7 @@ sessionsAppCtrl.controller( "SessionCtrl", function($controller, $scope, $stateP
 			$scope.session.isFavorite = true;
 			$scope.favorites.push( sessionId );
 
-			console.log('adding favorite',  $scope.session.sessionId, 'all favorites:', $scope.favorites  );
+			//console.log('adding favorite',  $scope.session.sessionId, 'all favorites:', $scope.favorites  );
 
 			//TODO: make list unique
 

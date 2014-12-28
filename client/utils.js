@@ -10,7 +10,7 @@ app.factory('utils', function(ipCookie) {
 		hasFavorites : function() {
 			var favoritesUnid = this.getFavoritesUnid();
 			var hasFavorites = favoritesUnid != null && favoritesUnid.length>0;
-			console.log('user has favorites? ' + hasFavorites);
+			//console.log('user has favorites? ' + hasFavorites);
 			return hasFavorites;
 		},
 

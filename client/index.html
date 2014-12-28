@@ -111,14 +111,16 @@
 
 		<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
 
-		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-calendar"></i>Sessions by day</a></li>
+		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
+
+		<li class="disabled"><a href=""><i class="fa fa-fw fa-calendar"></i>Sessions by day</a></li>
 
 		<!--repeat over days-->
 		<li ng-repeat="day in menuDays">
 			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 		</li>
 
-		<li><a href="" style="font-weight:bold"><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
+		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
 
 		<!--repeat over tracks-->
 		<li ng-repeat="track in tracks" class="track">
@@ -126,7 +128,6 @@
 				<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.nameAbbr}}</a>
 		</li>
 
-		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
 
 	</ul>
 </nav>
