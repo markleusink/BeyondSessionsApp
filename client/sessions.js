@@ -217,9 +217,9 @@ sessionsAppCtrl.controller( "SessionCtrl", function($controller, $scope, $stateP
 
 			//TODO: make list unique
 
-			//get the unid of this users' favorites document from a cookie
-		//if no id exists, a new favorite document is created using DDS 
-		//and the unid of that document is stored locally in a cookie.
+			//get the unid of this users' favorites document from localStorage
+			//if no id exists, a new favorite document is created using DDS 
+			//and the unid of that document is stored locally.
 
 			if ( favoritesUnid == null || favoritesUnid.length==0 ) {
 				//no favorites yet: get favorites unid

@@ -1,7 +1,7 @@
 
-var app = angular.module("sessionApp.utils", []);
+var utils = angular.module("sessionApp.utils", []);
 
-app.factory('utils', function(ipCookie) {
+utils.factory('utils', function(localStorageService) {
 
 	var favoritesCookieName = 'favoritesUnid';
 
@@ -10,16 +10,15 @@ app.factory('utils', function(ipCookie) {
 		hasFavorites : function() {
 			var favoritesUnid = this.getFavoritesUnid();
 			var hasFavorites = favoritesUnid != null && favoritesUnid.length>0;
-			//console.log('user has favorites? ' + hasFavorites);
 			return hasFavorites;
 		},
 
 		getFavoritesUnid : function() {
-			return ipCookie(favoritesCookieName);
+			return localStorageService.get('favoritesId');
 		},
 
 		setFavoritesUnid : function(id) {
-			ipCookie(favoritesCookieName, id, {path : '/', expires: 365} );
+			localStorageService.set('favoritesId', id);
 		},
 
 		getColorForTrack : function(trackName) {

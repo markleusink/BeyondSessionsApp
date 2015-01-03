@@ -4,12 +4,20 @@ TODO:
 - full screen: issue on iOS (needs top padding)
 */
 
+/*
+	ngResource
+	ngAnimate: animations
+	ui.rooter: router
+	ui.bootstrap: dropdowns
+	LocalStorage: store favorites unid
+*/
+
 var app = angular.module("sessionsApp", [
 		'ngResource',
 		'ngAnimate',
 		'ui.router',
 		'ui.bootstrap',
-		'ipCookie',
+		'LocalStorageModule',
 		'sessionApp.utils',
 		'sessionsApp.controllers',
 		'sessionsApp.services'
@@ -18,8 +26,9 @@ var app = angular.module("sessionsApp", [
 app.constant('sessionsRestUrl', 'http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/');
 app.constant('favoritesRestUrl', 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/');
 
-app.config( function($stateProvider) {
+app.config( function($stateProvider, localStorageServiceProvider) {
 
+	/*setup the routes*/
 	$stateProvider
 
 	  	.state('about', { 	//about the app
@@ -76,9 +85,14 @@ app.config( function($stateProvider) {
 			    title : 'Session'
 			});
 
+		/*set up local storage*/
+		console.log('set config');
+		localStorageServiceProvider
+	    	.setPrefix('bte');
+    	
 });
 
-app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie, SessionsFactory) {
+app.controller("MainCtrl", function($rootScope, $scope, utils, localStorageService, SessionsFactory) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
@@ -124,7 +138,7 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie, Session
 		
 		//store last state, but not for session details
 		if (toState.name != 'sessionDetails') {
-			ipCookie('lastState', toState.name, {path : '/', expires: 365} );
+			localStorageService.set('lastState', toState.name, {path : '/', expires: 365} );
 		}
 
 		if (toState.name == 'sessionsByDay' ) {
@@ -142,13 +156,13 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, ipCookie, Session
 
 });
 
-app.run( function($state, ipCookie) {
+app.run( function($state, localStorageService) {
 
 	//enable fastclick
 	FastClick.attach(document.body);
 
 	//go to last saved state or the default state)
-	var lastState = ipCookie('lastState');
+	var lastState = localStorageService.get('lastState');
 
 	if (lastState == null || lastState.length == 0) {
 		lastState = 'about';

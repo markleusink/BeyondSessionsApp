@@ -88,7 +88,6 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			if (favoritesUnid == null) {
 
-				console.log('no favorites cookie');
 				deferred = $q.defer();
 				deferred.resolve( favorites );
 				return deferred.promise;
