@@ -99,7 +99,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 			.then( function(res) {
 
 				for (var i=0; i<res.length; i++) {
-					if (res.data[i]['@unid'] == sessionId) {
+					if (res[i]['@unid'] == sessionId) {
 						var session = res[i];
 						//if 'speakers' is a string: make it an array
 						if (typeof session.speakers == 'string') {
