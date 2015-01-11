@@ -117,7 +117,7 @@ sessionsAppCtrl.controller( "NowNextCtrl", function($scope, SessionsFactory, uti
 				var diffMs = (s - now); // milliseconds between now & start
 				session.startsIn = Math.round( diffMs / 1000 / 60 );		//minutes to start
 
-				if (startsIn < 120 ) {		//only add sessions that start in the next 2 hours
+				if (session.startsIn < 120 ) {		//only add sessions that start in the next 2 hours
 					$scope.sessionsNext.push(session);
 				}
 
