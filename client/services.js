@@ -1,29 +1,73 @@
 
 var app = angular.module("sessionsApp.services", []);
 
-app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRestUrl, utils) {
+app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRestUrl, utils, localStorageService) {
 
 	var favorites = [];
 	var favoritesLoaded = false;
-	
+
+	//retrieve a specific data type from the localStorage (cached for 60 minutes)
+	getFromLocalCache = function(item) {
+
+		var lastUpdate = localStorageService.get( item + 'LastUpdate' );
+
+		if (lastUpdate != null) {
+			
+			var now = (new Date()).getTime();
+			var diff = (now - lastUpdate ) / 1000;
+
+			console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
+
+			if (diff < 3600) {		//60 mins
+				return localStorageService.get(item);
+			}
+
+		}
+
+		return null;
+
+	}
+
+	getAllSessions = function() {
+
+		var res = getFromLocalCache('sessions');
+
+		if (res != null) {
+			var deferred = $q.defer();
+			deferred.resolve(res);
+			return deferred.promise;
+		}
+
+		return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000')
+		.then (function(res) {
+			
+			localStorageService.set('sessions', res.data);
+			localStorageService.set('sessionsLastUpdate', (new Date()).getTime() );
+
+			return res.data;
+
+		});
+
+	};
+
 	return {
 
 		all : function() {
 
-			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return getAllSessions()
 			.then( function(res) {
-				return res.data;
+				return res;
 			});
 
 		},
 
 		getByDay : function(dayNo) {
 
-			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return getAllSessions()
 			.then( function(res) {
 
 				var filtered = [];
-				angular.forEach( res.data, function(session) {
+				angular.forEach( res, function(session) {
 					if (session.dayNo == dayNo) {
 						filtered.push(session);
 					}
@@ -35,11 +79,11 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 		getByTrack : function(track) {
 
-			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return getAllSessions()
 			.then( function(res) {
 
 				var filtered = [];
-				angular.forEach( res.data, function(session) {
+				angular.forEach( res, function(session) {
 					if (session.track == track) {
 						filtered.push(session);
 					}
@@ -51,12 +95,12 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 		getByID : function(sessionId) {
 
-			return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000', {cache: true})
+			return getAllSessions()
 			.then( function(res) {
 
-				for (var i=0; i<res.data.length; i++) {
+				for (var i=0; i<res.length; i++) {
 					if (res.data[i]['@unid'] == sessionId) {
-						var session = res.data[i];
+						var session = res[i];
 						//if 'speakers' is a string: make it an array
 						if (typeof session.speakers == 'string') {
 							session.speakers = [session.speakers];
@@ -67,16 +111,6 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 				}
 				return null;
 			});
-
-			/*
-			return $http.get(sessionsRestUrl + 'documents/unid/' + sessionId, {cache: true})
-			.then( function(res) { 
-				//if 'speakers' is a string: make it an array
-				if (typeof res.data.speakers == 'string') {
-					res.data.speakers = [res.data.speakers];
-				}
-				return res.data;
-			});*/
 
 		}, 
 
@@ -138,9 +172,21 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 		getTracks : function() {
 
-			return $http.get(sessionsRestUrl + 'collections/name/tracks', {cache: true})
-			.then( function(res) {
+			var res = getFromLocalCache('tracks');
+
+			if (res != null) {
+				var deferred = $q.defer();
+				deferred.resolve(res);
+				return deferred.promise;
+			}
+
+			return $http.get(sessionsRestUrl + 'collections/name/tracks')
+			.then (function(res) {
+				
+				localStorageService.set('tracks', res.data);
+				localStorageService.set('tracksLastUpdate', (new Date()).getTime() );
 				return res.data;
+
 			});
 
 		},
