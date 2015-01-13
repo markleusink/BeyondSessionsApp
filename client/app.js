@@ -13,6 +13,7 @@ TODO:
 */
 
 var app = angular.module("sessionsApp", [
+		'templates-main',
 		'ngResource',
 		'ngAnimate',
 		'ui.router',
@@ -86,7 +87,6 @@ app.config( function($stateProvider, localStorageServiceProvider) {
 			});
 
 		/*set up local storage*/
-		console.log('set config');
 		localStorageServiceProvider
 	    	.setPrefix('bte');
     	
