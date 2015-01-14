@@ -131,7 +131,7 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localSt
 	];
 
 	//set default active menu option
-	$scope.pageTitle = "Connect 2015 Sessions";
+	$scope.pageTitle = "ConnectED 2015 Sessions";
 	$scope.activeMenu = "about";
 
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
