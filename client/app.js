@@ -45,7 +45,7 @@ app.config( function($stateProvider, localStorageServiceProvider) {
 		})
 		.state('nowNext', { 
 		    url: '/nowNext',
-		    templateUrl: 'partials/nowNext.html',
+		    templateUrl: 'partials/nownext.html',
 		    title : 'Now & Next',
 		    controller : 'NowNextCtrl'
 		})
@@ -92,7 +92,7 @@ app.config( function($stateProvider, localStorageServiceProvider) {
     	
 });
 
-app.controller("MainCtrl", function($rootScope, $scope, utils, localStorageService, SessionsFactory) {
+app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localStorageService, SessionsFactory) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
@@ -136,6 +136,10 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, localStorageServi
 
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
 		
+		if (fromState.name.indexOf('sessions') == 0 ) {
+			$rootScope.yOffset = window.pageYOffset;
+		}
+
 		//store last state, but not for session details
 		if (toState.name != 'sessionDetails') {
 			localStorageService.set('lastState', toState.name, {path : '/', expires: 365} );
@@ -153,6 +157,24 @@ app.controller("MainCtrl", function($rootScope, $scope, utils, localStorageServi
 		}
 
 	} );
+
+	$rootScope.$on('$stateChangeSuccess', function(e, toState, toParams, fromState, fromParams) {
+		
+		$timeout( function() {
+
+			var yOffset = 0;
+
+			if (toState.name.indexOf('sessions') == 0 && $rootScope.yOffset) {
+				yOffset = $rootScope.yOffset;
+			}
+
+			window.scrollTo(0, yOffset);
+
+		}, 0);
+
+
+	});
+
 
 });
 

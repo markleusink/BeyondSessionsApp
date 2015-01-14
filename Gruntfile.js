@@ -10,9 +10,10 @@ module.exports = function(grunt) {
         files: [
           {expand: true, src: [
             'client/images/connected.png',
-             'client/images/mark.jpg',
-              'client/images/marky.jpg',
-              'm-swball.gif'
+            'client/images/mark.jpg',
+            'client/images/marky.jpg',
+            'client/images/m-swball.gif',
+            'client/images/beer.jpeg'
           ], 
           dest: 'build/client/images', flatten : true},
           {expand: true, src : [
@@ -43,7 +44,7 @@ module.exports = function(grunt) {
           'client/bower_components/font-awesome/css/font-awesome.min.css',
           'client/bower_components/animate.css/animate.min.css'
        ],
-       dest: 'build/client/styles-all.css'
+       dest: 'build/client/css/styles-all.css'
       },
       js: {
         options: { banner: '<%= banner %>' },

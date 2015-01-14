@@ -188,8 +188,6 @@ sessionsAppCtrl.controller( "SessionCtrl", function($controller, $scope, $stateP
 
 	$scope.toggleFavorite = function() {
 
-		console.log('toggle favorite');
-
 		var sessionId = $scope.session.sessionId;
 
 		//check if we have a UNID we can store the favorites in (on the server)

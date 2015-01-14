@@ -16,7 +16,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 			var now = (new Date()).getTime();
 			var diff = (now - lastUpdate ) / 1000;
 
-			console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
+			//console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
 
 			if (diff < (3600*2)) {		//cache sessions for 2 hours
 				return localStorageService.get(item);
@@ -134,7 +134,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 					return deferred.promise;
 				}
 
-				console.log('load favorites');
+				//console.log('load favorites');
 
 				return $http.get( favoritesRestUrl + 'documents/unid/' + favoritesUnid, {cache : false})
 				.then( function(res) {
@@ -217,7 +217,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			return $http.post( favoritesRestUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
 			.then (function(response) {
-				console.log('done patching favorites document, new favorites:', _favorites);
+				//console.log('done patching favorites document, new favorites:', _favorites);
 
 				favorites = _favorites;
 
@@ -228,7 +228,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 		saveFeedback : function(form) {
 			//we're saving the feedback in the same db as the favorites
 
-			console.log('saving feedback', form)
+			//console.log('saving feedback', form)
 		
 			return $http.post(favoritesRestUrl + 'documents?form=frmFeedback', form );
 
