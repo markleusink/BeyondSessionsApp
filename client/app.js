@@ -124,6 +124,7 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localSt
 	});
 
 	$scope.menuDays = [
+		{id: '6', label:'Saturday'},
 		{id: '0', label:'Sunday'},
 		{id: '1', label:'Monday'},
 		{id: '2', label:'Tuesday'},

@@ -18,7 +18,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			//console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
 
-			if (diff < (3600*2)) {		//cache sessions for 2 hours
+			if (diff < (3600*2)) {		//cache all sessions for 2 hours
 				return localStorageService.get(item);
 			}
 
