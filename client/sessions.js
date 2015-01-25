@@ -93,11 +93,6 @@ sessionsAppCtrl.controller( "NowNextCtrl", function($scope, SessionsFactory, uti
 	
 	var now = new Date();
 
-	//debug
-	now.setYear(2014);
-	now.setMonth(0);
-	now.setDate(29);
-
 	//v/ar nowMs = now.getTime();
 	var todayDayNo = now.getDay();
 
