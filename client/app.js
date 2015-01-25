@@ -35,7 +35,8 @@ app.config( function($stateProvider, localStorageServiceProvider) {
 	  	.state('about', { 	//about the app
 		    url: '/about',
 		    templateUrl: 'partials/about.html',
-		    title : 'About'
+		    title : 'About',
+		    controller : 'AboutCtrl'
 		})
 		.state('feedback', { 	
 		    url: '/feedback',

@@ -269,13 +269,25 @@ sessionsAppCtrl.controller( "SessionCtrl", function($controller, $scope, $stateP
 sessionsAppCtrl.controller('FeedbackCtrl', function($scope, SessionsFactory) {
 
 	$scope.submitted = false;
+	$scope.name = SessionsFactory.getName();
 
 	$scope.submit = function() {
+
+		//save the user's name
+		SessionsFactory.saveName( $scope.name);
 		
 		SessionsFactory.saveFeedback( {feedback : $scope.feedback, name: $scope.name} );
 		$scope.submitted = true;
 
 	};
+
+});
+
+sessionsAppCtrl.controller('AboutCtrl', function($scope, SessionsFactory) {
+
+	//get the user's name from the local store and display it
+	var name = SessionsFactory.getName();
+	$scope.greeting = (name ? 'Welcome back ' + name + '!' : 'Hi!');
 
 });
 

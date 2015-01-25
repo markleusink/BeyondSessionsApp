@@ -232,6 +232,16 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 		
 			return $http.post(favoritesRestUrl + 'documents?form=frmFeedback', form );
 
+		},
+
+		saveName : function(name) {
+
+			localStorageService.set('name', name);
+
+		},
+
+		getName : function(name) {
+			return localStorageService.get( 'name');
 		}
 
 

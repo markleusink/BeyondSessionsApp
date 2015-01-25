@@ -14,7 +14,7 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "			<a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\"><img class=\"img-responsive\" src=\"images/connected.png\" style=\"width:300px\" /></a>\n" +
     "		</div>\n" +
     "\n" +
-    "		<p>Hi!</p>\n" +
+    "		<p>{{greeting}}</p>\n" +
     "		<p>This is the demo app for our session at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. It is build using AngularJS and uses an IBM Domino backend.</p>\n" +
     "\n" +
     "		<p>In our session we're going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. We will show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
@@ -45,7 +45,10 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "			<p>Here comes the fine print...</p>\n" +
     "			\n" +
     "			<p>\n" +
-    "				We did our best. Worked very, very hard (that's relative of course). But take absolutely no liability for the accurateness of the data in this app. Or if the app will work at all. It probably will. We hope (if it doesn't: please <a ui-sref=\"feedback\" title=\"Feedback\">let us know</a>). If you want the ConnectED session data used by this app in a comfortable Notes database, check out the <a href=\"http://matnewman.com/webs/personal/matblog.nsf/dx/announcing-the-availability-of-the-totally-unofficial-totally-unsupported-ibm-connected-session-database\" target=\"_blank\">Totally Unofficial Totally Unsupported IBM ConnectED Session Database</a> by Mat Newman and others.\n" +
+    "				We did our best. Worked very, very hard (that's relative of course). But take absolutely no liability for the accurateness of the data in this app. Or if the app will work at all. It probably will. We hope (if it doesn't: please <a ui-sref=\"feedback\" title=\"Feedback\">let us know</a>).\n" +
+    "			</p>\n" +
+    "			<p>\n" +
+    "				If you want the ConnectED session data used by this app in a comfortable Notes database, check out the <a href=\"http://matnewman.com/webs/personal/matblog.nsf/dx/announcing-the-availability-of-the-totally-unofficial-totally-unsupported-ibm-connected-session-database\" target=\"_blank\">Totally Unofficial Totally Unsupported IBM ConnectED Session Database</a> (aka TUTU) by Mat Newman and others.\n" +
     "			</p>			\n" +
     "			<p>\n" +
     "				Oh, and if you want to know more about how this app was built: talk to us if you see us walking around. That's what a conference is all about (you seriously thought it was the sessions?). We are not scary and will talk for <i class=\"fa fa-beer\"></i> beer <i class=\"fa fa-smile-o\"></i>\n" +
