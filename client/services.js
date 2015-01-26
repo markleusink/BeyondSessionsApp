@@ -18,7 +18,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			//console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
 
-			if (diff < (3600*2)) {		//cache all sessions for 2 hours
+			if (diff < (3600*8)) {		//cache data for 8 hours
 				return localStorageService.get(item);
 			}
 
@@ -180,7 +180,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 				return deferred.promise;
 			}
 
-			return $http.get(sessionsRestUrl + 'collections/name/tracks')
+			return $http.get(sessionsRestUrl + 'collections/name/tracks?count=100')
 			.then (function(res) {
 				
 				localStorageService.set('tracks', res.data);

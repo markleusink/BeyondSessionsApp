@@ -22,7 +22,7 @@
 
 	<div style="margin-left: 15px;"><h4>Next ({{sessionsNext.length}})</h4></div>
 
-	<div ng-show="sessionsNext.length == 0" class="alert alert-info">Nothing's coming up. You're done for the day!</div>
+	<div ng-show="sessionsNext.length == 0" class="alert alert-info">Nothing happening in the next {{hoursAheadNextSessions}} hours. Relax and enjoy the <i class="fa fa-sun-o"></i></div>
 
 	<div ng-show="sessionsNext.length > 0">
 		<a ng-repeat="session in sessionsNext | orderBy :'startTime' track by $index" class="list-group-item"

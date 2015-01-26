@@ -152,7 +152,7 @@ angular.module("partials/nownext.html", []).run(["$templateCache", function($tem
     "\n" +
     "	<div style=\"margin-left: 15px;\"><h4>Next ({{sessionsNext.length}})</h4></div>\n" +
     "\n" +
-    "	<div ng-show=\"sessionsNext.length == 0\" class=\"alert alert-info\">Nothing's coming up. You're done for the day!</div>\n" +
+    "	<div ng-show=\"sessionsNext.length == 0\" class=\"alert alert-info\">Nothing happening in the next {{hoursAheadNextSessions}} hours. Relax and enjoy the <i class=\"fa fa-sun-o\"></i></div>\n" +
     "\n" +
     "	<div ng-show=\"sessionsNext.length > 0\">\n" +
     "		<a ng-repeat=\"session in sessionsNext | orderBy :'startTime' track by $index\" class=\"list-group-item\"\n" +
