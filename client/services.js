@@ -9,7 +9,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 	//retrieve a specific data type from the localStorage (cached for 60 minutes)
 	getFromLocalCache = function(item) {
 
-		var lastUpdate = localStorageService.get( item + 'LastUpdate' );
+	/*	var lastUpdate = localStorageService.get( item + 'LastUpdate' );
 
 		if (lastUpdate != null) {
 			
@@ -22,7 +22,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 				return localStorageService.get(item);
 			}
 
-		}
+		}*/
 
 		return null;
 
