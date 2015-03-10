@@ -11,7 +11,7 @@
 		<div ng-show="!isLoading && sessions.length > 0">
 
 			<div ng-show="allowSearch">
-				<input class="form-control" ng-model="searchField" placeholder="Search..." />
+				<input class="form-control" ng-model="searchField" placeholder="{{'SEARCH' | translate}}..." />
 			</div>
 
 			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : searchField track by session['@unid']" 

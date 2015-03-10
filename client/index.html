@@ -22,7 +22,7 @@
 
 	<title>Beyond The Everyday</title>
 
-	<link rel="stylesheet" type="text/css" href="bower_components/bootswatch/united/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.min.css">
@@ -43,7 +43,7 @@
 	      	</button>  
 	       
 	        <a class="visible-xs navbar-brand no-break-out" title="{{pageTitle}}" href="/">{{pageTitle}}</a>  
-	        <a class="hidden-xs navbar-brand no-break-out" title="IBM ConnectED 2015 Sessions" href="/">ConnectED 2015 Sessions</a>  
+	        <a class="hidden-xs navbar-brand no-break-out" title="ICS UG" href="/">ICS UG</a>  
 		</div>
     
 	    <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
@@ -57,23 +57,23 @@
 				<li ng-class="{'active' : activeMenu == 'about'}">
 				<a ui-sref="about" title="About">
 					<i class="fa fa-question"></i>
-					<span class="hidden-sm">About</span>
+					<span class="hidden-sm" translate>ABOUT</span>
 				</a></li>
 
 				<li class="dropdown" dropdown on-toggle="toggled(open)">
 	                <a href class="dropdown-toggle" title="Sessions" dropdown-toggle role="button" aria-expanded="false">Sessions <span class="caret"></span></a>
 	                <ul class="dropdown-menu" role="menu">
-	                	<li><a ui-sref="sessionsAll"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
+	                	<li><a ui-sref="sessionsAll"><i class="fa fa-fw fa-list"></i><span translate>ALLSESSIONS</span></a></li>
 
 				   		<li class="divider"></li>
-						<li class="dropdown-header"><i class="fa fa-fw fa-calendar"></i> By day</a></li>
+						<li class="dropdown-header"><i class="fa fa-fw fa-calendar"></i> <span translate>SESSIONSBYDAY</span></a></li>
 					    <!--repeat over days-->
 						<li ng-repeat="day in menuDays">
 							<a ui-sref="sessionsByDay({dayNo: day.id})"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 						</li>
 
 						<li class="divider"></li>
-						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> By track</a></li>
+						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> <span translate>SESSIONSBYDAY</span></a></li>
 
 						<!--repeat over tracks-->
 						<li ng-repeat="track in tracks" class="track">
@@ -84,7 +84,7 @@
 	    		</li>
 
 				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites"><i class="fa fa-star-o"></i>Favorites</a></li>
-				<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext"><i class="fa fa-clock-o"></i>Now & Next</a></li>
+				<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext"><i class="fa fa-clock-o"></i><span translate>NOWNEXT</span></a></li>
 				<li ng-class="{'active' : activeMenu == 'map'}">
 					<a ui-sref="map" title="map">
 						<i class="fa fa-map-marker"></i>
@@ -94,7 +94,18 @@
 				<li ng-class="{'active' : activeMenu == 'feedback'}">
 					<a ui-sref="feedback" title="Feedback">
 						<i class="fa fa-edit"></i>
-						<span class="hidden-sm">Feedback</span>
+						<span class="hidden-sm"><span translate>FEEDBACK</span></span>
+					</a>
+				</li>
+
+				<li>
+					<a ng-click="setLanguage('de')" href="#">
+						<img src="images/de.gif" />Switch to German
+					</a>
+				</li>
+				<li>
+					<a ng-click="setLanguage('en')" href="#">
+						<img src="images/en.gif" />Switch to English
 					</a>
 				</li>
 
@@ -109,26 +120,39 @@
 <nav class="offcanvas navmenu offcanvas-left" id="offcanvas">
 	<ul class="nav">
 
-		<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-question"></i>About</a></li>
+		<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-question"></i><span translate>ABOUT</span></a></li>
 
-		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i>All sessions</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i>ALLSESSIONS</a></li>
 		
 		<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-star-o"></i>Favorites</a></li>
 
-		<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-clock-o"></i>Now & Next</a></li>
+		<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-clock-o"></i><span translate>NOWNEXT</span></a></li>
 
 		<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
 
-		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i>Feedback</a></li>
+		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i><span class="translate">FEEDBACK</span></a></li>
 
-		<li class="disabled"><a href=""><i class="fa fa-fw fa-calendar"></i>Sessions by day</a></li>
+		<li>
+					<a ng-click="setLanguage('de')">
+						<img src="images/de.gif" />
+						<span class="hidden-sm">Switch to German</span>
+					</a>
+		</li>
+		<li>
+			<a ng-click="setLanguage('en')">
+				<img src="images/en.gif" />
+				<span class="hidden-sm">Switch to English</span>
+			</a>
+		</li>
+
+		<li class="disabled"><a href=""><i class="fa fa-fw fa-calendar"></i><span translate>SESSIONSBYDAY</span></a></li>
 
 		<!--repeat over days-->
 		<li ng-repeat="day in menuDays">
 			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 		</li>
 
-		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i>Sessions by track</a></li>
+		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i><span translate>SESSIONSBYTRACK</span></a></li>
 
 		<!--repeat over tracks-->
 		<li ng-repeat="track in tracks" class="track">
@@ -147,6 +171,7 @@
 </div>
 
 <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-translate/angular-translate.min.js"></script>
 
 <script type="text/javascript" src="polyfills.js"></script>
 <script type="text/javascript" src="app.js"></script>
@@ -160,12 +185,11 @@
 <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
 
 <!--angular ui bootstrap-->
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-<script type="text/javascript" src="bower_components/fastclick/lib/fastclick.js"></script>
 
 <!--google analytics-->
 <script>

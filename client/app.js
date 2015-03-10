@@ -16,8 +16,10 @@ var app = angular.module("sessionsApp", [
 		'templates-main',
 		'ngResource',
 		'ngAnimate',
+		'ngTouch',
 		'ui.router',
 		'ui.bootstrap',
+		'pascalprecht.translate',
 		'LocalStorageModule',
 		'sessionApp.utils',
 		'sessionsApp.controllers',
@@ -27,7 +29,7 @@ var app = angular.module("sessionsApp", [
 app.constant('sessionsRestUrl', 'http://beyondtheeveryday.com/beyond/connect2015.nsf/api/data/');
 app.constant('favoritesRestUrl', 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/');
 
-app.config( function($stateProvider, localStorageServiceProvider) {
+app.config( function($stateProvider, localStorageServiceProvider, $translateProvider) {
 
 	/*setup the routes*/
 	$stateProvider
@@ -90,10 +92,41 @@ app.config( function($stateProvider, localStorageServiceProvider) {
 		/*set up local storage*/
 		localStorageServiceProvider
 	    	.setPrefix('bte');
-    	
+
+	$translateProvider.translations('en', {
+		BACK : 'Back',
+		SEARCH : 'Search',
+		ABOUT : 'Welcome',
+		NOWNEXT : "Now & Next",
+		ALLSESSIONS : "All sessions",
+		FEEDBACK : 'Feedback',
+		SESSIONSBYDAY : "Sessions by day",
+		SESSIONSBYTRACK : "Sessions by track",
+		MONDAY : 'Monday',
+		TUESDAY : 'Tuesday',
+	    BUTTON_LANG_EN: 'english',
+	    BUTTON_LANG_DE: 'german'
+	  });
+	  $translateProvider.translations('de', {
+	  	BACK : 'Zurück',
+	  	SEARCH : 'Suchen',
+	  	ABOUT : 'Wilkommen',
+	  	ALLSESSIONS : "Alle Sessions",
+	  	FEEDBACK : 'Rückkopplung',
+	  	NOWNEXT : "Jetzt & später",
+	  	MONDAY : 'Montag',
+		TUESDAY : 'Dienstag',
+	  	SESSIONSBYDAY : "Sessions bei Tag",
+	  	SESSIONSBYTRACK : "Sessions bei track",
+	    BUTTON_LANG_EN: 'englisch',
+	    BUTTON_LANG_DE: 'deutsch'
+	  });
+	  $translateProvider.preferredLanguage('en');
+   
 });
 
-app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localStorageService, SessionsFactory) {
+app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, utils, 
+	localStorageService, SessionsFactory, $translate) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
@@ -127,14 +160,19 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localSt
 	$scope.menuDays = [
 		{id: '6', label:'Saturday'},
 		{id: '0', label:'Sunday'},
-		{id: '1', label:'Monday'},
-		{id: '2', label:'Tuesday'},
+		{id: '1', label:$translate.instant('MONDAY') },
+		{id: '2', label:$translate.instant('TUESDAY') },
 		{id: '3', label:'Wednesday'}
 	];
 
 	//set default active menu option
-	$scope.pageTitle = "ConnectED 2015 Sessions";
+	$scope.pageTitle = "ICS UG - Sessions";
 	$scope.activeMenu = "about";
+
+	$scope.setLanguage = function(toLan) {
+		localStorageService.set('language', toLan);
+		$translate.use(toLan);
+	}
 
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
 		
@@ -180,18 +218,20 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, utils, localSt
 
 });
 
-app.run( function($state, localStorageService) {
-
-	//enable fastclick
-	FastClick.attach(document.body);
+app.run( function($state, $rootScope, localStorageService) {
 
 	//go to last saved state or the default state)
 	var lastState = localStorageService.get('lastState');
+	$rootScope.language = localStorageService.get('lan');
 
 	if (lastState == null || lastState.length == 0) {
 		lastState = 'about';
 	}
 
 	$state.go(lastState);
+
+	if ($rootScope.language == null ) {
+		$rootScope.language = "en";
+	}
 
 });

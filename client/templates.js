@@ -10,26 +10,27 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "\n" +
     "	<div class=\"panel-body\">\n" +
     "\n" +
-    "		<div style=\"margin-bottom:15px\">\n" +
-    "			<a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\"><img class=\"img-responsive\" src=\"images/connected.png\" style=\"width:300px\" /></a>\n" +
+    "		<div class=\"row\" style=\"margin-bottom:10px;\">\n" +
+    "\n" +
+    "			<div class=\"col-xs-6\" style=\"text-align: center\">\n" +
+    "				<a href=\"http://www.ics.ug/en\" target=\"_blank\"><img src=\"images/icsug.png\" style=\"height:150px;\" /></a>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\" style=\"text-align: center; margin-top:30px\">\n" +
+    "				<a href=\"http://engage.ug\" target=\"_blank\"><img src=\"images/engage.png\" style=\"height:80px;\" /></a>\n" +
+    "			</div>\n" +
+    "\n" +
     "		</div>\n" +
     "\n" +
     "		<p>{{greeting}}</p>\n" +
-    "		<p>This is the demo app for our session at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. It is build using AngularJS and uses an IBM Domino backend.</p>\n" +
+    "		<p>This is the demo app for my session's in March 2015 at the ICS User Group event in Bremen and Engage in Ghent. The session is similar to the session I did with Mark Roden at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. The demo app is build using AngularJS and uses an IBM Domino backend.</p>\n" +
     "\n" +
-    "		<p>In our session we're going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. We will show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
+    "		<p>In the session I'm going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. I'll show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
     "		\n" +
-    "		<p>If you haven't registered for ConnectED yet: \n" +
-    "		<a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">register now</a> and we'll see you on Monday at 3:45 PM at the Swan - Toucan 1-2. It'll be worth it!\n" +
+    "		<p>If you haven't registered for the or ConnectED yet, do that now for the <a href=\"http://www.ics.ug/en\" target=\"_blank\">ICS User Group</a> or <a href=\"http://engage.ug\" target=\"_blank\">Engage</a> and hopefully I'll see you there. It'll be worth it!\n" +
     "		</p>\n" +
     "\n" +
     "		<div class=\"row\" style=\"margin-top:15px\">\n" +
-    "			<div class=\"col-xs-6 text-center\">\n" +
-    "				<a href=\"http://xomino.com\"  target=\"_blank\">\n" +
-    "					<img width=\"90\" height=\"90\" src=\"images/marky.jpg\" alt=\"That's what Marky looks like\" class=\"img-circle img-rounded\" /><br />\n" +
-    "					Mark Roden\n" +
-    "				</a>\n" +
-    "			</div>\n" +
+    "			\n" +
     "			<div class=\"col-xs-6 text-center\">\n" +
     "				<a href=\"http://linqed.eu\" target=\"_blank\">\n" +
     "					<img width=\"90\" height=\"90\" src=\"images/mark.jpg\" alt=\"That's what Mark looks like\" class=\"img-circle img-rounded\" /><br />\n" +
@@ -46,12 +47,9 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "			\n" +
     "			<p>\n" +
     "				We did our best. Worked very, very hard (that's relative of course). But take absolutely no liability for the accurateness of the data in this app. Or if the app will work at all. It probably will. We hope (if it doesn't: please <a ui-sref=\"feedback\" title=\"Feedback\">let us know</a>).\n" +
-    "			</p>\n" +
+    "			</p>		\n" +
     "			<p>\n" +
-    "				If you want the ConnectED session data used by this app in a comfortable Notes database, check out the <a href=\"http://matnewman.com/webs/personal/matblog.nsf/dx/announcing-the-availability-of-the-totally-unofficial-totally-unsupported-ibm-connected-session-database\" target=\"_blank\">Totally Unofficial Totally Unsupported IBM ConnectED Session Database</a> (aka TUTU) by Mat Newman and others.\n" +
-    "			</p>			\n" +
-    "			<p>\n" +
-    "				Oh, and if you want to know more about how this app was built: talk to us if you see us walking around. That's what a conference is all about (you seriously thought it was the sessions?). We are not scary and will talk for <i class=\"fa fa-beer\"></i> beer <i class=\"fa fa-smile-o\"></i>\n" +
+    "				Oh, and if you want to know more about how this app was built: talk to me if you see me walking around. That's what a conference is all about (you seriously thought it was the sessions?). I am not scary and will talk for a <i class=\"fa fa-beer\"></i> beer <i class=\"fa fa-smile-o\"></i>\n" +
     "			</p>\n" +
     "			<p>\n" +
     "				This source code of this app is publicly available on <a href=\"https://github.com/markleusink/BeyondSessionsApp\" target=\"_blank\"><i class=\"fa fa-github\"></i>GitHub</a>.\n" +
@@ -193,7 +191,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "						<i class=\"fa\" ng-class=\"session.isFavorite ? 'fa-star' : 'fa-star-o'\"></i>Favorite\n" +
     "					</button>\n" +
     "\n" +
-    "					<a class=\"btn btn-default\" href=\"javascript:history.go(-1);\"><i class=\"fa fa-angle-left\"></i>Back</a>\n" +
+    "					<a class=\"btn btn-default\" href=\"javascript:history.go(-1);\"><i class=\"fa fa-angle-left\"></i><span translate>BACK</span></a>\n" +
     "				</div>\n" +
     "\n" +
     "				<div>\n" +
@@ -237,7 +235,7 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "		<div ng-show=\"!isLoading && sessions.length > 0\">\n" +
     "\n" +
     "			<div ng-show=\"allowSearch\">\n" +
-    "				<input class=\"form-control\" ng-model=\"searchField\" placeholder=\"Search...\" />\n" +
+    "				<input class=\"form-control\" ng-model=\"searchField\" placeholder=\"{{'SEARCH' | translate}}...\" />\n" +
     "			</div>\n" +
     "\n" +
     "			<a ng-repeat=\"session in sessions | orderBy : 'startTime' | filter : searchField track by session['@unid']\" \n" +

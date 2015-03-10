@@ -2,9 +2,15 @@
   background-color: http://www.google.com/design/spec/style/color.html#color-color-palette;
   colors: see */
 
+/* ics color: #a4b575 */
+
 /*top padding for the static navbar*/
 body {
   padding-top: 57px;
+}
+
+a {
+  color: #a4b575;
 }
 
 /*no gutter on lists on small devices*/
