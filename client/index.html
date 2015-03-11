@@ -72,14 +72,13 @@
 							<a ui-sref="sessionsByDay({dayNo: day.id})"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 						</li>
 
-						<li class="divider"></li>
-						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> <span translate>SESSIONSBYDAY</span></a></li>
+						<!-- <li class="divider"></li>
+						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> <span translate>SESSIONSBYTRACK</span></a></li>
 
-						<!--repeat over tracks-->
 						<li ng-repeat="track in tracks" class="track">
 							<a ui-sref="sessionsByTrack({trackId:track.name})">
 								<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.name}}</a>
-						</li>
+						</li> -->
 	                </ul>
 	    		</li>
 
@@ -100,12 +99,12 @@
 
 				<li>
 					<a ng-click="setLanguage('de')" href="#">
-						<img src="images/de.gif" />Switch to German
+						<img src="images/de.gif" />German
 					</a>
 				</li>
 				<li>
 					<a ng-click="setLanguage('en')" href="#">
-						<img src="images/en.gif" />Switch to English
+						<img src="images/en.gif" />English
 					</a>
 				</li>
 
@@ -118,11 +117,16 @@
 
 <!--offcanvas-->
 <nav class="offcanvas navmenu offcanvas-left" id="offcanvas">
+
+<div style="background: #000; margin:10px; padding: 3px; text-align: center;">
+<img src="images/icsug-logo.png" style="width:130px" />
+</div>
+
 	<ul class="nav">
 
 		<li ng-class="{'active' : activeMenu == 'about'}"><a ui-sref="about" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-question"></i><span translate>ABOUT</span></a></li>
 
-		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i>ALLSESSIONS</a></li>
+		<li ng-class="{'active' : activeMenu == 'sessionsAll'}"><a ui-sref="sessionsAll" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-list"></i><span translate>ALLSESSIONS</span></a></li>
 		
 		<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-star-o"></i>Favorites</a></li>
 
@@ -130,7 +134,7 @@
 
 		<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
 
-		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i><span class="translate">FEEDBACK</span></a></li>
+		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i><span translate">FEEDBACK</span></a></li>
 
 		<li>
 					<a ng-click="setLanguage('de')">
@@ -152,13 +156,13 @@
 			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 		</li>
 
+		<!-- 
 		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i><span translate>SESSIONSBYTRACK</span></a></li>
 
-		<!--repeat over tracks-->
 		<li ng-repeat="track in tracks" class="track">
 			<a ui-sref="sessionsByTrack({trackId:track.name})" ng-click="hideOffCanvas()">
 				<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.nameAbbr}}</a>
-		</li>
+		</li> -->
 
 
 	</ul>

@@ -180,7 +180,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "\n" +
     "			<div class=\"panel-heading\" ng-class=\"getBackgroundClass(session.track)\">\n" +
     "		  		<h4>{{session.title}}</h4>\n" +
-    "				<div><small>{{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}} | {{::session.sessionId}}</small></div>\n" +
+    "				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}}</small></div>\n" +
     "			</div>\n" +
     "\n" +
     "			<div class=\"panel-body\">\n" +
@@ -194,8 +194,11 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "					<a class=\"btn btn-default\" href=\"javascript:history.go(-1);\"><i class=\"fa fa-angle-left\"></i><span translate>BACK</span></a>\n" +
     "				</div>\n" +
     "\n" +
-    "				<div>\n" +
+    "				<div ng-show=\"session.description.length>0\">\n" +
     "					{{::session.description}}\n" +
+    "				</div>\n" +
+    "				<div ng-show=\"session.description.length==0\">\n" +
+    "					No description provided\n" +
     "				</div>\n" +
     "\n" +
     "				<div style=\"margin:10px 0\"><a ui-sref=\"sessionsByTrack({trackId: session.track})\"><span class=\"label\" ng-class=\"getBackgroundClass(session.track)\">{{::session.track}}</span></a></div>\n" +
@@ -248,7 +251,7 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "\n" +
     "				<h4 class=\"list-group-item-heading\">{{::session.title}}</h4>\n" +
     "				<!-- <p class=\"list-group-item-text\">{{::session.sessionId}}</p> -->\n" +
-    "				<p class=\"list-group-item-text\">{{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}} | {{::session.sessionId}}</p>\n" +
+    "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}}</p>\n" +
     "\n" +
     "			</a>\n" +
     "			\n" +

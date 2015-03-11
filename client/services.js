@@ -1,7 +1,7 @@
 
 var app = angular.module("sessionsApp.services", []);
 
-app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRestUrl, utils, localStorageService) {
+app.factory('SessionsFactory', function($http, $q, $translate, configService, utils, localStorageService) {
 
 	var favorites = [];
 	var favoritesLoaded = false;
@@ -38,7 +38,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 			return deferred.promise;
 		}
 
-		return $http.get(sessionsRestUrl + 'collections/name/sessionsAll?count=1000')
+		return $http.get( ($translate.use() == 'de' ? configService.sessionsRestUrlDE : configService.sessionsRestUrlEN) )
 		.then (function(res) {
 			
 			localStorageService.set('sessions', res.data);
@@ -136,7 +136,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 				//console.log('load favorites');
 
-				return $http.get( favoritesRestUrl + 'documents/unid/' + favoritesUnid, {cache : false})
+				return $http.get( configService.favoritesRestUrl + 'documents/unid/' + favoritesUnid, {cache : false})
 				.then( function(res) {
 
 					//console.log('favorites loaded', res.data.favorites);
@@ -180,7 +180,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 				return deferred.promise;
 			}
 
-			return $http.get(sessionsRestUrl + 'collections/name/tracks?count=100')
+			return $http.get(configService.tracksRestUrlEN)
 			.then (function(res) {
 				
 				localStorageService.set('tracks', res.data);
@@ -194,7 +194,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 		getFavoritesUnid : function() {
 			//create a new favorites document, return the unid
 
-			return $http.post(favoritesRestUrl + 'documents?form=frmFavorites', { 'favorites' : ['']} )
+			return $http.post(configService.favoritesRestUrl + 'documents?form=frmFavorites', { 'favorites' : ['']} )
 			.then( function(response) {
 				//get the unid of the newly created document from the Location header
 				var location = response.headers('Location');
@@ -215,7 +215,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			var _this = this;
 
-			return $http.post( favoritesRestUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
+			return $http.post( configService.favoritesRestUrl + 'documents/unid/' + unid, { 'favorites' : _favorites}, config)
 			.then (function(response) {
 				//console.log('done patching favorites document, new favorites:', _favorites);
 
@@ -230,7 +230,7 @@ app.factory('SessionsFactory', function($http, $q, sessionsRestUrl, favoritesRes
 
 			//console.log('saving feedback', form)
 		
-			return $http.post(favoritesRestUrl + 'documents?form=frmFeedback', form );
+			return $http.post(configService.favoritesRestUrl + 'documents?form=frmFeedback', form );
 
 		},
 

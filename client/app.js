@@ -1,17 +1,3 @@
-/*
-TODO:
-- grunt task to concat JS files / template cache (performance optimization)
-- full screen: issue on iOS (needs top padding)
-*/
-
-/*
-	ngResource
-	ngAnimate: animations
-	ui.rooter: router
-	ui.bootstrap: dropdowns
-	LocalStorage: store favorites unid
-*/
-
 var app = angular.module("sessionsApp", [
 		'templates-main',
 		'ngResource',
@@ -26,8 +12,13 @@ var app = angular.module("sessionsApp", [
 		'sessionsApp.services'
 	]);
 
-app.constant('sessionsRestUrl', 'http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/');
-app.constant('favoritesRestUrl', 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/');
+app.service('configService', function () {
+  this.sessionsRestUrlEN = 'http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/sessionsEN?count=1000';
+  this.sessionsRestUrlDE = 'http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/sessionsDE?count=1000';
+  this.tracksRestUrlEN = 'http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/tracks?count=100';
+  this.tracksRestUrlDE = 'http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/tracks?count=100';
+  this.favoritesRestUrl = 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/';
+});
 
 app.config( function($stateProvider, localStorageServiceProvider, $translateProvider) {
 
@@ -104,6 +95,10 @@ app.config( function($stateProvider, localStorageServiceProvider, $translateProv
 		SESSIONSBYTRACK : "Sessions by track",
 		MONDAY : 'Monday',
 		TUESDAY : 'Tuesday',
+		THURSDAY : 'Thursday',
+		FRIDAY : 'Friday',
+		THU : 'Thu',
+		FRI : 'Fri',
 	    BUTTON_LANG_EN: 'english',
 	    BUTTON_LANG_DE: 'german'
 	  });
@@ -116,6 +111,10 @@ app.config( function($stateProvider, localStorageServiceProvider, $translateProv
 	  	NOWNEXT : "Jetzt & später",
 	  	MONDAY : 'Montag',
 		TUESDAY : 'Dienstag',
+		THURSDAY : 'Donnerstag',
+		FRIDAY : 'Freitag',
+		THU : 'Do',
+		FRI : 'Fr',
 	  	SESSIONSBYDAY : "Sessions bei Tag",
 	  	SESSIONSBYTRACK : "Sessions bei track",
 	    BUTTON_LANG_EN: 'englisch',
@@ -158,11 +157,8 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 	});
 
 	$scope.menuDays = [
-		{id: '6', label:'Saturday'},
-		{id: '0', label:'Sunday'},
-		{id: '1', label:$translate.instant('MONDAY') },
-		{id: '2', label:$translate.instant('TUESDAY') },
-		{id: '3', label:'Wednesday'}
+		{id: '4', label:$translate.instant('THURSDAY') },
+		{id: '5', label:$translate.instant('FRIDAY') }
 	];
 
 	//set default active menu option
@@ -170,6 +166,7 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 	$scope.activeMenu = "about";
 
 	$scope.setLanguage = function(toLan) {
+		console.log('store', toLan);
 		localStorageService.set('language', toLan);
 		$translate.use(toLan);
 	}
@@ -218,20 +215,36 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 
 });
 
-app.run( function($state, $rootScope, localStorageService) {
+app.run( function($state, $rootScope, $translate, localStorageService) {
 
 	//go to last saved state or the default state)
 	var lastState = localStorageService.get('lastState');
-	$rootScope.language = localStorageService.get('lan');
 
 	if (lastState == null || lastState.length == 0) {
 		lastState = 'about';
 	}
 
-	$state.go(lastState);
-
-	if ($rootScope.language == null ) {
-		$rootScope.language = "en";
+	var lan = localStorageService.get('language');
+	if (lan == null) {
+		lan = "en";		//default
 	}
 
+	$rootScope.language = lan;
+	$translate.use(lan);
+
+	$state.go(lastState);
+
+
+});
+
+app.filter( "dayNameFilter", function($translate) {
+	return function(dayNo) {
+		switch (dayNo) {
+			case 4:
+				return $translate.instant('THU');
+			case 5:
+				return $translate.instant('FRI');
+
+		}
+	};
 });

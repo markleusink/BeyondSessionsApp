@@ -23,6 +23,8 @@ utils.factory('utils', function(localStorageService) {
 
 		getColorForTrack : function(trackName) {
 
+			return "icsug";
+
 			if (!trackName) {
 				return 'blue';
 			}

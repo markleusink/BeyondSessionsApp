@@ -6,7 +6,7 @@
 
 			<div class="panel-heading" ng-class="getBackgroundClass(session.track)">
 		  		<h4>{{session.title}}</h4>
-				<div><small>{{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}} | {{::session.sessionId}}</small></div>
+				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}}</small></div>
 			</div>
 
 			<div class="panel-body">
@@ -20,8 +20,11 @@
 					<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i><span translate>BACK</span></a>
 				</div>
 
-				<div>
+				<div ng-show="session.description.length>0">
 					{{::session.description}}
+				</div>
+				<div ng-show="session.description.length==0">
+					No description provided
 				</div>
 
 				<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>

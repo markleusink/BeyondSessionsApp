@@ -24,7 +24,7 @@
 
 				<h4 class="list-group-item-heading">{{::session.title}}</h4>
 				<!-- <p class="list-group-item-text">{{::session.sessionId}}</p> -->
-				<p class="list-group-item-text">{{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}} | {{::session.sessionId}}</p>
+				<p class="list-group-item-text">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}}</p>
 
 			</a>
 			
