@@ -19,7 +19,7 @@ app.service('configService', function () {
   this.favoritesRestUrl = 'http://beyondtheeveryday.com/beyond/favorites.nsf/api/data/';
 });
 
-app.config( function($stateProvider, localStorageServiceProvider, $translateProvider) {
+app.config( function($stateProvider, localStorageServiceProvider) {
 
 	/*setup the routes*/
 	$stateProvider
@@ -83,48 +83,10 @@ app.config( function($stateProvider, localStorageServiceProvider, $translateProv
 		localStorageServiceProvider
 	    	.setPrefix('bte');
 
-	$translateProvider.translations('en', {
-		BACK : 'Back',
-		SEARCH : 'Search',
-		ABOUT : 'Welcome',
-		NOWNEXT : "Now & Next",
-		ALLSESSIONS : "All sessions",
-		FEEDBACK : 'Feedback',
-		SESSIONSBYDAY : "Sessions by day",
-		SESSIONSBYTRACK : "Sessions by track",
-		MONDAY : 'Monday',
-		TUESDAY : 'Tuesday',
-		THURSDAY : 'Thursday',
-		FRIDAY : 'Friday',
-		THU : 'Thu',
-		FRI : 'Fri',
-	    BUTTON_LANG_EN: 'english',
-	    BUTTON_LANG_DE: 'german'
-	  });
-	  $translateProvider.translations('de', {
-	  	BACK : 'Zurück',
-	  	SEARCH : 'Suchen',
-	  	ABOUT : 'Wilkommen',
-	  	ALLSESSIONS : "Alle Sessions",
-	  	FEEDBACK : 'Rückkopplung',
-	  	NOWNEXT : "Jetzt & später",
-	  	MONDAY : 'Montag',
-		TUESDAY : 'Dienstag',
-		THURSDAY : 'Donnerstag',
-		FRIDAY : 'Freitag',
-		THU : 'Do',
-		FRI : 'Fr',
-	  	SESSIONSBYDAY : "Sessions bei Tag",
-	  	SESSIONSBYTRACK : "Sessions bei track",
-	    BUTTON_LANG_EN: 'englisch',
-	    BUTTON_LANG_DE: 'deutsch'
-	  });
-	  $translateProvider.preferredLanguage('en');
-   
 });
 
-app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, utils, 
-	localStorageService, SessionsFactory, $translate) {
+app.controller("MainCtrl", function($rootScope, $scope, $state, $timeout, $translate, utils, 
+	localStorageService, SessionsFactory) {
 	
 	//function to toggle/hide/show the offcanvas
 	$scope.toggleOffCanvas = function() {
@@ -165,9 +127,12 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 	$scope.activeMenu = "about";
 
 	$scope.setLanguage = function(toLan) {
-		console.log('store', toLan);
 		localStorageService.set('language', toLan);
 		$translate.use(toLan);
+		localStorageService.set( 'sessionsLastUpdate', null );
+		$scope.hideOffCanvas();
+		$state.transitionTo($state.current, $state.$current.params, { reload: true, inherit: true, notify: true });
+
 	}
 
 	$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
@@ -210,6 +175,10 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 
 
 	});
+
+	$scope.isLanEN = function() {
+		return $translate.use() == 'en';
+	}
 
 
 });

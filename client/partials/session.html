@@ -24,7 +24,7 @@
 					{{::session.description}}
 				</div>
 				<div ng-show="session.description.length==0">
-					No description provided
+					<span class="translate">NODESCRIPTION</span>
 				</div>
 
 				<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>

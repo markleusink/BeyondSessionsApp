@@ -10,13 +10,13 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "\n" +
     "	<div class=\"panel-body\">\n" +
     "\n" +
-    "		<div class=\"row\" style=\"margin-bottom:10px;\">\n" +
+    "		<div class=\"row\" style=\"margin-bottom:15px;\">\n" +
     "\n" +
     "			<div class=\"col-xs-6\" style=\"text-align: center\">\n" +
     "				<a href=\"http://www.ics.ug/en\" target=\"_blank\"><img src=\"images/icsug.png\" style=\"height:150px;\" /></a>\n" +
     "			</div>\n" +
     "			<div class=\"col-xs-6\" style=\"text-align: center; margin-top:30px\">\n" +
-    "				<a href=\"http://engage.ug\" target=\"_blank\"><img src=\"images/engage.png\" style=\"height:80px;\" /></a>\n" +
+    "				<a href=\"http://engage.ug\" target=\"_blank\"><img src=\"images/engage.png\" style=\"height:70px;\" /></a>\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -198,7 +198,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "					{{::session.description}}\n" +
     "				</div>\n" +
     "				<div ng-show=\"session.description.length==0\">\n" +
-    "					No description provided\n" +
+    "					<span class=\"translate\">NODESCRIPTION</span>\n" +
     "				</div>\n" +
     "\n" +
     "				<div style=\"margin:10px 0\"><a ui-sref=\"sessionsByTrack({trackId: session.track})\"><span class=\"label\" ng-class=\"getBackgroundClass(session.track)\">{{::session.track}}</span></a></div>\n" +

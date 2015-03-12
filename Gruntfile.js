@@ -54,6 +54,7 @@ module.exports = function(grunt) {
 
           "client/polyfills.js",
           "client/app.js",
+          "client/translations.js",
           "client/utils.js",
           "client/services.js",
           "client/sessions.js",
