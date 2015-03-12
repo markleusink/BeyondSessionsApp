@@ -22,8 +22,8 @@
     "angular-bootstrap": "~0.12.0",
     "angular-local-storage": "~0.1.5",
     "bootswatch": "3.3.2",
-    "angular-touch": "~1.3.14",
-    "angular-translate": "~2.6.1"
+    "angular-translate": "~2.6.1",
+    "fastclick": "~1.0.6"
   },
   "resolutions": {
     "angular": "1.3.14"

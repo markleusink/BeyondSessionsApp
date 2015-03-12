@@ -2,7 +2,6 @@ var app = angular.module("sessionsApp", [
 		'templates-main',
 		'ngResource',
 		'ngAnimate',
-		'ngTouch',
 		'ui.router',
 		'ui.bootstrap',
 		'pascalprecht.translate',
@@ -216,6 +215,9 @@ app.controller("MainCtrl", function($rootScope, $scope, $timeout, $translate, ut
 });
 
 app.run( function($state, $rootScope, $translate, localStorageService) {
+
+	//enable fastclick
+	FastClick.attach(document.body);
 
 	//go to last saved state or the default state)
 	var lastState = localStorageService.get('lastState');
