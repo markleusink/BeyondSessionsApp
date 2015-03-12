@@ -198,7 +198,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "					{{::session.description}}\n" +
     "				</div>\n" +
     "				<div ng-show=\"session.description.length==0\">\n" +
-    "					<span class=\"translate\">NODESCRIPTION</span>\n" +
+    "					<i><span translate>NODESCRIPTION</span></i>\n" +
     "				</div>\n" +
     "\n" +
     "				<div style=\"margin:10px 0\"><a ui-sref=\"sessionsByTrack({trackId: session.track})\"><span class=\"label\" ng-class=\"getBackgroundClass(session.track)\">{{::session.track}}</span></a></div>\n" +
@@ -241,7 +241,7 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "				<input class=\"form-control\" ng-model=\"searchField\" placeholder=\"{{'SEARCH' | translate}}...\" />\n" +
     "			</div>\n" +
     "\n" +
-    "			<a ng-repeat=\"session in sessions | orderBy : 'startTime' | filter : searchField track by session['@unid']\" \n" +
+    "			<a ng-repeat=\"session in sessions | filter : searchField track by session['@unid']\" \n" +
     "				class=\"list-group-item\" 	\n" +
     "				ui-sref=\"sessionDetails({ sessionId : session.unid })\">\n" +
     "\n" +

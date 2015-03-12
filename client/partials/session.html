@@ -24,7 +24,7 @@
 					{{::session.description}}
 				</div>
 				<div ng-show="session.description.length==0">
-					<span class="translate">NODESCRIPTION</span>
+					<i><span translate>NODESCRIPTION</span></i>
 				</div>
 
 				<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>

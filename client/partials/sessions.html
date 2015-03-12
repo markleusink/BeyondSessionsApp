@@ -14,7 +14,7 @@
 				<input class="form-control" ng-model="searchField" placeholder="{{'SEARCH' | translate}}..." />
 			</div>
 
-			<a ng-repeat="session in sessions | orderBy : 'startTime' | filter : searchField track by session['@unid']" 
+			<a ng-repeat="session in sessions | filter : searchField track by session['@unid']" 
 				class="list-group-item" 	
 				ui-sref="sessionDetails({ sessionId : session.unid })">
 
