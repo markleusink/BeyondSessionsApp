@@ -9,7 +9,7 @@ app.factory('SessionsFactory', function($http, $q, $translate, configService, ut
 	//retrieve a specific data type from the localStorage (cached for 60 minutes)
 	getFromLocalCache = function(item) {
 
-	/*	var lastUpdate = localStorageService.get( item + 'LastUpdate' );
+	var lastUpdate = localStorageService.get( item + 'LastUpdate' );
 
 		if (lastUpdate != null) {
 			
@@ -18,11 +18,12 @@ app.factory('SessionsFactory', function($http, $q, $translate, configService, ut
 
 			//console.log('found ' + item + ' in cache, last update: ' + diff + ' seconds ago');
 
-			if (diff < (3600*8)) {		//cache data for 8 hours
+			//if (diff < (3600*8)) {		//cache data for 8 hours //TODO: adjust 
+			if (diff < 60) {
 				return localStorageService.get(item);
 			}
 
-		}*/
+		}
 
 		return null;
 
