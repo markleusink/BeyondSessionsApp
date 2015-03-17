@@ -6,7 +6,7 @@
 
 			<div class="panel-heading" ng-class="getBackgroundClass(session.track)">
 		  		<h4>{{session.title}}</h4>
-				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}}</small></div>
+				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show="session.room.length>0">in {{::session.room}}</span></small></div>
 			</div>
 
 			<div class="panel-body">
@@ -14,7 +14,7 @@
 				<div style="margin-bottom:10px">
 					
 					<button class="pull-right btn" ng-class="{'btn-default' : !session.isFavorite, 'btn-primary btn-flip' : session.isFavorite}" ng-click="toggleFavorite()">
-						<i class="fa" ng-class="session.isFavorite ? 'fa-star' : 'fa-star-o'"></i>Favorite
+						<i class="fa" ng-class="session.isFavorite ? 'fa-star' : 'fa-star-o'"></i><span translate>FAVORITE</span>
 					</button>
 
 					<a class="btn btn-default" href="javascript:history.go(-1);"><i class="fa fa-angle-left"></i><span translate>BACK</span></a>
@@ -29,7 +29,7 @@
 
 				<div style="margin:10px 0"><a ui-sref="sessionsByTrack({trackId: session.track})"><span class="label" ng-class="getBackgroundClass(session.track)">{{::session.track}}</span></a></div>
 
-				<div style="margin: 10px 0; font-weight: bold;"><u>Speakers</u></div>
+				<div style="margin: 10px 0; font-weight: bold;"><u><span translate>SPEAKERS</span></u></div>
 
 				<div class="row" ng-repeat="speaker in session.speakers">
 			

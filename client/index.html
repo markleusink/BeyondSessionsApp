@@ -20,7 +20,7 @@
 <link rel="icon" sizes="192x192" href="images/apple-touch-icon-144x144-precomposed.png">
 <link rel="icon" sizes="128x128" href="images/apple-touch-icon-114x114-precomposed.png">
 
-	<title>Beyond The Everyday</title>
+	<title>Beyond The Everyday - ICS UG</title>
 
 	<link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
@@ -72,24 +72,24 @@
 							<a ui-sref="sessionsByDay({dayNo: day.id})"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 						</li>
 
-						<!-- <li class="divider"></li>
+						<li class="divider"></li>
 						<li class="dropdown-header"><i class="fa fa-fw fa-tag"></i> <span translate>SESSIONSBYTRACK</span></a></li>
 
 						<li ng-repeat="track in tracks" class="track">
 							<a ui-sref="sessionsByTrack({trackId:track.name})">
 								<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.name}}</a>
-						</li> -->
+						</li>
 	                </ul>
 	    		</li>
 
 				<li ng-class="{'active' : activeMenu == 'favorites'}"><a ui-sref="favorites"><i class="fa fa-star-o"></i><span translate>FAVORITES</span></a></li>
 				<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext"><i class="fa fa-clock-o"></i><span translate>NOWNEXT</span></a></li>
-				<li ng-class="{'active' : activeMenu == 'map'}">
+				<!-- <li ng-class="{'active' : activeMenu == 'map'}">
 					<a ui-sref="map" title="map">
 						<i class="fa fa-map-marker"></i>
 						<span class="hidden-sm">Map</span>
 					</a>
-				</li>
+				</li> -->
 				<li ng-class="{'active' : activeMenu == 'feedback'}">
 					<a ui-sref="feedback" title="Feedback">
 						<i class="fa fa-edit"></i>
@@ -132,7 +132,7 @@
 
 		<li ng-class="{'active' : activeMenu == 'nowNext'}"><a ui-sref="nowNext" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-clock-o"></i><span translate>NOWNEXT</span></a></li>
 
-		<li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li>
+		<!-- <li ng-class="{'active' : activeMenu == 'map'}"><a ui-sref="map" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-map-marker"></i>Map</a></li> -->
 
 		<li ng-class="{'active' : activeMenu == 'feedback'}"><a ui-sref="feedback" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-edit"></i><span translate>FEEDBACK</span></a></li>
 
@@ -156,13 +156,12 @@
 			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 		</li>
 
-		<!-- 
 		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i><span translate>SESSIONSBYTRACK</span></a></li>
 
 		<li ng-repeat="track in tracks" class="track">
 			<a ui-sref="sessionsByTrack({trackId:track.name})" ng-click="hideOffCanvas()">
 				<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.nameAbbr}}</a>
-		</li> -->
+		</li>
 
 
 	</ul>

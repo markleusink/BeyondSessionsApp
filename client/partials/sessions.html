@@ -3,7 +3,7 @@
 	<div class="col-sm-12 no-gutter sessions">
 
 		<div ng-show="isLoading" class="list-group-item">
-			<div><i class="fa fa-spin fa-refresh"></i>Loading...</div>
+			<div><i class="fa fa-spin fa-refresh"></i><span translate>LOADING</span>...</div>
 		</div>
 
 		<div ng-show="!isLoading && sessions.length == 0" class="list-group-item">{{noDocsFound}}</div>
@@ -24,7 +24,7 @@
 
 				<h4 class="list-group-item-heading">{{::session.title}}</h4>
 				<!-- <p class="list-group-item-text">{{::session.sessionId}}</p> -->
-				<p class="list-group-item-text">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}}</p>
+				<p class="list-group-item-text">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show="session.room.lenght>0">| {{::session.room}}</span></p>
 
 			</a>
 			

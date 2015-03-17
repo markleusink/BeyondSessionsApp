@@ -13,20 +13,20 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "		<div class=\"row\" style=\"margin-bottom:15px;\">\n" +
     "\n" +
     "			<div class=\"col-xs-6\" style=\"text-align: center\">\n" +
-    "				<a href=\"http://www.ics.ug/en\" target=\"_blank\"><img src=\"images/icsug.png\" style=\"height:150px;\" /></a>\n" +
+    "				<a href=\"http://www.ics.ug/en\" target=\"_blank\"><img src=\"images/icsug.png\" style=\"height:125px;\" /></a>\n" +
     "			</div>\n" +
     "			<div class=\"col-xs-6\" style=\"text-align: center; margin-top:30px\">\n" +
-    "				<a href=\"http://engage.ug\" target=\"_blank\"><img src=\"images/engage.png\" style=\"height:70px;\" /></a>\n" +
+    "				<a href=\"http://engage.ug\" target=\"_blank\"><img src=\"images/engage.png\" style=\"height:60px;\" /></a>\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
-    "\n" +
+    " \n" +
     "		<p>{{greeting}}</p>\n" +
-    "		<p>This is the demo app for my session's in March 2015 at the ICS User Group event in Bremen and Engage in Ghent. The session is similar to the session I did with Mark Roden at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. The demo app is build using AngularJS and uses an IBM Domino backend.</p>\n" +
+    "		<p>This is the demo app for my session's in March 2015 at the ICS User Group event in Bremen and Engage in Ghent. The session is similar to the one I did with Mark Roden at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. The demo app is build using AngularJS and uses an IBM Domino backend. The session data comes from the ICS UG event.</p>\n" +
     "\n" +
-    "		<p>In the session I'm going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. I'll show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
+    "		<p>In my session I'm going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. I'll show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
     "		\n" +
-    "		<p>If you haven't registered for the or ConnectED yet, do that now for the <a href=\"http://www.ics.ug/en\" target=\"_blank\">ICS User Group</a> or <a href=\"http://engage.ug\" target=\"_blank\">Engage</a> and hopefully I'll see you there. It'll be worth it!\n" +
+    "		<p>If you haven't registered yet, do that now for the <a href=\"http://www.ics.ug/en\" target=\"_blank\">ICS User Group</a> or <a href=\"http://engage.ug\" target=\"_blank\">Engage</a> and hopefully I'll see you there. It'll be worth it!\n" +
     "		</p>\n" +
     "\n" +
     "		<div class=\"row\" style=\"margin-top:15px\">\n" +
@@ -90,7 +90,7 @@ angular.module("partials/feedback.html", []).run(["$templateCache", function($te
     "\n" +
     "			<div class=\"form-group\">\n" +
     "				<button class=\"btn btn-primary\" type=\"submit\">\n" +
-    "				<i class=\"fa fa-rocket\"></i>Send it!</button>\n" +
+    "				<i class=\"fa fa-rocket\"></i><span translate>SENDIT</span></button>\n" +
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
@@ -129,7 +129,7 @@ angular.module("partials/nownext.html", []).run(["$templateCache", function($tem
     "<div class=\"row no-gutter\">\n" +
     "<div class=\"col-sm-12 sessions\">\n" +
     "\n" +
-    "	<div style=\"margin-left: 15px;\"><h4>Now ({{sessionsNow.length}})</h4></div>\n" +
+    "	<div style=\"margin-left: 15px;\"><h4><span translate>NOW</span> ({{sessionsNow.length}})</h4></div>\n" +
     "\n" +
     "	<div ng-show=\"sessionsNow.length == 0\" class=\"alert alert-info\">No sessions running at this time</div>\n" +
     "\n" +
@@ -148,9 +148,9 @@ angular.module("partials/nownext.html", []).run(["$templateCache", function($tem
     "\n" +
     "	</div> \n" +
     "\n" +
-    "	<div style=\"margin-left: 15px;\"><h4>Next ({{sessionsNext.length}})</h4></div>\n" +
+    "	<div style=\"margin-left: 15px;\"><h4><span translate>NEXT</span> ({{sessionsNext.length}})</h4></div>\n" +
     "\n" +
-    "	<div ng-show=\"sessionsNext.length == 0\" class=\"alert alert-info\">Nothing happening in the next {{hoursAheadNextSessions}} hours. Relax and enjoy the <i class=\"fa fa-sun-o\"></i></div>\n" +
+    "	<div ng-show=\"sessionsNext.length == 0\" class=\"alert alert-info\">Nothing happening for the next {{hoursAheadNextSessions}} hours.</div>\n" +
     "\n" +
     "	<div ng-show=\"sessionsNext.length > 0\">\n" +
     "		<a ng-repeat=\"session in sessionsNext | orderBy :'startTime' track by $index\" class=\"list-group-item\"\n" +
@@ -180,7 +180,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "\n" +
     "			<div class=\"panel-heading\" ng-class=\"getBackgroundClass(session.track)\">\n" +
     "		  		<h4>{{session.title}}</h4>\n" +
-    "				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} in {{::session.room}}</small></div>\n" +
+    "				<div><small>{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show=\"session.room.length>0\">in {{::session.room}}</span></small></div>\n" +
     "			</div>\n" +
     "\n" +
     "			<div class=\"panel-body\">\n" +
@@ -188,7 +188,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "				<div style=\"margin-bottom:10px\">\n" +
     "					\n" +
     "					<button class=\"pull-right btn\" ng-class=\"{'btn-default' : !session.isFavorite, 'btn-primary btn-flip' : session.isFavorite}\" ng-click=\"toggleFavorite()\">\n" +
-    "						<i class=\"fa\" ng-class=\"session.isFavorite ? 'fa-star' : 'fa-star-o'\"></i>Favorite\n" +
+    "						<i class=\"fa\" ng-class=\"session.isFavorite ? 'fa-star' : 'fa-star-o'\"></i><span translate>FAVORITE</span>\n" +
     "					</button>\n" +
     "\n" +
     "					<a class=\"btn btn-default\" href=\"javascript:history.go(-1);\"><i class=\"fa fa-angle-left\"></i><span translate>BACK</span></a>\n" +
@@ -203,7 +203,7 @@ angular.module("partials/session.html", []).run(["$templateCache", function($tem
     "\n" +
     "				<div style=\"margin:10px 0\"><a ui-sref=\"sessionsByTrack({trackId: session.track})\"><span class=\"label\" ng-class=\"getBackgroundClass(session.track)\">{{::session.track}}</span></a></div>\n" +
     "\n" +
-    "				<div style=\"margin: 10px 0; font-weight: bold;\"><u>Speakers</u></div>\n" +
+    "				<div style=\"margin: 10px 0; font-weight: bold;\"><u><span translate>SPEAKERS</span></u></div>\n" +
     "\n" +
     "				<div class=\"row\" ng-repeat=\"speaker in session.speakers\">\n" +
     "			\n" +
@@ -230,7 +230,7 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "	<div class=\"col-sm-12 no-gutter sessions\">\n" +
     "\n" +
     "		<div ng-show=\"isLoading\" class=\"list-group-item\">\n" +
-    "			<div><i class=\"fa fa-spin fa-refresh\"></i>Loading...</div>\n" +
+    "			<div><i class=\"fa fa-spin fa-refresh\"></i><span translate>LOADING</span>...</div>\n" +
     "		</div>\n" +
     "\n" +
     "		<div ng-show=\"!isLoading && sessions.length == 0\" class=\"list-group-item\">{{noDocsFound}}</div>\n" +
@@ -251,7 +251,7 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "\n" +
     "				<h4 class=\"list-group-item-heading\">{{::session.title}}</h4>\n" +
     "				<!-- <p class=\"list-group-item-text\">{{::session.sessionId}}</p> -->\n" +
-    "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} | {{::session.room}}</p>\n" +
+    "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show=\"session.room.lenght>0\">| {{::session.room}}</span></p>\n" +
     "\n" +
     "			</a>\n" +
     "			\n" +
