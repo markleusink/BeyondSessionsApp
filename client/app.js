@@ -27,56 +27,56 @@ app.config( function($stateProvider, localStorageServiceProvider) {
 	  	.state('about', { 	//about the app
 		    url: '/about',
 		    templateUrl: 'partials/about.html',
-		    title : 'About',
+		    title : 'ABOUT',
 		    controller : 'AboutCtrl'
 		})
 		.state('feedback', { 	
 		    url: '/feedback',
 		    templateUrl: 'partials/feedback.html',
-		    title : 'Feedback',
+		    title : 'FEEDBACK',
 		    controller : 'FeedbackCtrl'
 		})
 		.state('nowNext', { 
 		    url: '/nowNext',
 		    templateUrl: 'partials/nownext.html',
-		    title : 'Now & Next',
+		    title : 'NOWNEXT',
 		    controller : 'NowNextCtrl'
 		})
 		.state('map', { 	//map of the venue
 		    url: '/map',
 		    templateUrl: 'partials/map.html',
-		    title : 'Swan Map'
+		    title : 'MAP'
 		})
 		.state('sessionsAll', { 	//all sessions
 		    url: '/sessionsAll',
 		    templateUrl: 'partials/sessions.html',
 		    controller: 'SessionsCtrl',
-		    title : 'All sessions',
+		    title : 'ALLSESSIONS',
 
 		  })
 		   .state('sessionsByDay', { 	
 			    url: '/sessionsByDay/:dayNo',
 			    templateUrl: 'partials/sessions.html',
 			    controller: 'SessionsByDayCtrl',
-			    title : 'Sessions'
+			    title : 'SESSIONS'
 		  })
 		   .state('sessionsByTrack', { 	
 			    url: '/sessionsByTrack/:trackId',
 			    templateUrl: 'partials/sessions.html',
 			    controller: 'SessionsByTrackCtrl',
-			    title : 'Sessions'
+			    title : 'SESSIONS'
 		  })
 		   .state('favorites', { 	
 			    url: '/favorites',
 			    templateUrl: 'partials/sessions.html',
 			    controller: 'FavoritesCtrl',
-			    title : 'Favorites'
+			    title : 'FAVORITES'
 		  })
 		  .state('sessionDetails', { 	//show session details
 			    url: '/sessions/:sessionId',
 			    templateUrl: 'partials/session.html',
 			    controller: 'SessionCtrl',
-			    title : 'Session'
+			    title : 'SESSION'
 			});
 
 		/*set up local storage*/
@@ -123,7 +123,7 @@ app.controller("MainCtrl", function($rootScope, $scope, $state, $timeout, $trans
 	];
 
 	//set default active menu option
-	$scope.pageTitle = "ICS UG - Sessions";
+	$scope.pageTitle = $translate.instant("SESSIONS");
 	$scope.activeMenu = "about";
 
 	$scope.setLanguage = function(toLan) {
@@ -147,13 +147,13 @@ app.controller("MainCtrl", function($rootScope, $scope, $state, $timeout, $trans
 		}
 
 		if (toState.name == 'sessionsByDay' ) {
-			$scope.pageTitle = toState.title + ': ' + utils.getFullDayName(toParams.dayNo);
+			$scope.pageTitle = utils.getFullDayName(toParams.dayNo);
 			$scope.activeMenu = toState.name + toParams.dayId;
 		} else if (toState.name == 'sessionsByTrack' ) {
 			$scope.pageTitle = toParams.trackId;
 			$scope.activeMenu = toParams.trackId;
 		} else {
-			$scope.pageTitle = toState.title;
+			$scope.pageTitle = $translate.instant(toState.title);
 			$scope.activeMenu = toState.name;
 		}
 

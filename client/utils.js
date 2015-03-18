@@ -1,7 +1,7 @@
 
 var utils = angular.module("sessionApp.utils", []);
 
-utils.factory('utils', function(localStorageService) {
+utils.factory('utils', function(localStorageService, $translate) {
 
 	var favoritesCookieName = 'favoritesUnid';
 
@@ -65,21 +65,23 @@ utils.factory('utils', function(localStorageService) {
 
 		getFullDayName : function(dayNo) {
 
+			var lan = $translate.use();
+
 			switch (dayNo) {
 				case '0':
-					return "Sunday";
+					return $translate.instant("SUNDAY");
 				case '1':
-					return "Monday";
+					return $translate.instant("MONDAY");
 				case '2':
-					return "Tuesday";
+					return $translate.instant("TUESDAY");
 				case '3':
-					return "Wednesday";
+					return $translate.instant("WEDNESDAY");
 				case '4':
-					return "Thursday";
+					return $translate.instant("THURSDAY");
 				case '5':
-					return "Friday";
+					return $translate.instant("FRIDAY");
 				case '6':
-					return "Saturday";
+					return $translate.instant("SATURDAY");
 				default:
 					return "?";
 			}
