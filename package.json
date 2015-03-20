@@ -1,17 +1,16 @@
 {
-  "name": "connect15",
+  "name": "beyond-sessions-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "Gruntfile.js",
+  "description": "Demo app for the Beyond The Everday session",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "https://markleusink@bitbucket.org/markleusink/beyond-sessions-app.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "m.leusink@linqed.eu",
+  "license": "MIT",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
