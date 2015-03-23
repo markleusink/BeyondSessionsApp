@@ -20,15 +20,9 @@ angular.module("partials/about.html", []).run(["$templateCache", function($templ
     "			</div>\n" +
     "\n" +
     "		</div>\n" +
-    " \n" +
-    "		<p>{{greeting}}</p>\n" +
-    "		<p>This is the demo app for my session's in March 2015 at the ICS User Group event in Bremen and Engage in Ghent. The session is similar to the one I did with Mark Roden at <b><a href=\"http://www-01.ibm.com/software/collaboration/events/connected/\" target=\"_blank\">ConnectED 2015</a></b> in January in Orlando: <b>\"The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino\"</b>. The demo app is build using AngularJS and uses an IBM Domino backend. The session data comes from the ICS UG event.</p>\n" +
-    "\n" +
-    "		<p>In my session I'm going to talk about building web apps using the AngularJS JavaScript framework, with data coming from a Domino backend using REST. I'll show you how an app built like this can run in multiple runtimes, like Domino, Bluemix, Connections, Microsoft Sharepoint and MobileFirst Foundation (previously Worklight).</p>\n" +
     "		\n" +
-    "		<p>If you haven't registered yet, do that now for the <a href=\"http://www.ics.ug/en\" target=\"_blank\">ICS User Group</a> or <a href=\"http://engage.ug\" target=\"_blank\">Engage</a> and hopefully I'll see you there. It'll be worth it!\n" +
-    "		</p>\n" +
-    "\n" +
+    "		<span translate>ABOUT_FULL</span>\n" +
+    "	\n" +
     "		<div class=\"row\" style=\"margin-top:15px\">\n" +
     "			\n" +
     "			<div class=\"col-xs-6 text-center\">\n" +

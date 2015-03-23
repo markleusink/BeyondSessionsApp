@@ -40,7 +40,7 @@ app.factory('SessionsFactory', function($http, $q, $translate, configService, ut
 			return deferred.promise;
 		}
 
-		return $http.get( ($translate.use() == 'de' ? configService.sessionsRestUrlDE : configService.sessionsRestUrlEN) )
+		return $http.get( ($translate.use() == 'de' ? configService.sessionsRestUrlDE : configService.sessionsRestUrlEN), {cache : true} )
 		.then (function(res) {
 			
 			localStorageService.set('sessions', res.data);

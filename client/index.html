@@ -43,7 +43,7 @@
 	      	</button>  
 	       
 	        <a class="visible-xs navbar-brand no-break-out" style="padding-left: 0px;" title="{{pageTitle}}" href="/"><img src="images/icsug-logo.png" style="height:25px; display:inline; margin-right: 10px;" />{{pageTitle}}</a>  
-	        <a class="hidden-xs navbar-brand no-break-out" title="ICS UG" href="/">ICS UG</a>  
+	        <a class="hidden-xs navbar-brand no-break-out" title="ICS UG" style="padding: 2px 15px;" href="/"><img src="images/icsug-logo.png" style="height:40px; display:inline; margin-right: 10px;" /></a>  
 		</div>
     
 	    <button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
@@ -149,13 +149,13 @@
 
 		<!--repeat over days-->
 		<li ng-repeat="day in menuDays">
-			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
+			<a ui-sref="sessionsByDay({dayNo: day.id})" ng-click="hideOffCanvas()" style="padding-left:25px;"><i class="fa fa-fw fa-angle-right"></i>{{day.label}}</a>
 		</li>
 
 		<li class="disabled"><a href="" ><i class="fa fa-fw fa-tag"></i><span translate>SESSIONSBYTRACK</span></a></li>
 
 		<li ng-repeat="track in tracks" class="track">
-			<a ui-sref="sessionsByTrack({trackId:track.name})" ng-click="hideOffCanvas()">
+			<a ui-sref="sessionsByTrack({trackId:track.name})" ng-click="hideOffCanvas()" style="padding-left:25px;">
 				<i class="fa fa-fw fa-angle-right" ng-class="track.clazz"></i>{{track.nameAbbr}}</a>
 		</li>
 
