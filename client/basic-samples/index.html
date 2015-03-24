@@ -16,17 +16,16 @@
 
 			var app = angular.module('beyondApp', []);
 
-			app.controller('SessionsCtrl', function($scope) {
+			app.controller('SessionsCtrl', function($scope, $http) {
 
 				$scope.user = 'Mark';
 
-				$scope.sessions = [
-					{ 'title' : 'What\'s new in IBM Notes/Domino 2015'},
-					{ 'title' : 'Take Back Control of Your Workday! How to use IBM Verse'},
-					{ 'title' : 'The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino'},
-					{ 'title' : 'Take Back Control of Your Workday! How to use IBM Verse.'},
-					{ 'title' : 'Improve Communication & Collaboration'}
-				];
+				$http.get('http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/sessionsEn?count=100')
+					.success( function(data) {
+
+						$scope.sessions = data;
+
+					});
 
 			});
 
