@@ -38,9 +38,15 @@
 
 		<div class="container">
 
+			<div class="jumbotron">
+
+				Find a session: <input ng-model="query" />
+
+			</div>
+
 			<table class="table table-striped"><tbody>
 
-				<tr ng-repeat="session in sessions">
+				<tr ng-repeat="session in sessions | filter : query">
 
 					<td style="width:50%">
 						{{session.title}}
