@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app>
+<html ng-app="beyondApp">
 
 	<head>
 		<title>Beyond The Everday - Angular demos</title>
@@ -11,18 +11,27 @@
 		<!-- load Angular -->
 		<script src="/bower_components/angular/angular.min.js"></script>
 
+		<script>
+
+			var app = angular.module('beyondApp', []);
+
+			app.controller('SessionsCtrl', function($scope) {
+
+				$scope.user = 'Mark';
+
+			});
+
+		</script>
+
 	</head>
 
-	<body style="padding-top:20px">
+	<body style="padding-top:20px" ng-controller="SessionsCtrl">
+
 		<div class="container">
 
-			Hi! Below the text '10' is shown - Angular style
-
-			<p>
-				{{ 2 + 8 }}
-			</p>
+			Hi {{user}}
 
 		</div>
-	</body>
 
+	</body>
 </html>
