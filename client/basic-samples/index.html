@@ -18,6 +18,7 @@
 			app.controller('SessionsCtrl', function($scope) {
 
 				$scope.user = 'Mark';
+				$scope.showIt = true;
 
 			});
 
@@ -30,6 +31,12 @@
 		<div class="container">
 
 			Hi {{user}}
+
+			<div class="well" ng-if="showIt">
+
+				Content in a well
+
+			</div>
 
 		</div>
 
