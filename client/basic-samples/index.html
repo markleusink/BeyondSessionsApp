@@ -20,6 +20,10 @@
 				$scope.user = 'Mark';
 				$scope.showIt = true;
 
+				$scope.toggleWell = function() {
+					$scope.showIt = !$scope.showIt;
+				};
+
 			});
 
 		</script>
@@ -32,10 +36,12 @@
 
 			Hi {{user}}
 
+			<div style="padding:10px">
+				<button ng-click="toggleWell()">Toggle the well</button>
+			</div>
+
 			<div class="well" ng-if="showIt">
-
 				Content in a well
-
 			</div>
 
 		</div>
