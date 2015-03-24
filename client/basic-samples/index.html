@@ -4,6 +4,7 @@
 
 	<head>
 		<title>Beyond The Everday - Angular demos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- some basic styling -->
 		<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -18,11 +19,14 @@
 			app.controller('SessionsCtrl', function($scope) {
 
 				$scope.user = 'Mark';
-				$scope.showIt = true;
 
-				$scope.toggleWell = function() {
-					$scope.showIt = !$scope.showIt;
-				};
+				$scope.sessions = [
+					{ 'title' : 'What\'s new in IBM Notes/Domino 2015'},
+					{ 'title' : 'Take Back Control of Your Workday! How to use IBM Verse'},
+					{ 'title' : 'The Future of Web Development - Write Once, Run Everywhere with AngularJS and Domino'},
+					{ 'title' : 'Take Back Control of Your Workday! How to use IBM Verse.'},
+					{ 'title' : 'Improve Communication & Collaboration'}
+				];
 
 			});
 
@@ -34,15 +38,21 @@
 
 		<div class="container">
 
-			Hi {{user}}
+			<table class="table table-striped"><tbody>
 
-			<div style="padding:10px">
-				<button ng-click="toggleWell()">Toggle the well</button>
-			</div>
+				<tr ng-repeat="session in sessions">
 
-			<div class="well" ng-if="showIt">
-				Content in a well
-			</div>
+					<td style="width:50%">
+						{{session.title}}
+					</td>
+
+					<td style="width:50%">
+						<input class="form-control" type="text" ng-model="session.title" />
+					</td>
+				
+				</tr>
+
+			</tbody></table>
 
 		</div>
 
