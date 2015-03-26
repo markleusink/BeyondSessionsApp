@@ -137,7 +137,7 @@ angular.module("partials/nownext.html", []).run(["$templateCache", function($tem
     "			<div class=\"label label-warning pull-right\" title=\"{{session.runsFor + ' minutes left'}}\">{{session.runsFor}}\"</div>\n" +
     "			\n" +
     "			<h4 class=\"list-group-item-heading\">{{::session.title}}</h4>\n" +
-    "			<p class=\"list-group-item-text\">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>\n" +
+    "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show=\"session.room.length>0\">| {{::session.room}}</span></p>\n" +
     "		</a>\n" +
     "\n" +
     "	</div> \n" +
@@ -156,7 +156,7 @@ angular.module("partials/nownext.html", []).run(["$templateCache", function($tem
     "			<div class=\"label label-primary pull-right\" title=\"{{'Starting in ' + session.startsIn + ' minutes'}}\">{{session.startsIn}}\"</div>\n" +
     "		\n" +
     "			<h4 class=\"list-group-item-heading\">{{::session.title}}</h4>\n" +
-    "			<p class=\"list-group-item-text\">{{::session.startTime | date : 'EEE HH:mm'}} | {{::session.room}} | {{::session.sessionId}}</p>\n" +
+    "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show=\"session.room.length>0\">| {{::session.room}}</span></p>\n" +
     "		</a>\n" +
     "	</div>\n" +
     "\n" +
