@@ -16,19 +16,52 @@
 
 			var app = angular.module('beyondApp', []);
 
-			app.controller('SessionsCtrl', function($scope, $http) {
+			app.controller('SessionsCtrl', ['$scope', '$http', function($scope, $http){
+	
+				var baseUrl = 'http://beyondtheeveryday.com/beyond/connect2015.nsf';
 
-				$scope.user = 'Mark';
+				//initial call to populate the list of sessions
+				getAllSessions();
+				
+				//function to create a session
+				$scope.createSession = function() {
+					$http.post( baseUrl + '/api/data/documents?form=frmSessionTest', $scope.formData)
+						.success(function(data) {
 
-				$http.get('http://beyondtheeveryday.com/beyond/icsug.nsf/api/data/collections/name/sessionsEn?count=100')
-					.success( function(data) {
+							$scope.formData = {}; //clear form
 
-						$scope.sessions = data;
+							//let's make another get request to populate the list with the newly added session
+							getAllSessions();
+							
+						})
+						.error(function(data) {
+							console.log('Error: ' + data);
+						});
+				};
 
-					});
+				//delete a session
+				$scope.deleteSession = function(session) {
+					
+					$http.delete( baseUrl + '/api/data/documents/unid/' + session['@unid'] )
+						.success(function(data) {
+							getAllSessions();
+						})
+						.error(function(data) {
+							console.log('Error: ' + data);
+						});
+						
+				};
 
-			});
+				function getAllSessions() {
 
+					$http.get( baseUrl + '/api/data/collections/name/sessionsAll')
+						.success( function(data) {
+							$scope.sessions = data;
+						});
+
+				}
+				
+			}]);	
 		</script>
 
 	</head>
@@ -54,10 +87,35 @@
 					<td style="width:50%">
 						<input class="form-control" type="text" ng-model="session.title" />
 					</td>
+
+					<td>
+						<button class="btn btn-warning btn-sm" ng-click="deleteSession(session)">
+							<span class="glyphicon glyphicon-trash"> Remove</span>
+						</button>
+					</td>
 				
 				</tr>
 
 			</tbody></table>
+
+			<form>
+
+				<div style="margin-top:20px" class="col-md-6">
+					<div class="panel panel-default">
+
+						<div class="panel-heading">Add a session</div>
+						<div class="panel-body">
+
+							Title: <input type="text" ng-model="formData.title" />
+
+							<button type="submit" class="btn btn-primary" ng-click="createSession()">Save</button>
+
+						</div>
+
+					</div>
+				</div>
+			</form>
+
 
 		</div>
 
