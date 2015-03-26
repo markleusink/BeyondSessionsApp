@@ -9,6 +9,7 @@ app.factory('SessionsFactory', function($http, $q, $translate, configService, ut
 	//retrieve a specific data type from the localStorage (cached for 60 minutes)
 	getFromLocalCache = function(item) {
 
+		return null;
 		var lastUpdate = localStorageService.get( item + 'LastUpdate' );
 
 		if (lastUpdate != null) {

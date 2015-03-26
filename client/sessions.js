@@ -105,8 +105,6 @@ sessionsAppCtrl.controller( "NowNextCtrl", function($scope, SessionsFactory, uti
 			var s = new Date(session.startTime);
 			var e = new Date(session.endTime);
 
-			//console.log('session', s, e, now);
-
 			//restrict list of sessions to sessions running now/ next
 			if (s > now) {
 				
