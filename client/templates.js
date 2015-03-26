@@ -244,7 +244,6 @@ angular.module("partials/sessions.html", []).run(["$templateCache", function($te
     "				<i class=\"pull-right no-text fa \" ng-class=\"isFavorite(session) ? 'fa-star' : 'fa-angle-right'\"></i>\n" +
     "\n" +
     "				<h4 class=\"list-group-item-heading\">{{::session.title}}</h4>\n" +
-    "				<!-- <p class=\"list-group-item-text\">{{::session.sessionId}}</p> -->\n" +
     "				<p class=\"list-group-item-text\">{{::session.dayNo | dayNameFilter }} {{::session.startTimeDesc}} - {{::session.endTimeDesc}} <span ng-show=\"session.room.length>0\">| {{::session.room}}</span></p>\n" +
     "\n" +
     "			</a>\n" +
