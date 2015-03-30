@@ -1,0 +1,33 @@
+<span>
+
+	<table class="table table-striped"><tbody>
+
+		<tr ng-repeat="session in sessions | filter : query">
+
+			<td style="width:50%">
+				<a ui-sref="session({sessionId: session['@unid']})">{{session.title}}</a>
+			</td>
+		
+		</tr>
+
+	</tbody></table>
+
+	<form>
+
+		<div style="margin-top:20px" class="col-md-6">
+			<div class="panel panel-default">
+
+				<div class="panel-heading">Add a session</div>
+				<div class="panel-body">
+
+					Title: <input type="text" ng-model="formData.title" />
+
+					<button type="submit" class="btn btn-primary" ng-click="createSession()">Save</button>
+
+				</div>
+
+			</div>
+		</div>
+	</form>
+	
+</span>
